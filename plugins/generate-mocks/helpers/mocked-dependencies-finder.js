@@ -2,7 +2,7 @@ const glob = require('glob-promise');
 const path = require('path');
 const FileHandler = require('@kopytko/packager/src/plugin-helpers/file-handler');
 
-const BrightscriptDependencies = require('./brightscript/brightscript-dependencies');
+const BrightscriptDependencies = require('../../import-dependencies/helpers/brightscript/unit-testing-brightscript-dependencies');
 
 const IGNORED_TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*_*.brs';
 const TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*.test.brs';
