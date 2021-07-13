@@ -7,7 +7,7 @@ const CONTENT = `sub main()
   screen.setMessagePort(port)
   screen.show()
 
-  scene = screen.createScene("TestScene")
+  scene = screen.createScene("UnitTestingScene")
   verbosity = CreateObject("roAppInfo").getValue("testRunnerVerbosity").toInt()
 
   runner = TestRunner()
