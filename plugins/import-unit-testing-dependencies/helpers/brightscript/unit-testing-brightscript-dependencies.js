@@ -1,11 +1,12 @@
-const PackagerBrightscriptDependencies = require('@kopytko/packager/src/plugin-helpers/brightscript/brightscript-dependencies');
+const BrightscriptDependencies = require('@kopytko/packager/src/plugin-helpers/brightscript/brightscript-dependencies');
 const BrightscriptExternalDependencyItemCreator = require('@kopytko/packager/src/plugin-helpers/brightscript/brightscript-external-dependency-item-creator');
 const BrightscriptInternalDependencyItemCreator = require('@kopytko/packager/src/plugin-helpers/brightscript/brightscript-internal-dependency-item-creator');
 
 const BrightscriptExternalMockFinder = require('./brightscript-external-mock-finder');
 const BrightscriptInternalMockFinder = require('./brightscript-internal-mock-finder');
 
-module.exports = class BrightscriptDependencies extends PackagerBrightscriptDependencies {
+
+module.exports = class UnitTestingBrightscriptDependencies extends BrightscriptDependencies {
   _mockDependencyCollection;
 
   /**
