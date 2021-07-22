@@ -1,5 +1,5 @@
 const args = require('@kopytko/packager/src/env/args');
-const fs = require('fs').promises;
+const fs = require('fs-extra');
 
 const CONTENT = `sub main()
   screen = CreateObject("roSGScreen")
@@ -18,6 +18,6 @@ end sub`;
 
 module.exports = class TestMainFileContentGenerator {
   static async generate(location) {
-    await fs.writeFile(location, CONTENT);
+    await fs.outputFile(location, CONTENT);
   }
 }
