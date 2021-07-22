@@ -1,3 +1,4 @@
+' @import /source/UnitTestFramework.brs
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
 
@@ -37,9 +38,6 @@ function KopytkoTestSuite() as Object
       Name: name,
       _func: [func],
       Func: function () as String
-        componentAA = GetGlobalAA()
-        componentAA.global.removeField("eventBus")
-
         ' TestRunner runs this method within TestSuite context
         for each beforeEach in m._beforeEach
           if (TF_Utils__IsFunction(beforeEach))
@@ -329,40 +327,6 @@ function KopytkoTestSuite() as Object
 
     return Invalid
   end function
-
-  ts._clearComponent = sub (componentScope as Object)
-    if (Type(destroyKopytko) <> "Invalid")
-      destroyKopytko()
-      componentScope.top.setFocus(true)
-
-      ' Unobserving fields only of Kopytko components because non-kopytko may set up observers in the init() function
-      ' which is called only once for all test cases
-      for each field in componentScope.top.keys()
-        componentScope.top.unobserveFieldScoped(field)
-      end for
-    end if
-
-    if (componentScope["$$setTimeoutData"] <> Invalid)
-      for each timeoutId in componentScope["$$setTimeoutData"]
-        timeout = componentScope["$$setTimeoutData"][timeoutId]
-        timeout.timer.unobserveFieldScoped("fire")
-        timeout.timer.control = "stop"
-        componentScope["$$setTimeoutData"].delete(timeoutId)
-      end for
-    end if
-    if (componentScope["$$setIntervalData"] <> Invalid)
-      for each intervalId in componentScope["$$setIntervalData"]
-        interval = componentScope["$$setIntervalData"][intervalId]
-        interval.timer.unobserveFieldScoped("fire")
-        interval.timer.control = "stop"
-        componentScope["$$setIntervalData"].delete(intervalId)
-      end for
-    end if
-
-    if (m._defaultProps <> Invalid)
-      componentScope.top.update(m._defaultProps)
-    end if
-  end sub
 
   return ts
 end function

@@ -14,10 +14,6 @@ module.exports = class NodeTestContentGenerator {
   <!-- Test suites -->
 ${data.testSuiteDependencies}
 
-  <!-- Test framework -->
-  <script type="text/brightscript" uri="pkg:/source/_testFramework/KopytkoTestSuite.brs"/>
-  <script type="text/brightscript" uri="pkg:/source/_testFramework/UnitTestFramework.brs"/>
-
   <script type="text/brightscript">
   <![CDATA[
     sub init()
