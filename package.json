@@ -38,7 +38,10 @@
     "packageRootDir": "src"
   },
   "dependencies": {
-    "@kopytko/packager": "github:getndazn/kopytko-packager"
+    "@kopytko/packager": "github:getndazn/kopytko-packager",
+    "fs-extra": "^10.0.0",
+    "glob-promise": "^4.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {}
 }
