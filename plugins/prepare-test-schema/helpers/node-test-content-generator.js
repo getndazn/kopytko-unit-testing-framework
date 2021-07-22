@@ -14,10 +14,6 @@ module.exports = class NodeTestContentGenerator {
   <!-- Test suites -->
 ${data.testSuiteDependencies}
 
-  <!-- Test framework -->
-  <script type="text/brightscript" uri="pkg:/source/testFramework/DaznTestSuite.brs"/>
-  <script type="text/brightscript" uri="pkg:/source/testFramework/UnitTestFramework.brs"/>
-
   <script type="text/brightscript">
   <![CDATA[
     sub init()

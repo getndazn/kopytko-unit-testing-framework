@@ -38,7 +38,6 @@
     "packageRootDir": "src"
   },
   "dependencies": {
-    "@kopytko/packager": "github:getndazn/kopytko-packager"
-  },
-  "devDependencies": {}
+    "@kopytko/packager": "github:getndazn/kopytko-packager#e54bd97"
+  }
 }
