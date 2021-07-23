@@ -6,10 +6,6 @@ function KopytkoTestSuite() as Object
     m.__mocks = {}
   end sub]
 
-  ts._afterEach = [sub (ts as Object)
-    ts._clearComponent(m)
-  end sub]
-
   ts.addParameterizedTests = sub (paramsList as Object, testName as String, testFunction as Function)
     for each param in paramsList
       parsedTestName = testName
