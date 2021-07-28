@@ -2,6 +2,9 @@
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
 
+  ts._beforeAll = []
+  ts._afterAll = []
+
   ts._beforeEach = [sub (ts as Object)
     m.__mocks = {}
   end sub]
@@ -60,22 +63,25 @@ function KopytkoTestSuite() as Object
       _setUp: [setup],
       SetUp: sub ()
         ' TestRunner runs this method within TestCase context
+        for each beforeAll in m._beforeAll
+          if (TF_Utils__IsFunction(beforeAll))
+            beforeAll(m)
+          end if
+        end for
+
         if (TF_Utils__IsFunction(m._setUp[0]))
           m._setUp[0](m.testSuite)
-        end if
-
-        componentInterface = GetGlobalAA().top
-        ' Setting defaultProps only for Kopytko components because other components may have observers set in the init()
-        ' function (should be avoided in Kopytko) and setting defaultProps after each test would call these callbacks
-        if (componentInterface.isSubtype("KopytkoGroup"))
-          m.testsuite._defaultProps = componentInterface.getFields()
-          m.testsuite._defaultProps.delete("change")
-          m.testsuite._defaultProps.delete("focusedChild")
         end if
       end sub,
       _tearDown: [teardown],
       TearDown: sub ()
         ' TestRunner runs this method within TestCase context
+        for each afterAll in m._afterAll
+          if (TF_Utils__IsFunction(afterAll))
+            afterAll(m)
+          end if
+        end for
+
         if (TF_Utils__IsFunction(m._tearDown[0]))
           m._tearDown[0](m.testSuite)
         end if
