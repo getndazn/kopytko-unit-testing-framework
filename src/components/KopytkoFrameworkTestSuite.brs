@@ -2,69 +2,25 @@
 function KopytkoFrameworkTestSuite() as Object
   ts = KopytkoTestSuite()
 
+  ts._beforeAll.push(sub (ts as Object)
+    componentInterface = GetGlobalAA().top
+    ' Setting defaultProps only for Kopytko components because other components may have observers set in the init()
+    ' function (should be avoided in Kopytko) and setting defaultProps after each test would call these callbacks
+    if (componentInterface.isSubtype("KopytkoGroup"))
+      ts._defaultProps = componentInterface.getFields()
+      ts._defaultProps.delete("change")
+      ts._defaultProps.delete("focusedChild")
+    end if
+  end sub)
+
+  ts._beforeEach.push(sub (ts as Object)
+    componentAA = GetGlobalAA()
+    componentAA.global.removeField("eventBus")
+  end sub)
+
   ts._afterEach.push(sub (ts as Object)
     ts._clearComponent(m)
   end sub)
-
-  ' "func as Function" crashes the app
-  ts.createTest = function (name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean) as Object
-    return {
-      Name: name,
-      _func: [func],
-      Func: function () as String
-        componentAA = GetGlobalAA()
-        componentAA.global.removeField("eventBus")
-
-        ' TestRunner runs this method within TestSuite context
-        for each beforeEach in m._beforeEach
-          if (TF_Utils__IsFunction(beforeEach))
-            beforeEach(m)
-          end if
-        end for
-
-        if (m.testInstance.hasArguments)
-          result = m.testInstance._func[0](m, m.testInstance.arg)
-        else
-          result = m.testInstance._func[0](m)
-        end if
-
-        for each afterEach in m._afterEach
-          if (TF_Utils__IsFunction(afterEach))
-            afterEach(m)
-          end if
-        end for
-
-        return result
-      end function,
-      _setUp: [setup],
-      SetUp: sub ()
-        ' TestRunner runs this method within TestCase context
-        if (TF_Utils__IsFunction(m._setUp[0]))
-          m._setUp[0](m.testSuite)
-        end if
-
-        componentInterface = GetGlobalAA().top
-        ' Setting defaultProps only for Kopytko components because other components may have observers set in the init()
-        ' function (should be avoided in Kopytko) and setting defaultProps after each test would call these callbacks
-        if (componentInterface.isSubtype("KopytkoGroup"))
-          m.testsuite._defaultProps = componentInterface.getFields()
-          m.testsuite._defaultProps.delete("change")
-          m.testsuite._defaultProps.delete("focusedChild")
-        end if
-      end sub,
-      _tearDown: [teardown],
-      TearDown: sub ()
-        ' TestRunner runs this method within TestCase context
-        if (TF_Utils__IsFunction(m._tearDown[0]))
-          m._tearDown[0](m.testSuite)
-        end if
-      end sub,
-      perfData: {},
-      testSuite: m,
-      hasArguments: hasArgs,
-      arg: arg,
-    }
-  End Function
 
   ts.assertDataWasSetOnStore = function (data as Object, msg = "" as String) as String
     if (m.wasMethodCalled("StoreFacade.set", data)) then return ""
