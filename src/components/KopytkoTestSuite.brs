@@ -2,13 +2,15 @@
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
 
+  ' @protected
   ts._beforeAll = []
+  ' @protected
   ts._afterAll = []
-
+  ' @protected
   ts._beforeEach = [sub (ts as Object)
     m.__mocks = {}
   end sub]
-
+  ' @protected
   ts._afterEach = []
 
   ts.addParameterizedTests = sub (paramsList as Object, testName as String, testFunction as Function)
