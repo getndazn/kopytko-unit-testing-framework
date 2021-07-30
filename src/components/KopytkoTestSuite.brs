@@ -95,7 +95,7 @@ function KopytkoTestSuite() as Object
     m._afterEach.push(callback)
   end sub
 
-  ts.getElementByText = function (query as String, container = Invalid as Object) as Object
+  ts.findLabelByText = function (query as String, container = Invalid as Object) as Object
     splitRegExp = query.split("/")
 
     if (splitRegExp.count() = 3)
@@ -109,35 +109,6 @@ function KopytkoTestSuite() as Object
     end if
 
     return m._getByTextIterator(regExp, container)
-  end function
-
-  ts.getTimezoneCompensatedISOString = function (ISOString as String) as Object
-    dateTime = CreateObject("roDateTime")
-    dateTime.fromISO8601String(ISOString)
-    seconds = dateTime.asSeconds()
-    dateTime.toLocalTime()
-    secondsInLocalTimezone = dateTime.asSeconds()
-    difference = seconds - secondsInLocalTimezone
-    dateTime.fromSeconds(seconds + difference)
-
-    return dateTime.toISOString()
-  end function
-
-  '''''''''''''''''''''
-  ' Overrode asserts: '
-  '''''''''''''''''''''
-  ts.assertArrayContains = function (array as dynamic, value as dynamic, msg = "" as string) as string
-    if (TF_Utils__IsArray(array))
-      for each item in array
-        if (item = value) then return ""
-      end for
-    else
-      return "Input value is not an Array."
-    end if
-
-    if (msg <> "") then return msg
-
-    return "Array doesn't have the '" + TF_Utils__AsString(value) + "' value."
   end function
 
   ''''''''''''''''''''''
@@ -175,20 +146,6 @@ function KopytkoTestSuite() as Object
     end for
 
     return m.assertEqual(expected.parentSubtype(expected.subtype()), tested.parentSubtype(tested.subtype()), msg)
-  end function
-
-  ts.assertRequestWasMade = function (params as Object, options = {} as Object, msg = "" as String) as String
-    if (m.wasMethodCalled("createRequest", params, options)) then return ""
-    if (msg <> "") then return msg
-
-    return "The request was not made the expected number of times with the given params"
-  end function
-
-  ts.assertDataWasSetOnStore = function (data as Object, msg = "" as String) as String
-    if (m.wasMethodCalled("StoreFacade.set", data)) then return ""
-    if (msg <> "") then return msg
-
-    return "The data was not set on store"
   end function
 
   ts.assertMethodWasCalled = function (methodPath as String, params = {} as Object, options = {} as Object, msg = "" as String) as String

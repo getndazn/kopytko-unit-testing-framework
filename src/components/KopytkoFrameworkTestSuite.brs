@@ -66,6 +66,20 @@ function KopytkoFrameworkTestSuite() as Object
     }
   End Function
 
+  ts.assertDataWasSetOnStore = function (data as Object, msg = "" as String) as String
+    if (m.wasMethodCalled("StoreFacade.set", data)) then return ""
+    if (msg <> "") then return msg
+
+    return "The data was not set on store"
+  end function
+
+  ts.assertRequestWasMade = function (params as Object, options = {} as Object, msg = "" as String) as String
+    if (m.wasMethodCalled("createRequest", params, options)) then return ""
+    if (msg <> "") then return msg
+
+    return "The request was not made the expected number of times with the given params"
+  end function
+
   ts._clearComponent = sub (componentScope as Object)
     if (Type(destroyKopytko) <> "Invalid")
       destroyKopytko()
