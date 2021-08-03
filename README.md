@@ -151,11 +151,11 @@ Calls to the methods or constructor can be inspected:
 ## Setup and Teardown
 Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
 However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite,
-so you shouldn't use them. Instead, add your function into `beforeAll` and `afterAll` array properties of `KopytkoTestSuite`.
+so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
 `KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem
 related stuff.
-Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore
-`beforeAll` and `afterAll` will be executed once per file.
+Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all
+`beforeAll` and `afterAll` callbacks will be executed once per a file.
 
 `KopytkoTestSuite` provides additional possibility to run custom code before/after every test suite via `setBeforeEach` and `setAfterEach`
 methods.
