@@ -6,7 +6,7 @@
 - [`setBeforeAll(callback)`](#setbeforeallcallback)
 - [`setBeforeEach(callback)`](#setbeforeeachcallback)
 
-## Interfaces
+## Callbacks
 - [`setupOrTeardownCallback`](#setuporteardowncallback)
 
 ---
@@ -17,7 +17,7 @@
 Runs a function after all the tests in the file have completed.
 
 Params:
-- `callback`: `setupOrTeardownCallback`
+- `callback`: [`setupOrTeardownCallback`](#setuporteardowncallback)
 
 Example:
 ```brightscript
@@ -31,22 +31,20 @@ end sub)
 Runs a function after each one of the tests in the file completes.
 
 Params:
-- `callback`: `setupOrTeardownCallback`
+- `callback`: [`setupOrTeardownCallback`](#setuporteardowncallback)
 
 ### `setBeforeAll(callback)`
 Runs a function before all the tests in the file run.
 
 Params:
-- `callback`: `setupOrTeardownCallback`
+- `callback`: [`setupOrTeardownCallback`](#setuporteardowncallback)
 
 ### `setBeforeEach(callback)`
 Runs a function before each one of the tests in the file runs.
 
 Params:
-- `callback`: `setupOrTeardownCallback`
+- `callback`: [`setupOrTeardownCallback`](#setuporteardowncallback)
 
 ### `setupOrTeardownCallback`
-A function used as a callback in some methods.
-
 Params:
 - `ts`: `Object` the TestSuite object
