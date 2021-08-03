@@ -13,6 +13,22 @@ function KopytkoTestSuite() as Object
   ' @protected
   ts._afterEach = []
 
+  ts.setUp = sub ()
+    for each beforeAll in m._beforeAll
+      if (TF_Utils__IsFunction(beforeAll))
+        beforeAll(m)
+      end if
+    end for
+  end sub
+
+  ts.tearDown = sub ()
+    for each afterAll in m._afterAll
+      if (TF_Utils__IsFunction(afterAll))
+        afterAll(m)
+      end if
+    end for
+  end sub
+
   ts.addParameterizedTests = sub (paramsList as Object, testName as String, testFunction as Function)
     for each param in paramsList
       parsedTestName = testName
@@ -64,26 +80,12 @@ function KopytkoTestSuite() as Object
       end function,
       _setUp: [setup],
       SetUp: sub ()
-        ' TestRunner runs this method within TestCase context
-        for each beforeAll in m._beforeAll
-          if (TF_Utils__IsFunction(beforeAll))
-            beforeAll(m)
-          end if
-        end for
-
         if (TF_Utils__IsFunction(m._setUp[0]))
           m._setUp[0](m.testSuite)
         end if
       end sub,
       _tearDown: [teardown],
       TearDown: sub ()
-        ' TestRunner runs this method within TestCase context
-        for each afterAll in m._afterAll
-          if (TF_Utils__IsFunction(afterAll))
-            afterAll(m)
-          end if
-        end for
-
         if (TF_Utils__IsFunction(m._tearDown[0]))
           m._tearDown[0](m.testSuite)
         end if
@@ -95,12 +97,20 @@ function KopytkoTestSuite() as Object
     }
   End Function
 
+  ts.setBeforeAll = sub (callback as Function)
+    m._beforeAll.push(callback)
+  end sub
+
   ts.setBeforeEach = sub (callback as Function)
     m._beforeEach.push(callback)
   end sub
 
   ts.setAfterEach = sub (callback as Function)
     m._afterEach.push(callback)
+  end sub
+
+  ts.setAfterAll = sub (callback as Function)
+    m._afterAll.push(callback)
   end sub
 
   ts.findLabelByText = function (query as String, container = Invalid as Object) as Object

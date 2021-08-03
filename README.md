@@ -148,12 +148,19 @@ Calls to the methods or constructor can be inspected:
 ?m.__mocks.exampleService.constructorCalls[0].params.dependency
 ```
 
-## Importing mocks
-```brightscript
-' @mock /components/superFunction.brs
-```
+## Setup and Teardown
+Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
+However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite,
+so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
+`KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem
+related stuff.
+Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all
+`beforeAll` and `afterAll` callbacks will be executed once per a file.
 
-Because every mock needs `/components/_mocks/Mock.brs` dependency, in case of mocking external dependencies to avoid
-treating such dependency as an internal dependency of an external module (and looking for Mock.brs in external
-module files), mock generator always adds `@import /components/_mocks/Mock.brs from app` entry.
-`app` module informs the dependency importer that it is the main app module.
+`KopytkoTestSuite` provides additional possibility to run custom code before/after every test suite via `setBeforeEach` and `setAfterEach`
+methods.
+
+Functions passed into all these methods and arrays should have just one `ts` argument which is a test suite.
+
+## API
+- [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
