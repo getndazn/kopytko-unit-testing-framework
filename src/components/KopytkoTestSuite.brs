@@ -97,12 +97,20 @@ function KopytkoTestSuite() as Object
     }
   End Function
 
+  ts.setBeforeAll = sub (callback as Function)
+    m._beforeAll.push(callback)
+  end sub
+
   ts.setBeforeEach = sub (callback as Function)
     m._beforeEach.push(callback)
   end sub
 
   ts.setAfterEach = sub (callback as Function)
     m._afterEach.push(callback)
+  end sub
+
+  ts.setAfterAll = sub (callback as Function)
+    m._afterAll.push(callback)
   end sub
 
   ts.findLabelByText = function (query as String, container = Invalid as Object) as Object
