@@ -1,4 +1,4 @@
-# KopytkoTestSuite
+# KopytkoTestSuite API
 
 ## Methods
 - [`setAfterAll(callback)`](#setafterallcallback)

@@ -161,3 +161,6 @@ Notice that if you have test cases of a unit split into few files, every file cr
 methods.
 
 Functions passed into all these methods and arrays should have just one `ts` argument which is a test suite.
+
+## API
+- [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
