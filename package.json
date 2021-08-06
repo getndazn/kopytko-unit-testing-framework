@@ -32,7 +32,8 @@
   "files": [
     "src",
     "plugins",
-    "scripts"
+    "scripts",
+    "manifest.js"
   ],
   "ropm": {
     "packageRootDir": "src"
