@@ -1,5 +1,8 @@
 # Kopytko Unit Testing Framework
-The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between Kopytko and Roku unit testing framework. The main difference is placement of the tests. We believe tests should be close to the tested objects.
+
+The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework).
+There are some differences between Kopytko and Roku unit testing framework. The main difference is placement of the tests.
+We believe tests should be close to the tested objects.
 
 The expected structure of the app:
 ```
@@ -19,8 +22,64 @@ The `_tests` folders should be placed near to the tested entity. Each test suite
 - ability to mock dependencies automatically
 - ability to mock dependencies manually
 
-## Unit Test philosophy
-The unit tests can be splitted into multiple files and imported by the packager automatically. Let's consider the following example:
+## Setup
+
+1. Install framework as a dev dependency
+```shell
+npm install @kopytko/unit-testing-framework --save-dev
+```
+
+2. Kopytko Unit Testing Framework uses [Kopytko Packager](https://github.com/getndazn/kopytko-packager) to build apps.
+   If you don't use it yet, go to its docs and init a @kopytko app. Once done, setup test environment in your `.kopytkorc` file
+```json
+{
+  "pluginDefinitions": {
+    "import-unit-testing-dependencies": "/node_modules/@kopytko/unit-testing-framework/plugins/import-unit-testing-dependencies",
+    "generate-mocks": "/node_modules/@kopytko/unit-testing-framework/plugins/generate-mocks",
+    "prepare-test-schema": "/node_modules/@kopytko/unit-testing-framework/plugins/prepare-test-schema"
+  },
+  "plugins": [
+    { "name": "kopytko-copy-external-dependencies", "preEnvironmentPlugin": true }
+  ],
+  "environments": {
+    "test": {
+      "plugins": ["generate-mocks", "prepare-test-schema", "import-unit-testing-dependencies"]
+    }
+  }
+}
+```
+Remark: You can use any name (except Kopytko Packager's `dev` reserved environment name) for the test environment, just be consistent.
+
+3. Setup test script in your `package.json` and force no-prefixing kopytko-unit-testing-framework module's files
+```json
+{
+  "scripts": {
+    "test": "ENV=test node ../scripts/test.js"
+  },
+  "ropm": {
+    "noprefix": [
+      "@kopytko/unit-testing-framework"
+    ]
+  }
+}
+```
+
+## Running unit tests
+
+Simply
+```shell
+npm test
+```
+
+If you want to run unit tests of a specific unit, you can pass the file name as a default argument:
+```shell
+npm test -- MyTestableUnit
+```
+This is a shortcut for `npm test -- --testFileName=MyTestableUnit`
+
+## Kopytko Unit Test philosophy
+
+The unit tests can be split into multiple files and imported by the packager automatically. Let's consider the following example:
 ```
  components
   _tests
@@ -43,8 +102,10 @@ end function
 ```
 `MyServiceTestSuite.test.brs`
 ```brightscript
+' @import /components/KopytkoTestSuite.brs from @kopytko/unit-testing-framework
 function MyServiceTestSuite() as Object
-  ts = BaseTestSuite()
+  ts = KopytkoTestSuite()
+
   ts.setUp = function ()
     ' do something
   end function
@@ -87,7 +148,12 @@ function TestSuite__MyService_getData() as Object
 end function
 ```
 Such structure is understood and imported automatically by the packager.
+
+Behind the scenes Kopytko Unit Testing Framework replaces the source/Main.brs file to run unit tests.
+Roku's Unit Testing Framework core file is automatically imported by Kopytko Packager via ROPM.
+
 ## Test Mocks
+
 Dependencies may be mocked by using `@mock` annotation after dependencies import in the main test file:
 
 `' @mock pkg:/components/example/ExampleService.brs`
@@ -149,6 +215,7 @@ Calls to the methods or constructor can be inspected:
 ```
 
 ## Setup and Teardown
+
 Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
 However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite,
 so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
@@ -163,4 +230,9 @@ methods.
 Functions passed into all these methods and arrays should have just one `ts` argument which is a test suite.
 
 ## API
+
 - [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
+
+## Example test app config and unit tests
+
+Go to [/example](example) directory
