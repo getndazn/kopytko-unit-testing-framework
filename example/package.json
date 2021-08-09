@@ -1,0 +1,17 @@
+{
+  "name": "unit-testing-example",
+  "version": "1.0.0",
+  "description": "Example unit tests app",
+  "scripts": {
+    "test": "ENV=test node ../scripts/test.js"
+  },
+  "private": true,
+  "devDependencies": {
+    "@kopytko/unit-testing-framework": "file:.."
+  },
+  "ropm": {
+    "noprefix": [
+      "@kopytko/unit-testing-framework"
+    ]
+  }
+}
