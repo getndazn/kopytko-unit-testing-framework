@@ -48,7 +48,7 @@ npm install @kopytko/unit-testing-framework --save-dev
   }
 }
 ```
-Remark: You can use any name (except Kopytko Packager's `dev` reserved environment name) for the test environment, just be consistent.
+Remark: You can use any name for the test environment, just be consistent.
 
 3. Setup test script in your `package.json` and force no-prefixing kopytko-unit-testing-framework module's files
 ```json
