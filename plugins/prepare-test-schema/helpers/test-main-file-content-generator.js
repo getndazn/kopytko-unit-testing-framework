@@ -1,5 +1,5 @@
-const args = require('@kopytko/packager/src/env/args');
 const fs = require('fs-extra');
+const args = require('../../../packager-steps/args');
 
 const CONTENT = `sub main()
   screen = CreateObject("roSGScreen")
