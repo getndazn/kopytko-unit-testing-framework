@@ -35,9 +35,13 @@ async function prepareSchema(testFilePath, testXmlGenerator, rootDir) {
 
   await fs.mkdir(outputLocation, { recursive: true });
 
-  testSchema.testSuites.forEach(testSuite => {
-    fs.copyFile(testSuite.filePath, `${outputLocation}${testSuite.outputFileName}`);
-  });
+  await Promise.all(
+    testSchema.testSuites.map(testSuite => copyTestSuite(testSuite, outputLocation))
+  );
 
   await testXmlGenerator.generate(testSchema, outputLocation);
+}
+
+function copyTestSuite(testSuite, outputLocation) {
+  return fs.copyFile(testSuite.filePath, `${outputLocation}${testSuite.outputFileName}`);
 }

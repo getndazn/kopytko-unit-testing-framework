@@ -7,7 +7,8 @@ it is required to exceptionally use NPM v6.
 
 1. Install kopytko-unit-testing-framework's dependencies using NPM v6
 `cd .. && npm ci`
-2. Install example app unit-testing-framework dep
+2. Install example app unit-testing-framework dependencies
+`cd example && npm ci`
 
 ## Usage
 ```shell

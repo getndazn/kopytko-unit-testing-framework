@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const args = require('../../../packager-steps/args');
+const args = require('../../../../packager-steps/args');
 
 const CONTENT = `sub main()
   screen = CreateObject("roSGScreen")
