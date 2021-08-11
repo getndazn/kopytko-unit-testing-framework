@@ -1,16 +1,14 @@
 {
   "baseManifest": "manifest.js",
   "pluginDefinitions": {
-    "import-unit-testing-dependencies": "/node_modules/@kopytko/unit-testing-framework/plugins/import-unit-testing-dependencies",
-    "generate-mocks": "/node_modules/@kopytko/unit-testing-framework/plugins/generate-mocks",
-    "prepare-test-schema": "/node_modules/@kopytko/unit-testing-framework/plugins/prepare-test-schema"
+    "generate-tests": "/node_modules/@kopytko/unit-testing-framework/plugins/generate-tests"
   },
   "plugins": [
     { "name": "kopytko-copy-external-dependencies", "preEnvironmentPlugin": true }
   ],
   "environments": {
     "test": {
-      "plugins": ["generate-mocks", "prepare-test-schema", "import-unit-testing-dependencies"]
+      "plugins": ["generate-tests"]
     }
   }
 }
