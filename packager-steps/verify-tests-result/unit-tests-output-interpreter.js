@@ -67,7 +67,7 @@ module.exports = class UnitTestsOutputInterpreter {
 
   _getTestsResultsProperty(summaryString, property) {
     return parseInt(
-      this._getPropertyRegex(property).exec(summaryString)[1], 10
+      this._getPropertyRegex(property).exec(summaryString)[1], 10,
     );
   }
 
