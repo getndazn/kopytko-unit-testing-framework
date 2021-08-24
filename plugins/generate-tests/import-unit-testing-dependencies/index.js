@@ -19,7 +19,7 @@ async function updateXmlFiles(dir, dependenciesImporter) {
   const xmlFilePaths = await glob(path.join(dir, XML_FILE_PATH_PATTERN));
 
   return Promise.all(
-    xmlFilePaths.map(filePath => updateXmlFile(filePath, dir, dependenciesImporter))
+    xmlFilePaths.map(filePath => updateXmlFile(filePath, dir, dependenciesImporter)),
   );
 }
 

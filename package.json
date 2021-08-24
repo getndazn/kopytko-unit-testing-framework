@@ -2,7 +2,9 @@
   "name": "@kopytko/unit-testing-framework",
   "version": "0.0.1",
   "description": "Kopytko Unit Testing Framework",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint ./"
+  },
   "keywords": [
     "roku",
     "brightscript",
@@ -40,10 +42,16 @@
     "packageRootDir": "src"
   },
   "dependencies": {
-    "@kopytko/packager": "github:getndazn/kopytko-packager#5a28ee9",
+    "@kopytko/packager": "github:getndazn/kopytko-packager",
     "fs-extra": "^10.0.0",
     "glob-promise": "^4.2.0",
     "telnet-client": "^1.4.9",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/eslint-parser": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "eslint": "^7.32.0"
   }
 }

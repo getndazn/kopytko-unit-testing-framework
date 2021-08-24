@@ -21,7 +21,7 @@ module.exports = async function prepareTestSchema(dir) {
   await TestSceneGenerator.generate(`${dir}${TESTS_LOCATION}`);
   await TestMainFileContentGenerator.generate(`${dir}${MAIN_FILE_LOCATION}`)
   await Promise.all(
-    testFilePaths.map(filePath => prepareSchema(filePath, testXmlGenerator, dir))
+    testFilePaths.map(filePath => prepareSchema(filePath, testXmlGenerator, dir)),
   );
 }
 
@@ -36,7 +36,7 @@ async function prepareSchema(testFilePath, testXmlGenerator, rootDir) {
   await fs.mkdir(outputLocation, { recursive: true });
 
   await Promise.all(
-    testSchema.testSuites.map(testSuite => copyTestSuite(testSuite, outputLocation))
+    testSchema.testSuites.map(testSuite => copyTestSuite(testSuite, outputLocation)),
   );
 
   await testXmlGenerator.generate(testSchema, outputLocation);

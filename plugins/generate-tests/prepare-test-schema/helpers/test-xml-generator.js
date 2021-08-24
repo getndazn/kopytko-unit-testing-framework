@@ -28,7 +28,7 @@ module.exports = class TestXmlGenerator {
       unitName: test.unit.name,
       unitPath: this._buildPackagePath(test.unit.filePath),
       testSuiteNames: this._generateTestSuiteNames(test),
-      testSuiteDependencies: test.testSuites.map(this._buildTestSuiteDependencyLine).join(NEW_LINE_CHAR)
+      testSuiteDependencies: test.testSuites.map(this._buildTestSuiteDependencyLine).join(NEW_LINE_CHAR),
     });
   }
 
