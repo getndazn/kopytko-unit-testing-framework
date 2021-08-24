@@ -15,10 +15,10 @@ module.exports = class DependenciesMappingGenerator {
   async generate(dir) {
     const brsFilePaths = await glob(path.join(dir, BRIGHTSCRIPT_FILE_PATH_PATTERN), {});
     const filesImportPaths = await Promise.all(
-      brsFilePaths.map(async filePath => (await this._getBrightscriptDependencies(filePath)).getImportPaths())
+      brsFilePaths.map(async filePath => (await this._getBrightscriptDependencies(filePath)).getImportPaths()),
     );
     const filesMockPaths = await Promise.all(
-      brsFilePaths.map(async filePath => (await this._getBrightscriptDependencies(filePath)).getMockPaths())
+      brsFilePaths.map(async filePath => (await this._getBrightscriptDependencies(filePath)).getMockPaths()),
     );
     const mapping = {};
 
