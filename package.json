@@ -11,25 +11,12 @@
     "ropm"
   ],
   "contributors": [
-    {
-      "name": "Paweł Hertman",
-      "email": "pawel@hertman.eu",
-      "url": "http://hertman.eu/"
-    },
-    {
-      "name": "Radosław Zambrowski",
-      "email": "radekzam@gmail.com"
-    },
-    {
-      "name": "Tomasz Rejment",
-      "email": "tomasz.rejment@dazn.com"
-    },
-    {
-      "name": "Błażej Chełkowski",
-      "email": "blazej.chelkowski@dazn.com"
-    }
+    "Paweł Hertman <pawel@hertman.eu>",
+    "Tomasz Rejment <trejment@gmail.com>",
+    "Błażej Chełkowski <blazej.chelkowski@outlook.com>",
+    "Radosław Zambrowski <radekzam@gmail.com>"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "files": [
     "src",
@@ -53,5 +40,15 @@
     "@babel/eslint-parser": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "eslint": "^7.32.0"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/changelog",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
   }
 }
