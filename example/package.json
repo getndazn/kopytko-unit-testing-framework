@@ -3,15 +3,10 @@
   "version": "1.0.0",
   "description": "Example unit tests app",
   "scripts": {
-    "test": "ENV=test node ../scripts/test.js"
+    "test": "ENV=test node node_modules/@kopytko/unit-testing-framework/scripts/test.js"
   },
   "private": true,
   "devDependencies": {
-    "@kopytko/unit-testing-framework": "file:.."
-  },
-  "ropm": {
-    "noprefix": [
-      "@kopytko/unit-testing-framework"
-    ]
+    "@kopytko/unit-testing-framework": "file:../kopytko-unit-testing-framework-0.0.1.tgz"
   }
 }

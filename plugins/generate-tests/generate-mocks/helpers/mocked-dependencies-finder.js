@@ -8,7 +8,11 @@ const IGNORED_TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*_*.brs';
 const TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*.test.brs';
 
 module.exports = class MockedDependenciesFinder {
-  constructor(rootDir) {
+  _modules;
+  _rootDir;
+
+  constructor(rootDir, modules) {
+    this._modules = modules;
     this._rootDir = rootDir;
   }
 
@@ -26,7 +30,7 @@ module.exports = class MockedDependenciesFinder {
 
   async _getFileMockPaths(filePath) {
     const fileLines = await FileHandler.readLines(filePath);
-    const brightscriptDependencies = new BrightscriptDependencies(fileLines, filePath, this._rootDir);
+    const brightscriptDependencies = new BrightscriptDependencies(fileLines, filePath, this._modules, this._rootDir);
 
     return brightscriptDependencies.getMockPaths();
   }
