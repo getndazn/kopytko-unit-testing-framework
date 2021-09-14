@@ -12,6 +12,12 @@ const BRIGHTSCRIPT_LOCAL_DEPENDENCY_PREFIX = 'pkg:';
 const BRIGHTSCRIPT_MOCK_FILE_EXTENSION = '.mock.brs';
 
 module.exports = class DependenciesMappingGenerator {
+  _modules;
+
+  constructor(modules) {
+    this._modules = modules;
+  }
+
   async generate(dir) {
     const brsFilePaths = await glob(path.join(dir, BRIGHTSCRIPT_FILE_PATH_PATTERN), {});
     const filesImportPaths = await Promise.all(
@@ -43,7 +49,7 @@ module.exports = class DependenciesMappingGenerator {
   async _getBrightscriptDependencies(filePath) {
     const fileLines = await FileHandler.readLines(filePath);
 
-    return new UnitTestingBrightscriptDependencies(fileLines, filePath);
+    return new UnitTestingBrightscriptDependencies(fileLines, filePath, this._modules);
   }
 
   _checkCircularDependency(mapping, fileImportPaths, fileUri) {
