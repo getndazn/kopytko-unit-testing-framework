@@ -9,8 +9,8 @@ const DependenciesMappingGenerator = require('./helpers/dependencies-mapping-gen
 
 const XML_FILE_PATH_PATTERN = '/components/**/*.xml';
 
-module.exports = async function importDependencies(dir) {
-  const dependenciesImporter = await createDependenciesImporter(dir);
+module.exports = async function importDependencies(dir, modules) {
+  const dependenciesImporter = await createDependenciesImporter(dir, modules);
 
   return updateXmlFiles(dir, dependenciesImporter);
 }
@@ -36,8 +36,8 @@ async function updateXmlFile(filePath, dir, dependenciesImporter) {
   }
 }
 
-async function createDependenciesImporter(dir) {
-  const mapping = await new DependenciesMappingGenerator().generate(dir);
+async function createDependenciesImporter(dir, modules) {
+  const mapping = await new DependenciesMappingGenerator(modules).generate(dir);
   const finder = new DependenciesFinder(mapping);
 
   return new DependenciesImporter(finder, mapping);

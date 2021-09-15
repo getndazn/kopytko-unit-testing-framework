@@ -13,15 +13,16 @@ module.exports = class UnitTestingBrightscriptDependencies extends BrightscriptD
    * Reads file lines and saves dependencies
    * @param {Array<String>} fileLines
    * @param {String} filePath
+   * @param {Modules} modules
    * @param {String} [rootDir]
    */
-  constructor(fileLines, filePath, rootDir = '') {
-    super(fileLines, filePath, rootDir);
+  constructor(fileLines, filePath, modules, rootDir = '') {
+    super(fileLines, filePath, modules, rootDir);
 
-    const internalItemCreator = new BrightscriptInternalDependencyItemCreator(this._rootDir, this._sanitizedModuleName);
+    const internalItemCreator = new BrightscriptInternalDependencyItemCreator(this._rootDir, this._modulePrefix, filePath);
     this._mockDependencyCollection = this.getDependencyCollection(new BrightscriptInternalMockFinder(internalItemCreator));
 
-    const externalItemCreator = new BrightscriptExternalDependencyItemCreator(this._rootDir);
+    const externalItemCreator = new BrightscriptExternalDependencyItemCreator(this._rootDir, this._modulePrefix, filePath, modules);
     const externalMockDependencyCollection = this.getDependencyCollection(new BrightscriptExternalMockFinder(externalItemCreator));
     externalMockDependencyCollection.getItems().forEach(dependency => this._mockDependencyCollection.add(dependency));
   }

@@ -8,7 +8,7 @@
   "keywords": [
     "roku",
     "brightscript",
-    "ropm"
+    "kopytko-module"
   ],
   "contributors": [
     "Paweł Hertman <pawel@hertman.eu>",
@@ -25,9 +25,7 @@
     "scripts",
     "manifest.js"
   ],
-  "ropm": {
-    "packageRootDir": "src"
-  },
+  "kopytkoModuleDir": "src/",
   "dependencies": {
     "@kopytko/packager": "github:getndazn/kopytko-packager",
     "fs-extra": "^10.0.0",

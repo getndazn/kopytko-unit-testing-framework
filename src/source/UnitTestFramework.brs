@@ -1486,12 +1486,12 @@ function TestRunner() as Object
 
     ' Internal properties
     this.SKIP_TEST_MESSAGE_PREFIX = "SKIP_TEST_MESSAGE_PREFIX__"
-    this.nodesTestDirectory = "p" + "kg:/components/tests" ' it is a @kopytko team hack to avoid rewriting path by ROPM
+    this.nodesTestDirectory = "pkg:/components/tests"
     if this.isNodeMode
         this.testsDirectory = this.nodesTestDirectory
         this.testFilePrefix = m.top.subtype()
     else
-        this.testsDirectory = "p" + "kg:/source/tests" ' it is a @kopytko team hack to avoid rewriting path by ROPM
+        this.testsDirectory = "pkg:/source/tests"
         this.testFilePrefix = "Test__"
     end if
     this.testSuitePrefix = "TestSuite__"
