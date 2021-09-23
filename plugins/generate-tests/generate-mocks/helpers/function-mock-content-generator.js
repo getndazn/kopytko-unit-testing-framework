@@ -4,7 +4,7 @@ const FUNCTION_PARAMS_INDENTATION_LEVEL = 3;
 
 module.exports = class FunctionMockContentGenerator {
   generate(mockInfo) {
-    return `' @import /components/_mocks/Mock.brs from @kopytko/unit-testing-framework
+    return `' @import /components/_mocks/Mock.brs from @dazn/kopytko-unit-testing-framework
 function ${mockInfo.function.name}(${mockInfo.function.rawParams}) as Dynamic
   return Mock({
     name: "${mockInfo.function.name}",

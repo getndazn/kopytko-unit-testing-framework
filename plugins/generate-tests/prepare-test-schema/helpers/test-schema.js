@@ -1,7 +1,7 @@
 const TestSuite = require('./test-suite');
 const TestSuitesFinder = require('./test-suites-finder');
 const UnitFinder = require('./unit-finder');
-const KopytkoError = require('@kopytko/packager/src/errors/kopytko-error');
+const KopytkoError = require('@dazn/kopytko-packager/src/errors/kopytko-error');
 
 const TESTS_DIRECTORY = '_tests/';
 

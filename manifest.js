@@ -1,4 +1,4 @@
-const baseManifest = require('@kopytko/packager/base-manifest');
+const baseManifest = require('@dazn/kopytko-packager/base-manifest');
 
 module.exports = {
   ...baseManifest,

@@ -1,8 +1,8 @@
 const glob = require('glob-promise');
 const path = require('path');
 
-const KopytkoError = require('@kopytko/packager/src/errors/kopytko-error');
-const FileHandler = require('@kopytko/packager/src/plugin-helpers/file-handler');
+const KopytkoError = require('@dazn/kopytko-packager/src/errors/kopytko-error');
+const FileHandler = require('@dazn/kopytko-packager/src/plugin-helpers/file-handler');
 
 const UnitTestingBrightscriptDependencies = require('./brightscript/unit-testing-brightscript-dependencies');
 

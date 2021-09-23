@@ -1,4 +1,4 @@
-const RokuError = require('@kopytko/packager/src/errors/roku-error');
+const RokuError = require('@dazn/kopytko-packager/src/errors/roku-error');
 
 module.exports = class UnitTestsOutputInterpreter {
   _accumulatedData = [];

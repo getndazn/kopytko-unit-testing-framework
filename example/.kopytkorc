@@ -1,7 +1,7 @@
 {
   "baseManifest": "manifest.js",
   "pluginDefinitions": {
-    "generate-tests": "/node_modules/@kopytko/unit-testing-framework/plugins/generate-tests"
+    "generate-tests": "/node_modules/@dazn/kopytko-unit-testing-framework/plugins/generate-tests"
   },
   "plugins": [
     { "name": "kopytko-copy-external-dependencies", "preEnvironmentPlugin": true }
