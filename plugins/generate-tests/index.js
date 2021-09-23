@@ -1,4 +1,4 @@
-const buildModules = require('@kopytko/packager/src/plugin-helpers/module/build-modules');
+const buildModules = require('@dazn/kopytko-packager/src/plugin-helpers/module/build-modules');
 
 const generateMocks = require('./generate-mocks');
 const prepareTestSchema = require('./prepare-test-schema');

@@ -6,7 +6,7 @@ const METHOD_PARAMS_INDENTATION_LEVEL = 5;
 
 module.exports = class ObjectMockContentGenerator {
   generate(mockInfo) {
-    return `' @import /components/_mocks/Mock.brs from @kopytko/unit-testing-framework
+    return `' @import /components/_mocks/Mock.brs from @dazn/kopytko-unit-testing-framework
 function ${mockInfo.constructor.name}(${mockInfo.constructor.rawParams}) as Dynamic
   return Mock({
     testComponent: m,

@@ -1,4 +1,4 @@
-const FileHandler = require('@kopytko/packager/src/plugin-helpers/file-handler');
+const FileHandler = require('@dazn/kopytko-packager/src/plugin-helpers/file-handler');
 const FunctionInfo = require('./function-info');
 const FunctionType = require('./function-type.const');
 const FunctionMockContentGenerator = require('./function-mock-content-generator');

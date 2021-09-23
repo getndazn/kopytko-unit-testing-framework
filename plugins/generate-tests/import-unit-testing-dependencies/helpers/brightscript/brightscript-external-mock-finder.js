@@ -1,4 +1,4 @@
-const DependencyFinder = require('@kopytko/packager/src/plugin-helpers/dependency/dependency-finder');
+const DependencyFinder = require('@dazn/kopytko-packager/src/plugin-helpers/dependency/dependency-finder');
 
 const BRIGHTSCRIPT_EXTERNAL_MOCK_REGEX = /^\s*'\s*@mock\s+(?:pkg:)?((\/[\w-/.]+\.brs)\s+from\s+([\w-/.@!]+))\s*$/;
 

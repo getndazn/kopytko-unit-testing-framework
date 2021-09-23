@@ -1,5 +1,5 @@
-const AppDeployer = require('@kopytko/packager/src/core/app-deployer');
-const Step = require('@kopytko/packager/src/step-runner/steps/step');
+const AppDeployer = require('@dazn/kopytko-packager/src/core/app-deployer');
+const Step = require('@dazn/kopytko-packager/src/step-runner/steps/step');
 const TestResultsFetcher = require('./test-results-fetcher');
 
 module.exports = class VerifyTestsResultStep extends Step {

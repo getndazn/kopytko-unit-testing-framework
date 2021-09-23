@@ -1,4 +1,4 @@
-const KopytkoError = require('@kopytko/packager/src/errors/kopytko-error');
+const KopytkoError = require('@dazn/kopytko-packager/src/errors/kopytko-error');
 
 const TEST_SUITE_NAME_REGEX = /[^/]+(?=.test.brs)/;
 

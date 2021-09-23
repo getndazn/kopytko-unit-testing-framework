@@ -1,8 +1,8 @@
 const { once } = require('events');
 const Telnet = require('telnet-client');
 
-const KopytkoError = require('@kopytko/packager/src/errors/kopytko-error');
-const RokuError = require('@kopytko/packager/src/errors/roku-error');
+const KopytkoError = require('@dazn/kopytko-packager/src/errors/kopytko-error');
+const RokuError = require('@dazn/kopytko-packager/src/errors/roku-error');
 const UnitTestsOutputInterpreter = require('./unit-tests-output-interpreter');
 
 module.exports = class TestResultsFetcher {

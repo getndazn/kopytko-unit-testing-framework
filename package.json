@@ -1,5 +1,5 @@
 {
-  "name": "@kopytko/unit-testing-framework",
+  "name": "@dazn/kopytko-unit-testing-framework",
   "version": "1.0.0",
   "description": "Kopytko Unit Testing Framework",
   "scripts": {
@@ -8,6 +8,7 @@
   "keywords": [
     "roku",
     "brightscript",
+    "kopytko",
     "kopytko-module"
   ],
   "contributors": [
@@ -25,9 +26,16 @@
     "scripts",
     "manifest.js"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getndazn/kopytko-packager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/getndazn/kopytko-packager/issues"
+  },
   "kopytkoModuleDir": "src/",
   "dependencies": {
-    "@kopytko/packager": "github:getndazn/kopytko-packager",
+    "@dazn/kopytko-packager": "^1.0.1",
     "fs-extra": "^10.0.0",
     "glob-promise": "^4.2.0",
     "telnet-client": "^1.4.9",

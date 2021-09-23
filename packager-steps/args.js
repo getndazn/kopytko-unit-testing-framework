@@ -1,4 +1,4 @@
-const args = require('@kopytko/packager/src/env/args');
+const args = require('@dazn/kopytko-packager/src/env/args');
 
 const firstArgument = process.argv[2] || '';
 const anonymousArgument = !firstArgument.includes('--') ? firstArgument : '';

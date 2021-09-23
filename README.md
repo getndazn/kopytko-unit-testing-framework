@@ -26,7 +26,7 @@ The `_tests` folders should be placed near to the tested entity. Each test suite
 
 1. Install framework as a dev dependency
 ```shell
-npm install @kopytko/unit-testing-framework --save-dev
+npm install @dazn/kopytko-unit-testing-framework --save-dev
 ```
 
 2. Kopytko Unit Testing Framework uses [Kopytko Packager](https://github.com/getndazn/kopytko-packager) to build apps.
@@ -34,7 +34,7 @@ npm install @kopytko/unit-testing-framework --save-dev
 ```json
 {
   "pluginDefinitions": {
-    "generate-tests": "/node_modules/@kopytko/unit-testing-framework/plugins/generate-tests"
+    "generate-tests": "/node_modules/@dazn/kopytko-unit-testing-framework/plugins/generate-tests"
   },
   "plugins": [
     { "name": "kopytko-copy-external-dependencies", "preEnvironmentPlugin": true }
@@ -48,16 +48,11 @@ npm install @kopytko/unit-testing-framework --save-dev
 ```
 Remark: You can use any name for the test environment, just be consistent.
 
-3. Setup test script in your `package.json` and force no-prefixing kopytko-unit-testing-framework module's files
+3. Setup test script in your `package.json`
 ```json
 {
   "scripts": {
     "test": "ENV=test node ../scripts/test.js"
-  },
-  "ropm": {
-    "noprefix": [
-      "@kopytko/unit-testing-framework"
-    ]
   }
 }
 ```
@@ -100,7 +95,7 @@ end function
 ```
 `MyServiceTestSuite.test.brs`
 ```brightscript
-' @import /components/KopytkoTestSuite.brs from @kopytko/unit-testing-framework
+' @import /components/KopytkoTestSuite.brs from @dazn/kopytko-unit-testing-framework
 function MyServiceTestSuite() as Object
   ts = KopytkoTestSuite()
 
