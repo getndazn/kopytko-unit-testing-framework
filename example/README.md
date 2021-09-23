@@ -2,7 +2,7 @@
 
 ## Setup
 
-***Because of [NPM v7 local dependencies  bug](https://github.com/npm/cli/issues/3593)***
+Because NPM links local dependency and kopytko-packager trying to find all dependencies in direct node_modules/ directory
 it is required to exceptionally pack the kopytko-unit-testing-framework first:
 
 1. Install kopytko-unit-testing-framework's dependencies: `cd .. && npm ci`
