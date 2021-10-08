@@ -1,7 +1,19 @@
 # Kopytko Unit Testing Framework
 
-The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework).
-There are some differences between Kopytko and Roku unit testing framework. The main difference is placement of the tests.
+- [App Structure](#app-structure)
+- [Setup](#setup)
+- [Running Unit Tests](#running-unit-tests)
+- [Kopytko Unit Test Philosophy](#kopytko-unit-test-philosophy)
+- [Test Mocks](#test-mocks)
+- [Setup and Teardown](#setup-and-teardown)
+- [Limitations](#limitations)
+- [API](#api)
+- [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
+
+The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between those two frameworks.
+
+## App Structure
+
 We believe tests should be close to the tested objects.
 
 The expected structure of the app:
@@ -57,7 +69,7 @@ Remark: You can use any name for the test environment, just be consistent.
 }
 ```
 
-## Running unit tests
+## Running Unit Tests
 
 Simply
 ```shell
@@ -70,7 +82,7 @@ npm test -- MyTestableUnit
 ```
 This is a shortcut for `npm test -- --testFileName=MyTestableUnit`
 
-## Kopytko Unit Test philosophy
+## Kopytko Unit Test Philosophy
 
 The unit tests can be split into multiple files and imported by the packager automatically. Let's consider the following example:
 ```
@@ -99,9 +111,9 @@ end function
 function MyServiceTestSuite() as Object
   ts = KopytkoTestSuite()
 
-  ts.setUp = function ()
+  ts.setBeforeAll = sub (ts as Object)
     ' do something
-  end function
+  end sub
 
   return ts
 end function
@@ -112,7 +124,7 @@ function TestSuite__MyService_Main() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - Main"
 
-  ts.addTest("it should create new instance of the service", function () as String
+  ts.addTest("it should create new instance of the service", function (ts as Object) as String
     return ts.assertNotInvalid(MyService())
   end function)
 
@@ -125,7 +137,7 @@ function TestSuite__MyService_getData() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - getData"
 
-  ts.addTest("it should return some data", function () as String
+  ts.addTest("it should return some data", function (ts as Object) as String
    ' Given
     service = MyService()
     expected = { arg: "abc" }
@@ -210,21 +222,22 @@ Calls to the methods or constructor can be inspected:
 ## Setup and Teardown
 
 Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
-However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite,
-so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
-`KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem
-related stuff.
-Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all
-`beforeAll` and `afterAll` callbacks will be executed once per a file.
+However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite, so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
+`KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem related stuff.
+Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all `beforeAll` and `afterAll` callbacks will be executed once per a file.
 
 `KopytkoTestSuite` provides additional possibility to run custom code before/after every test suite via `setBeforeEach` and `setAfterEach`
 methods.
 
 Functions passed into all these methods and arrays should have just one `ts` argument which is a test suite.
 
+## Limitations
+ - The Framework was not tested with the annotations
+
 ## API
 
 - [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
+- [KopytkoFrameworkTestSuite](docs/api/KopytkoFrameworkTestSuite.md)
 
 ## Example test app config and unit tests
 
