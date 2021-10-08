@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.0...v1.0.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* Added missing interface docs ([#22](https://github.com/getndazn/kopytko-unit-testing-framework/issues/22)) ([e8ecb9b](https://github.com/getndazn/kopytko-unit-testing-framework/commit/e8ecb9b679392e9f15e7d2a178fe23b18424e506))
+
 # 1.0.0 (2021-09-24)
 
 
