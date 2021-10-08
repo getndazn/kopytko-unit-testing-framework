@@ -9,7 +9,7 @@ it is required to exceptionally pack the kopytko-unit-testing-framework first:
 2. Create NPM package: `npm pack`
 3. Install example app unit-testing-framework dependencies
 `cd example && npm ci`
-4. Install packed unit-testing-framework: `npm i ../dazn-kopytko-unit-testing-framework-0.0.1.tgz`
+4. Install packed unit-testing-framework: `npm i ../dazn-kopytko-unit-testing-framework-{currentVersion}.tgz`, for instance: `npm i ../dazn-kopytko-unit-testing-framework-1.0.0.tgz`
 
 ## Usage
 ```shell
