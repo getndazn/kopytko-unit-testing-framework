@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.1...v1.0.2) (2021-12-03)
+
+
+### Bug Fixes
+
+* **deps:** Fixed npm urls ([#24](https://github.com/getndazn/kopytko-unit-testing-framework/issues/24)) ([4f86b55](https://github.com/getndazn/kopytko-unit-testing-framework/commit/4f86b550708c5d7da0a2656b045bf71774de9f82))
+
 ## [1.0.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.0...v1.0.1) (2021-10-08)
 
 
