@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.2...v1.0.3) (2022-01-21)
+
+
+### Bug Fixes
+
+* support testFileName argument ([36d6928](https://github.com/getndazn/kopytko-unit-testing-framework/commit/36d6928e952c85fbdad04680add59c91ea7bf9a7))
+
 ## [1.0.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.1...v1.0.2) (2021-12-03)
 
 
