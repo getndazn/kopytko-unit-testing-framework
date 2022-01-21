@@ -1,4 +1,4 @@
-const args = require('@dazn/kopytko-packager/src/env/args');
+const args = require('../args');
 
 module.exports = {
   rokuIP: args.rokuIP,
