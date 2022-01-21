@@ -15,7 +15,8 @@
     "Paweł Hertman <pawel@hertman.eu>",
     "Tomasz Rejment <trejment@gmail.com>",
     "Błażej Chełkowski <blazej.chelkowski@outlook.com>",
-    "Radosław Zambrowski <radekzam@gmail.com>"
+    "Radosław Zambrowski <radekzam@gmail.com>",
+    "Tomasz Bazelczuk <tbazelczuk@gmail.com>"
   ],
   "license": "MIT",
   "files": [
@@ -34,7 +35,6 @@
   },
   "kopytkoModuleDir": "src/",
   "dependencies": {
-    "@dazn/kopytko-packager": "^1.0.1",
     "fs-extra": "^10.0.0",
     "glob-promise": "^4.2.0",
     "telnet-client": "^1.4.9",
@@ -45,6 +45,9 @@
     "@babel/eslint-parser": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "eslint": "^7.32.0"
+  },
+  "peerDependencies": {
+    "@dazn/kopytko-packager": "^1.0.1"
   },
   "publishConfig": {
     "access": "public"
