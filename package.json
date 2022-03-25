@@ -44,10 +44,10 @@
     "@babel/core": "^7.15.0",
     "@babel/eslint-parser": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
-    "eslint": "^7.32.0"
+    "eslint": "^8.10.0"
   },
   "peerDependencies": {
-    "@dazn/kopytko-packager": "^1.0.1"
+    "@dazn/kopytko-packager": "^1.2.3"
   },
   "publishConfig": {
     "access": "public"
