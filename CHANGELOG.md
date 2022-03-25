@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.3...v1.0.4) (2022-03-25)
+
+
+### Bug Fixes
+
+* update dependencies ([#27](https://github.com/getndazn/kopytko-unit-testing-framework/issues/27)) ([785690e](https://github.com/getndazn/kopytko-unit-testing-framework/commit/785690ed409df2e2bccb09d9893741ab935896d3))
+
 ## [1.0.3](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.2...v1.0.3) (2022-01-21)
 
 
