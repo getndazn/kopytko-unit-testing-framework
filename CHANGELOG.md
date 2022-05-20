@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.4...v1.0.5) (2022-05-20)
+
+
+### Bug Fixes
+
+* Increased default test runner verbosity level ([#28](https://github.com/getndazn/kopytko-unit-testing-framework/issues/28)) ([83f1fef](https://github.com/getndazn/kopytko-unit-testing-framework/commit/83f1fefad38cb704bca5a339a599fdcd30a4154f))
+
 ## [1.0.4](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.3...v1.0.4) (2022-03-25)
 
 
