@@ -71,7 +71,7 @@ function KopytkoTestSuite() as Object
             result = m.testInstance._func[0](m)
           end if
         catch e
-          sourceObj = e.backtrace[e.backtrace.Count() - 1]
+          sourceObj = e.backtrace[e.backtrace.count() - 1]
           result = Substitute("{0} at {1}", e.message, FormatJson(sourceObj))
         end try
 
