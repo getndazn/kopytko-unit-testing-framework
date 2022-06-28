@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.5...v1.1.0) (2022-06-28)
+
+
+### Features
+
+* using try catch blocks to avoid unit test crash ([ebbc7d5](https://github.com/getndazn/kopytko-unit-testing-framework/commit/ebbc7d58480ea4c95a55bbac598258e2cddf7049))
+
 ## [1.0.5](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.4...v1.0.5) (2022-05-20)
 
 
