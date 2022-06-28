@@ -64,11 +64,16 @@ function KopytkoTestSuite() as Object
           end if
         end for
 
-        if (m.testInstance.hasArguments)
-          result = m.testInstance._func[0](m, m.testInstance.arg)
-        else
-          result = m.testInstance._func[0](m)
-        end if
+        try
+          if (m.testInstance.hasArguments)
+            result = m.testInstance._func[0](m, m.testInstance.arg)
+          else
+            result = m.testInstance._func[0](m)
+          end if
+        catch e
+          sourceObj = e.backtrace[e.backtrace.count() - 1]
+          result = Substitute("{0} at {1}", e.message, FormatJson(sourceObj))
+        end try
 
         for each afterEach in m._afterEach
           if (TF_Utils__IsFunction(afterEach))
