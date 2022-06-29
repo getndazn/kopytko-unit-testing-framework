@@ -239,9 +239,13 @@ function kptk_toHaveBeenLastCalledWith(params as Object) as String
   MATCHER_NAME = "toHaveBeenLastCalledWith(expected)"
 
   methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
-  numberOfCalls = methodMock.calls.count()
+  numberOfCalls = 0
   actualParams = Invalid
   passed = false
+
+  if (TF_Utils__IsValid(methodMock.calls))
+    numberOfCalls = methodMock.calls.count()
+  end if
 
   if (numberOfCalls > 0)
     ' check if last call of the function made with expected params
@@ -268,9 +272,13 @@ function kptk_toHaveBeenNthCalledWith(nthCall as Integer, params as Object) as S
   MATCHER_NAME = "toHaveBeenNthCalledWith(expected)"
 
   methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
-  numberOfCalls = methodMock.calls.count()
+  numberOfCalls = 0
   actualParams = Invalid
   passed = false
+
+  if (TF_Utils__IsValid(methodMock.calls))
+    numberOfCalls = methodMock.calls.count()
+  end if
 
   if (numberOfCalls > 0)
     ' check if nth call of the function made with expected params
