@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.1.0...v1.1.1) (2022-07-01)
+
+
+### Bug Fixes
+
+* remove old env variable ([#31](https://github.com/getndazn/kopytko-unit-testing-framework/issues/31)) ([72014ac](https://github.com/getndazn/kopytko-unit-testing-framework/commit/72014ac7ad5d8799d1a6aab68e0c49bdbcccab4e))
+
 # [1.1.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.0.5...v1.1.0) (2022-06-28)
 
 
