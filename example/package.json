@@ -7,6 +7,6 @@
   },
   "private": true,
   "devDependencies": {
-    "@dazn/kopytko-unit-testing-framework": "file:../dazn-kopytko-unit-testing-framework-1.0.0.tgz"
+    "@dazn/kopytko-unit-testing-framework": "file:../dazn-kopytko-unit-testing-framework-1.1.0.tgz"
   }
 }
