@@ -124,6 +124,63 @@ function TestSuite__assertionExample() as Object
     end function)
 
     ' ---------------------------------------------------------
+    ' toContainsSubset()
+    ' ---------------------------------------------------------
+    ts.addTest("expect(received).toContainsSubset(expected)", function (ts as Object) as String
+      ' Given
+      arr = ["value1", "value2", "value3"]
+  
+      ' Then
+      return ts.expect(arr).toContainsSubset(["value2", "value3"])
+    end function)
+  
+    ts.addTest("expect(received).not.toContainsSubset(expected)", function (ts as Object) as String
+      ' Given
+      arr = ["value1", "value2", "value3"]
+  
+      ' Then
+      return ts.expect(arr).not.toContainsSubset(["value3", "value4"])
+    end function)
+
+    ' ---------------------------------------------------------
+    ' toHasKey()
+    ' ---------------------------------------------------------
+    ts.addTest("expect(received).toHasKey(expected)", function (ts as Object) as String
+      ' Given
+      assArray = { key1: "value1", key2: "value2", key3: "value3" }
+  
+      ' Then
+      return ts.expect(assArray).toHasKey("key2")
+    end function)
+  
+    ts.addTest("expect(received).not.toHasKey(expected)", function (ts as Object) as String
+      ' Given
+      assArray = { key1: "value1", key2: "value2", key3: "value3" }
+  
+      ' Then
+      return ts.expect(assArray).not.toHasKey("key4")
+    end function)
+
+    ' ---------------------------------------------------------
+    ' toHasKeys()
+    ' ---------------------------------------------------------
+    ts.addTest("expect(received).toHasKeys(expected)", function (ts as Object) as String
+      ' Given
+      assArray = { key1: "value1", key2: "value2", key3: "value3" }
+  
+      ' Then
+      return ts.expect(assArray).toHasKeys(["key1", "key2"])
+    end function)
+  
+    ts.addTest("expect(received).not.toHasKeys(expected)", function (ts as Object) as String
+      ' Given
+      assArray = { key1: "value1", key2: "value2", key3: "value3" }
+  
+      ' Then
+      return ts.expect(assArray).not.toHasKeys(["key1", "key4"])
+    end function)
+
+    ' ---------------------------------------------------------
     ' toHaveLength()
     ' ---------------------------------------------------------
     ts.addTest("expect(received).toHaveLength(expected)", function (ts as Object) as String

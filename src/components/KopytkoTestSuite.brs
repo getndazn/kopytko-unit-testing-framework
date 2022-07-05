@@ -1,5 +1,5 @@
 ' @import /source/UnitTestFramework.brs
-' @import /components/KopytkoAssertionMethods.brs
+' @import /components/KopytkoAssertionChecker.brs
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
 
@@ -316,34 +316,7 @@ function KopytkoTestSuite() as Object
 
   ' @return An object having all the assertion/ matcher methods
   ' ----------------------------------------------------------------
-  ts.expect = function (value as Dynamic) as Object
-    context = {}
-    context._ts = m
-    context._received = Invalid
-    context._isNot = false
-
-    ' assign received value if received value is initialized and valid
-    if (TF_Utils__IsValid(value)) then context._received = value
-
-    ' matcher functions
-    context.toBe = kptk_toBe
-    context.toBeFalsy = kptk_toBeFalsy
-    context.toBeInvalid = kptk_toBeInvalid
-    context.toBeTruthy = kptk_toBeTruthy
-    context.toBeValid = kptk_toBeValid
-    context.toContain = kptk_toContain
-    context.toHaveBeenCalled = kptk_toHaveBeenCalled
-    context.toHaveBeenCalledTimes = kptk_toHaveBeenCalledTimes
-    context.toHaveBeenCalledWith = kptk_toHaveBeenCalledWith
-    context.toHaveBeenLastCalledWith = kptk_toHaveBeenLastCalledWith
-    context.toHaveBeenNthCalledWith = kptk_toHaveBeenNthCalledWith
-    context.toHaveLength = kptk_toHaveLength
-    context.toThrow = kptk_toThrow
-
-    context.not = kptk_not(context)
-
-    return context
-  end function
+  ts.expect = KopytkoAssertionChecker
 
   return ts
 end function
