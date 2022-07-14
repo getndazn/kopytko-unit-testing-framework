@@ -1,12 +1,13 @@
 ' Assert functions in this file:
 '
-'     toBeInvalid
-'     toBeValid
-'     toBeTruthy
-'     toBeFalsy
 '     toBe
+'     toBeFalsy
+'     toBeInvalid
+'     toBeTruthy
+'     toBeValid
 '     toContain
 '     toContainsSubset
+'     toEqual
 '     toHasKey
 '     toHasKeys
 '     toHaveLength
@@ -19,9 +20,18 @@
 '     not
 
 
-function KopytkoAssertionChecker(value as Dynamic) as Object
+' ----------------------------------------------------------------
+' The expect function is used every time you want to test a value. 
+' You will rarely call expect by itself. 
+' Instead, you will use expect along with a "matcher" function to assert something about a value
+
+' @param value (dynamic) - Value which needs to be asserted
+
+' @return An object having all the assertion/ matcher methods
+' ----------------------------------------------------------------
+function expect(value as Dynamic) as Object
   context = {}
-  context._ts = m
+  context._ts = GetGlobalAA()["$$ts"]
   context._received = Invalid
   context._isNot = false
 
@@ -31,7 +41,8 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' Matcher functions
 
   ' ----------------------------------------------------------------
-  ' To ensure if value is eqaul to the expected value
+  ' To compare primitive values or to check referential identity of node instances
+  ' It fails for object types as object referencee check is not supported in BrightScript
   '
   ' @param value (dynamic) - Expected value 
   '
@@ -39,14 +50,21 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toBe = function (value as Dynamic) as String
     MATCHER_NAME = "toBe(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, value, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, value, m._received, { isNot : m._isNot })
+
+    valuesType = Type(Box(m._received), 3)
+
+    ' Retrun error if received value is object type as referencee check is not supported in BrightScript
+    if (valuesType = "roList" OR valuesType = "roArray" OR valuesType = "roAssociativeArray")
+      return errorMsg + "Reference assertion is not allowed for object types. Please use 'toEqual' for value assertion"
+    end if
 
     assertMsg = m._ts.assertEqual(value, m._received)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg)
+    return m._ternary(assertMsg = "", "", errorMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -56,12 +74,12 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toBeFalsy = function () as String
     MATCHER_NAME = "toBeFalsy()"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, false, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, false, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertFalse(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -73,12 +91,12 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toBeInvalid = function () as String
     MATCHER_NAME = "toBeInvalid()"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, Invalid, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, Invalid, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertInvalid(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -90,12 +108,12 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toBeTruthy = function () as String
     MATCHER_NAME = "toBeTruthy()"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, true, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, true, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertTrue(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -107,34 +125,37 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toBeValid = function () as String
     MATCHER_NAME = "toBeValid()"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, "Value to be valid", m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, "Value to be valid", m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertNotInvalid(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
 
   ' ----------------------------------------------------------------
-  ' To ensure if Array or AssociativeArray contains the expected value
+  ' To ensure if Array or AssociativeArray contains the expected value or key
   '
   ' @param value (dynamic) - Expected value 
-  ' @param key (dynamic) - A key name for associative array.
   '
   ' @return Empty string (if contains) OR an error message
   ' ----------------------------------------------------------------
-  context.toContain = function (value as Dynamic, key = Invalid as Dynamic) as String
+  context.toContain = function (value as Dynamic) as String
     MATCHER_NAME = "toContain(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, value, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, value, m._received, { isNot : m._isNot })
 
-    assertMsg = m._ts.assertArrayContains(m._received, value, key)
+    if (Type(m._received) = "roAssociativeArray")
+      assertMsg = m._ts.assertAAHasKey(m._received, value)
+    else
+      assertMsg = m._ts.assertArrayContains(m._received, value)
+    end if
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -146,14 +167,43 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toContainsSubset = function (subset as Dynamic) as String
     MATCHER_NAME = "toContainsSubset(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, subset, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, subset, m._received, { isNot : m._isNot })
 
-    assertMsg = m._ts.assertArrayContainsSubset(m._received, subset)
+    if (Type(m._received) = "roAssociativeArray")
+      assertMsg = m._ternary(m._isAASubset(m._received, subset), "", "AssociativeArray doesn't contain the expected value.")
+    else
+      assertMsg = m._ts.assertArrayContainsSubset(m._received, subset)
+    end if
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ternary(assertMsg = "", "", errorMsg + assertMsg)
+  end function
+
+  ' ----------------------------------------------------------------
+  ' To ensure if value is eqaul to the expected value
+  '
+  ' @param value (dynamic) - Expected value 
+  '
+  ' @return Empty string (if equal) OR an error message
+  ' ----------------------------------------------------------------
+  context.toEqual = function (value as Dynamic) as String
+    MATCHER_NAME = "toEqual(expected)"
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, value, m._received, { isNot : m._isNot })
+
+    valuesType = Type(Box(m._received), 3)
+
+    if (valuesType = "roSGNode")
+      assertMsg = m._ternary(m._ts.isMatch(m._received, value), "", errorMsg)
+    else
+      assertMsg = m._ts.assertEqual(value, m._received)
+    end if
+
+    ' if matcher has been called with expect.not
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+
+    return m._ternary(assertMsg = "", "", errorMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -165,14 +215,14 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toHasKey = function (key as Dynamic) as String
     MATCHER_NAME = "toHaveKey(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, key, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, key, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertAAHasKey(m._received, key)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -184,14 +234,14 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toHasKeys = function (keys as Object) as String
     MATCHER_NAME = "toHaveKeys(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, keys, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, keys, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertAAHasKeys(m._received, keys)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -213,9 +263,9 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   
     passed = (numberOfCalls > 0)
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, ">=1", numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, ">=1", numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
   end function
 
   ' ----------------------------------------------------------------
@@ -239,9 +289,9 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
 
     passed = (numberOfCalls = number)
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, number, numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, number, numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
   end function
 
   ' ----------------------------------------------------------------
@@ -275,9 +325,9 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
     end for
 
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, params, callsParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", utils_asString(numberOfCalls)))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, callsParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -307,9 +357,9 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", utils_asString(numberOfCalls)))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -340,9 +390,9 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", utils_asString(numberOfCalls)))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -354,14 +404,14 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   context.toHaveLength = function (number as Dynamic) as String
     MATCHER_NAME = "toHaveLength(expected)"
-    errorMsg = matcherErrorMessage(MATCHER_NAME, number, m._received, { isNot : m._isNot })
+    errorMsg = m._matcherErrorMessage(MATCHER_NAME, number, m._received, { isNot : m._isNot })
 
     assertMsg = m._ts.assertArrayCount(m._received, number)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return utils_ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return utils_ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -384,9 +434,63 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
     end try
 
     ' if matcher has been called with expect.not
-    passed = utils_ternary(m._isNot, NOT passed, passed)
+    passed = m._ternary(m._isNot, NOT passed, passed)
 
-    return utils_ternary(passed, "", matcherErrorMessage(MATCHER_NAME, "throws", e, { isNot : m._isNot }))
+    return m._ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, "throws", e, { isNot : m._isNot }))
+  end function
+
+  ' ----------------------------------------------------------------
+  ' Utils
+  ' ----------------------------------------------------------------
+
+  context._matcherErrorMessage = function (matcherName as String, expected = Invalid as Dynamic, actual = Invalid as Dynamic, options = {} as Object, expectedString = "Expected" as String, receivedString = "Received" as String) as String
+    TRAILING_STR = " ; "
+    isNot = (options.isNot <> Invalid AND options.isNot)
+    ' format matcher name
+    matcherString = "expect(received)" + m._ternary(isNot, ".not", "") + "." + matcherName + " - "
+
+    if (TF_Utils__IsNotEmptyString(expectedString))
+      ' format expected string
+      matcherString += Substitute("{0}: {1} {2}", expectedString, m._ternary(isNot, "[not]", ""), m._asString(expected)) + TRAILING_STR
+    end if
+
+    if (TF_Utils__IsNotEmptyString(receivedString))
+      ' format received string
+      matcherString += Substitute("{0}: {1}", receivedString, m._asString(actual)) + TRAILING_STR
+    end if
+
+    return matcherString
+  end function
+
+  context._asString = function (value as Dynamic) as String
+    if (not TF_Utils__IsValid(value))
+      return "Invalid"
+    else if (TF_Utils__IsValid(GetInterface(value, "ifToStr")))
+      return value.toStr()
+    else if (TF_Utils__IsValid(GetInterface(value, "ifAssociativeArray")) OR TF_Utils__IsValid(GetInterface(value, "ifArray")))
+      return FormatJson(value)
+    else
+      return ""
+    end if
+  end function
+
+  context._ternary = function (conditionResult as Boolean, trueReturnValue as Dynamic, falseReturnValue as Dynamic) as Dynamic
+    if (conditionResult)
+      return trueReturnValue
+    end if
+
+    return falseReturnValue
+  end function
+
+  context._isAASubset = function (obj as Object, subObj as Object) as Boolean
+    isAASubset = true
+    for each key in subObj.keys()
+      if (NOT m._ts.isMatch(subObj[key], obj[key]))
+        isAASubset = false
+      end if
+    end for
+
+    return isAASubset
   end function
 
   ' ----------------------------------------------------------------
@@ -404,49 +508,4 @@ function KopytkoAssertionChecker(value as Dynamic) as Object
   end function)(context)
 
   return context
-end function
-
-
-
-' ----------------------------------------------------------------
-' Utils
-' ----------------------------------------------------------------
-
-function matcherErrorMessage(matcherName as String, expected = Invalid as Dynamic, actual = Invalid as Dynamic, options = {} as Object, expectedString = "Expected" as String, receivedString = "Received" as String) as String
-  TRAILING_STR = " ; "
-  isNot = (options.isNot <> Invalid AND options.isNot)
-  ' format matcher name
-  matcherString = "expect(received)" + utils_ternary(isNot, ".not", "") + "." + matcherName + " - "
-
-  if (TF_Utils__IsNotEmptyString(expectedString))
-    ' format expected string
-    matcherString += Substitute("{0}: {1} {2}", expectedString, utils_ternary(isNot, "[not]", ""), utils_asString(expected)) + TRAILING_STR
-  end if
-
-  if (TF_Utils__IsNotEmptyString(receivedString))
-    ' format received string
-    matcherString += Substitute("{0}: {1}", receivedString, utils_asString(actual)) + TRAILING_STR
-  end if
-
-  return matcherString
-end function
-
-function utils_asString(value as Dynamic) as String
-  if (not TF_Utils__IsValid(value))
-    return "Invalid"
-  else if (TF_Utils__IsValid(GetInterface(value, "ifToStr")))
-    return value.toStr()
-  else if (TF_Utils__IsValid(GetInterface(value, "ifAssociativeArray")) OR TF_Utils__IsValid(GetInterface(value, "ifArray")))
-    return FormatJson(value)
-  else
-    return ""
-  end if
-end function
-
-function utils_ternary(conditionResult as Boolean, trueReturnValue as Dynamic, falseReturnValue as Dynamic) as Dynamic
-  if (conditionResult)
-    return trueReturnValue
-  end if
-
-  return falseReturnValue
 end function

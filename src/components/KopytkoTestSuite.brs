@@ -1,7 +1,8 @@
 ' @import /source/UnitTestFramework.brs
-' @import /components/KopytkoAssertionChecker.brs
+' @import /components/KopytkoExpect.brs
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
+  GetGlobalAA()["$$ts"] = ts
 
   ' @protected
   ts._beforeAll = []
@@ -306,17 +307,6 @@ function KopytkoTestSuite() as Object
 
     return Invalid
   end function
-
-  ' ----------------------------------------------------------------
-  ' The expect function is used every time you want to test a value. 
-  ' You will rarely call expect by itself. 
-  ' Instead, you will use expect along with a "matcher" function to assert something about a value
-
-  ' @param value (dynamic) - Value which needs to be asserted
-
-  ' @return An object having all the assertion/ matcher methods
-  ' ----------------------------------------------------------------
-  ts.expect = KopytkoAssertionChecker
 
   return ts
 end function

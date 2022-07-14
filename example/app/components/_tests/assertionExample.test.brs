@@ -17,7 +17,7 @@ function TestSuite__assertionExample() as Object
       value = Invalid
   
       ' Then
-      return ts.expect(value).toBeInvalid()
+      return expect(value).toBeInvalid()
     end function)
   
     ts.addTest("expect(received).not.toBeInvalid()", function (ts as Object) as String
@@ -25,7 +25,7 @@ function TestSuite__assertionExample() as Object
       value = "Test Value"
   
       ' Then
-      return ts.expect(value).not.toBeInvalid()
+      return expect(value).not.toBeInvalid()
     end function)
   
     ' ---------------------------------------------------------
@@ -36,7 +36,7 @@ function TestSuite__assertionExample() as Object
       value = 2
   
       ' Then
-      return ts.expect(value).toBeValid()
+      return expect(value).toBeValid()
     end function)
   
     ts.addTest("expect(received).not.toBeValid()", function (ts as Object) as String
@@ -44,7 +44,7 @@ function TestSuite__assertionExample() as Object
       value = Invalid
   
       ' Then
-      return ts.expect(value).not.toBeValid()
+      return expect(value).not.toBeValid()
     end function)
   
     ' ---------------------------------------------------------
@@ -55,7 +55,7 @@ function TestSuite__assertionExample() as Object
       value = true
   
       ' Then
-      return ts.expect(value).toBeTruthy()
+      return expect(value).toBeTruthy()
     end function)
   
     ts.addTest("expect(received).not.toBeTruthy()", function (ts as Object) as String
@@ -63,7 +63,7 @@ function TestSuite__assertionExample() as Object
       value = false
   
       ' Then
-      return ts.expect(value).not.toBeTruthy()
+      return expect(value).not.toBeTruthy()
     end function)
   
     ' ---------------------------------------------------------
@@ -74,7 +74,7 @@ function TestSuite__assertionExample() as Object
       value = false
   
       ' Then
-      return ts.expect(value).toBeFalsy()
+      return expect(value).toBeFalsy()
     end function)
   
     ts.addTest("expect(received).not.toBeFalsy()", function (ts as Object) as String
@@ -82,7 +82,7 @@ function TestSuite__assertionExample() as Object
       value = true
   
       ' Then
-      return ts.expect(value).not.toBeFalsy()
+      return expect(value).not.toBeFalsy()
     end function)
   
     ' ---------------------------------------------------------
@@ -90,10 +90,10 @@ function TestSuite__assertionExample() as Object
     ' ---------------------------------------------------------
     ts.addTest("expect(received).toBe(expected)", function (ts as Object) as String
       ' Given
-      value = {key: "value"}
+      value = "Test String"
   
       ' Then
-      return ts.expect(value).toBe({key: "value"})
+      return expect(value).toBe("Test String")
     end function)
   
     ts.addTest("expect(received).not.toBe(expected)", function (ts as Object) as String
@@ -101,7 +101,26 @@ function TestSuite__assertionExample() as Object
       value = 5
   
       ' Then
-      return ts.expect(value).not.toBe(4)
+      return expect(value).not.toBe(4)
+    end function)
+
+    ' ---------------------------------------------------------
+    ' toEqual()
+    ' ---------------------------------------------------------
+    ts.addTest("expect(received).toEqual(expected)", function (ts as Object) as String
+      ' Given
+      value = { key1: "value1", key2: [1, 2, 3]}
+  
+      ' Then
+      return expect(value).toEqual({ key1: "value1", key2: [1, 2, 3]})
+    end function)
+  
+    ts.addTest("expect(received).not.toEqual(expected)", function (ts as Object) as String
+      ' Given
+      value = { key1: "value1", key2: [1, 2, 3]}
+  
+      ' Then
+      return expect(value).not.toEqual(4)
     end function)
 
     ' ---------------------------------------------------------
@@ -112,7 +131,15 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).toContain("value2")
+      return expect(arr).toContain("value2")
+    end function)
+
+    ts.addTest("expect(received).toContain(expected)", function (ts as Object) as String
+      ' Given
+      arr = { key1: "key1", key2: "key2" }
+  
+      ' Then
+      return expect(arr).toContain("key2")
     end function)
   
     ts.addTest("expect(received).not.toContain(expected)", function (ts as Object) as String
@@ -120,7 +147,15 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).not.toContain("value4")
+      return expect(arr).not.toContain("value4")
+    end function)
+
+    ts.addTest("expect(received).not.toContain(expected)", function (ts as Object) as String
+      ' Given
+      arr = { key1: "key1", key2: "key2" }
+  
+      ' Then
+      return expect(arr).not.toContain("key3")
     end function)
 
     ' ---------------------------------------------------------
@@ -131,7 +166,15 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).toContainsSubset(["value2", "value3"])
+      return expect(arr).toContainsSubset(["value2", "value3"])
+    end function)
+
+    ts.addTest("expect(received).toContainsSubset(expected)", function (ts as Object) as String
+      ' Given
+      arr = { key1: "value1", key2: "value2" }
+  
+      ' Then
+      return expect(arr).toContainsSubset({ key2: "value2" })
     end function)
   
     ts.addTest("expect(received).not.toContainsSubset(expected)", function (ts as Object) as String
@@ -139,7 +182,15 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).not.toContainsSubset(["value3", "value4"])
+      return expect(arr).not.toContainsSubset(["value3", "value4"])
+    end function)
+
+    ts.addTest("expect(received).not.toContainsSubset(expected)", function (ts as Object) as String
+      ' Given
+      arr = { key1: "value1", key2: "value2" }
+  
+      ' Then
+      return expect(arr).not.toContainsSubset({ key3: "value2" })
     end function)
 
     ' ---------------------------------------------------------
@@ -150,7 +201,7 @@ function TestSuite__assertionExample() as Object
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return ts.expect(assArray).toHasKey("key2")
+      return expect(assArray).toHasKey("key2")
     end function)
   
     ts.addTest("expect(received).not.toHasKey(expected)", function (ts as Object) as String
@@ -158,7 +209,7 @@ function TestSuite__assertionExample() as Object
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return ts.expect(assArray).not.toHasKey("key4")
+      return expect(assArray).not.toHasKey("key4")
     end function)
 
     ' ---------------------------------------------------------
@@ -169,7 +220,7 @@ function TestSuite__assertionExample() as Object
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return ts.expect(assArray).toHasKeys(["key1", "key2"])
+      return expect(assArray).toHasKeys(["key1", "key2"])
     end function)
   
     ts.addTest("expect(received).not.toHasKeys(expected)", function (ts as Object) as String
@@ -177,7 +228,7 @@ function TestSuite__assertionExample() as Object
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return ts.expect(assArray).not.toHasKeys(["key1", "key4"])
+      return expect(assArray).not.toHasKeys(["key1", "key4"])
     end function)
 
     ' ---------------------------------------------------------
@@ -188,7 +239,7 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).toHaveLength(3)
+      return expect(arr).toHaveLength(3)
     end function)
   
     ts.addTest("expect(received).not.toHaveLength(expected)", function (ts as Object) as String
@@ -196,7 +247,7 @@ function TestSuite__assertionExample() as Object
       arr = ["value1", "value2", "value3"]
   
       ' Then
-      return ts.expect(arr).not.toHaveLength(6)
+      return expect(arr).not.toHaveLength(6)
     end function)
 
     ' ---------------------------------------------------------
@@ -207,7 +258,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum()
   
       ' Then
-      return ts.expect("sum").toHaveBeenCalled()
+      return expect("sum").toHaveBeenCalled()
     end function)
 
     ts.addTest("expect(received).not.toHaveBeenCalled()", function (ts as Object) as String
@@ -215,7 +266,7 @@ function TestSuite__assertionExample() as Object
       funcNotCallingSum()
   
       ' Then
-      return ts.expect("sum").not.toHaveBeenCalled()
+      return expect("sum").not.toHaveBeenCalled()
     end function)
 
     ' ---------------------------------------------------------
@@ -227,7 +278,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum()
   
       ' Then
-      return ts.expect("sum").toHaveBeenCalledTimes(2)
+      return expect("sum").toHaveBeenCalledTimes(2)
     end function)
 
     ts.addTest("expect(received).not.toHaveBeenCalledTimes(expected)", function (ts as Object) as String
@@ -236,7 +287,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum()
   
       ' Then
-      return ts.expect("sum").not.toHaveBeenCalledTimes(1)
+      return expect("sum").not.toHaveBeenCalledTimes(1)
     end function)
 
     ' ---------------------------------------------------------
@@ -247,7 +298,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(1, 2)
   
       ' Then
-      return ts.expect("sum").toHaveBeenCalledWith({ a: 1, b: 2})
+      return expect("sum").toHaveBeenCalledWith({ a: 1, b: 2})
     end function)
 
     ts.addTest("expect(received).not.toHaveBeenCalledWith(expected)", function (ts as Object) as String
@@ -255,7 +306,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(2, 3)
   
       ' Then
-      return ts.expect("sum").not.toHaveBeenCalledWith({ a: 3, b: 2})
+      return expect("sum").not.toHaveBeenCalledWith({ a: 3, b: 2})
     end function)
 
     ' ---------------------------------------------------------
@@ -268,7 +319,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(5, 6)
   
       ' Then
-      return ts.expect("sum").toHaveBeenLastCalledWith({ a: 5, b: 6})
+      return expect("sum").toHaveBeenLastCalledWith({ a: 5, b: 6})
     end function)
 
     ts.addTest("expect(received).not.toHaveBeenLastCalledWith(expected)", function (ts as Object) as String
@@ -278,7 +329,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(5, 6)
   
       ' Then
-      return ts.expect("sum").not.toHaveBeenLastCalledWith({ a: 3, b: 4})
+      return expect("sum").not.toHaveBeenLastCalledWith({ a: 3, b: 4})
     end function)
 
     ' ---------------------------------------------------------
@@ -291,7 +342,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(5, 6)
   
       ' Then
-      return ts.expect("sum").toHaveBeenNthCalledWith(2, { a: 3, b: 4})
+      return expect("sum").toHaveBeenNthCalledWith(2, { a: 3, b: 4})
     end function)
 
     ts.addTest("expect(received).not.toHaveBeenNthCalledWith(expected)", function (ts as Object) as String
@@ -301,7 +352,7 @@ function TestSuite__assertionExample() as Object
       funcCallingSum(5, 6)
   
       ' Then
-      return ts.expect("sum").not.toHaveBeenNthCalledWith(2, { a: 1, b: 2})
+      return expect("sum").not.toHaveBeenNthCalledWith(2, { a: 1, b: 2})
     end function)
 
     ' ---------------------------------------------------------
@@ -309,14 +360,14 @@ function TestSuite__assertionExample() as Object
     ' ---------------------------------------------------------
     ts.addTest("expect(received).toThrow()", function (ts as Object) as String
 
-      return ts.expect(function()
+      return expect(function()
         funcWithException()
       end function).toThrow()
     end function)
   
     ts.addTest("expect(received).not.toThrow()", function (ts as Object) as String
   
-      return ts.expect(function()
+      return expect(function()
         funcWithNoException()
       end function).not.toThrow()
     end function)
