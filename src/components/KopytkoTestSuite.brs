@@ -1,6 +1,8 @@
 ' @import /source/UnitTestFramework.brs
+' @import /components/KopytkoExpect.brs
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
+  GetGlobalAA()["$$ts"] = ts
 
   ' @protected
   ts._beforeAll = []
