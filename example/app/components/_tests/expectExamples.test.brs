@@ -1,7 +1,7 @@
 ' @import /components/KopytkoTestSuite.brs from @dazn/kopytko-unit-testing-framework
 ' @mock /components/sum.brs
 
-function TestSuite__assertionExample() as Object
+function TestSuite__expectExamples() as Object
     ts = KopytkoTestSuite()
 
     ts.setBeforeEach(sub (ts as Object)
