@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.1.1...v1.2.0) (2022-07-18)
+
+
+### Bug Fixes
+
+* some changes to handle some negative cases ([29a2097](https://github.com/getndazn/kopytko-unit-testing-framework/commit/29a20976543375c7ef5fb2f1132f48c0e4225a77))
+
+
+### Features
+
+* added some more matcher functions and fixed review comments ([39a52fe](https://github.com/getndazn/kopytko-unit-testing-framework/commit/39a52fe3598d41a380234933dff6283b81370126))
+* added support for AA and nodes to assert toContain ([a3aa299](https://github.com/getndazn/kopytko-unit-testing-framework/commit/a3aa299a8f6789bf1d80f78174cc480362a3b1d2))
+* adding assert functions like jest ([693a4a5](https://github.com/getndazn/kopytko-unit-testing-framework/commit/693a4a547a16c275bf2d1bc26118d0a6fa105565))
+* some updates as per review comments ([90a2ece](https://github.com/getndazn/kopytko-unit-testing-framework/commit/90a2ece160d6043c05d5c4c2bd2cde7b1069c4a9))
+* updated expect example tests file name for better visibility ([75d583d](https://github.com/getndazn/kopytko-unit-testing-framework/commit/75d583d8668f38221f157811e24984cc860d8624))
+
 ## [1.1.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.1.0...v1.1.1) (2022-07-01)
 
 
