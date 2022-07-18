@@ -20,23 +20,33 @@ function TestSuite__assertionExample() as Object
       return expect(value).toBeInvalid()
     end function)
   
-    ts.addTest("expect(received).not.toBeInvalid()", function (ts as Object) as String
-      ' Given
-      value = "Test Value"
+    ts.addParameterizedTests([
+      { value: 4 },
+      { value: true },
+      { value: "Test Value" },
+      { value: { key: "value" } },
+      { value: [1, 2, 3] },
+      { value: CreateObject("roSGNode", "rectangle") },
+    ], "expect(received).not.toBeInvalid()", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(value).not.toBeInvalid()
+      return expect(params.value).not.toBeInvalid()
     end function)
   
     ' ---------------------------------------------------------
     ' toBeValid()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toBeValid()", function (ts as Object) as String
-      ' Given
-      value = 2
+    ts.addParameterizedTests([
+      { value: 4 },
+      { value: true },
+      { value: "Test Value" },
+      { value: { key: "value" } },
+      { value: [1, 2, 3] },
+      { value: CreateObject("roSGNode", "rectangle") },
+    ], "expect(received).toBeValid()", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(value).toBeValid()
+      return expect(params.value).toBeValid()
     end function)
   
     ts.addTest("expect(received).not.toBeValid()", function (ts as Object) as String
@@ -48,149 +58,179 @@ function TestSuite__assertionExample() as Object
     end function)
   
     ' ---------------------------------------------------------
-    ' toBeTruthy()
+    ' toBeTrue()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toBeTruthy()", function (ts as Object) as String
+    ts.addTest("expect(received).toBeTrue()", function (ts as Object) as String
       ' Given
       value = true
   
       ' Then
-      return expect(value).toBeTruthy()
+      return expect(value).toBeTrue()
     end function)
   
-    ts.addTest("expect(received).not.toBeTruthy()", function (ts as Object) as String
+    ts.addTest("expect(received).not.toBeTrue()", function (ts as Object) as String
       ' Given
       value = false
   
       ' Then
-      return expect(value).not.toBeTruthy()
+      return expect(value).not.toBeTrue()
     end function)
   
     ' ---------------------------------------------------------
-    ' toBeFalsy()
+    ' toBeFalse()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toBeFalsy()", function (ts as Object) as String
+    ts.addTest("expect(received).toBeFalse()", function (ts as Object) as String
       ' Given
       value = false
   
       ' Then
-      return expect(value).toBeFalsy()
+      return expect(value).toBeFalse()
     end function)
   
-    ts.addTest("expect(received).not.toBeFalsy()", function (ts as Object) as String
+    ts.addTest("expect(received).not.toBeFalse()", function (ts as Object) as String
       ' Given
       value = true
   
       ' Then
-      return expect(value).not.toBeFalsy()
+      return expect(value).not.toBeFalse()
     end function)
   
     ' ---------------------------------------------------------
     ' toBe()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toBe(expected)", function (ts as Object) as String
-      ' Given
-      value = "Test String"
+    ts.addParameterizedTests([
+      { value: 4, expectedValue: 4 },
+      { value: true, expectedValue: true },
+      { value: "Test Value", expectedValue: "Test Value" },
+    ], "expect(received).toBe(expected)", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(value).toBe("Test String")
+      return expect(params.value).toBe(params.expectedValue)
+    end function)
+
+    ts.addTest("expect(received).toBe(expected) for scenegraph node", function (ts as Object) as String
+      ' Given
+      value = CreateObject("roSGNode", "rectangle")
+      expectedValue = value
+  
+      ' Then
+      return expect(value).toBe(expectedValue)
     end function)
   
-    ts.addTest("expect(received).not.toBe(expected)", function (ts as Object) as String
-      ' Given
-      value = 5
-  
+    ts.addParameterizedTests([
+      { value: 4, expectedValue: 5 },
+      { value: true, expectedValue: false },
+      { value: "Test Value", expectedValue: "Another Value" },
+      { value: CreateObject("roSGNode", "rectangle"), expectedValue: CreateObject("roSGNode", "rectangle") }
+    ], "expect(received).not.toBe(expected)", function (ts as Object, params as Object) as String
+
       ' Then
-      return expect(value).not.toBe(4)
+      return expect(params.value).not.toBe(params.expectedValue)
     end function)
 
     ' ---------------------------------------------------------
     ' toEqual()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toEqual(expected)", function (ts as Object) as String
-      ' Given
-      value = { key1: "value1", key2: [1, 2, 3]}
+    ts.addParameterizedTests([
+      { value: 4, expectedValue: 4 },
+      { value: true, expectedValue: true },
+      { value: "Test Value", expectedValue: "Test Value" },
+      { value: ["a", "b", "c"], expectedValue: ["a", "b", "c"] }
+      { value: { key1: "value1", key2: "value2" }, expectedValue: { key1: "value1", key2: "value2" } }
+      { value: CreateObject("roSGNode", "rectangle"), expectedValue: CreateObject("roSGNode", "rectangle") }
+    ], "expect(received).toEqual(expected)", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(value).toEqual({ key1: "value1", key2: [1, 2, 3]})
+      return expect(params.value).toEqual(params.expectedValue)
+    end function)
+
+    ts.addTest("expect(received).toEqual(expected) for scenegraph node", function (ts as Object) as String
+      ' When
+      value = CreateObject("roSGNode", "rectangle")
+      value.id = "TestID"
+      value.createChild("rectangle")
+
+      expectedValue = CreateObject("roSGNode", "rectangle")
+      expectedValue.id = "TestID"
+      expectedValue.createChild("rectangle")
+      ' Then
+      return expect(value).toEqual(expectedValue)
     end function)
   
+    ts.addParameterizedTests([
+      { value: 4, expectedValue: 5 },
+      { value: true, expectedValue: false },
+      { value: "Test Value", expectedValue: "Another Value" },
+      { value: ["a", "b", "c"], expectedValue: ["a", "b", "c", "d"] }
+      { value: { key1: "value1", key2: "value2" }, expectedValue: { key1: "value1", key3: "value3" } }
+    ], "expect(received).not.toEqual(expected)", function (ts as Object, params as Object) as String
+
+      ' Then
+      return expect(params.value).not.toEqual(params.expectedValue)
+    end function)
+
     ts.addTest("expect(received).not.toEqual(expected)", function (ts as Object) as String
       ' Given
-      value = { key1: "value1", key2: [1, 2, 3]}
-  
+      value = CreateObject("roSGNode", "rectangle")
+      value.id = "id_1"
+      expectedValue = CreateObject("roSGNode", "rectangle")
+      expectedValue.id = "id_2"
+
       ' Then
-      return expect(value).not.toEqual(4)
+      return expect(value).not.toEqual(expectedValue)
     end function)
 
     ' ---------------------------------------------------------
     ' toContain()
     ' ---------------------------------------------------------
-    ts.addTest("expect(received).toContain(expected)", function (ts as Object) as String
-      ' Given
-      arr = ["value1", "value2", "value3"]
+    ts.addParameterizedTests([
+      { value: ["a", "b", "c"], expectedValue: "b" },
+      { value: ["a", "b", "c", "d"], expectedValue: ["b", "c"] },
+      { value: { key1: "value1", key2: "value2" }, expectedValue: {key2: "value2"} },
+    ], "expect(received).toContain(expected)", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(arr).toContain("value2")
+      return expect(params.value).toContain(params.expectedValue)
     end function)
 
-    ts.addTest("expect(received).toContain(expected)", function (ts as Object) as String
+    ts.addTest("expect(received).toContain(expected) to assert fields of scenegraph node", function (ts as Object) as String
       ' Given
-      arr = { key1: "key1", key2: "key2" }
+      node = CreateObject("roSGNode", "rectangle")
+      node.width = 100.0
+      node.height = 50.0
   
       ' Then
-      return expect(arr).toContain("key2")
-    end function)
-  
-    ts.addTest("expect(received).not.toContain(expected)", function (ts as Object) as String
-      ' Given
-      arr = ["value1", "value2", "value3"]
-  
-      ' Then
-      return expect(arr).not.toContain("value4")
+      return expect(node).toContain({ width: 100.0, height: 50.0 })
     end function)
 
-    ts.addTest("expect(received).not.toContain(expected)", function (ts as Object) as String
+    ts.addTest("expect(received).toContain(expected) to assert child nodes of scenegraph node", function (ts as Object) as String
       ' Given
-      arr = { key1: "key1", key2: "key2" }
+      parentNode = CreateObject("roSGNode", "rectangle")
+      childNode = CreateObject("roSGNode", "rectangle")
+      parentNode.appendChild(childNode)
+
+      ' Then
+      return expect(parentNode).toContain(childNode)
+    end function)
+  
+    ts.addParameterizedTests([
+      { value: ["a", "b", "c"], expectedValue: "d" },
+      { value: ["a", "b", "c", "d"], expectedValue: ["b", "e"] },
+      { value: { key1: "value1", key2: "value2" }, expectedValue: {key3: "value3"} },
+      { value: CreateObject("roSGNode", "rectangle"), expectedValue: { someKey: "someValue" } }
+    ], "expect(received).not.toContain(expected)", function (ts as Object, params as Object) as String
   
       ' Then
-      return expect(arr).not.toContain("key3")
+      return expect(params.value).not.toContain(params.expectedValue)
     end function)
 
-    ' ---------------------------------------------------------
-    ' toContainsSubset()
-    ' ---------------------------------------------------------
-    ts.addTest("expect(received).toContainsSubset(expected)", function (ts as Object) as String
+    ts.addTest("expect(received).not.toContain(expected) to assert child nodes of scenegraph node", function (ts as Object) as String
       ' Given
-      arr = ["value1", "value2", "value3"]
-  
-      ' Then
-      return expect(arr).toContainsSubset(["value2", "value3"])
-    end function)
+      parentNode = CreateObject("roSGNode", "rectangle")
+      childNode = CreateObject("roSGNode", "rectangle")
 
-    ts.addTest("expect(received).toContainsSubset(expected)", function (ts as Object) as String
-      ' Given
-      arr = { key1: "value1", key2: "value2" }
-  
       ' Then
-      return expect(arr).toContainsSubset({ key2: "value2" })
-    end function)
-  
-    ts.addTest("expect(received).not.toContainsSubset(expected)", function (ts as Object) as String
-      ' Given
-      arr = ["value1", "value2", "value3"]
-  
-      ' Then
-      return expect(arr).not.toContainsSubset(["value3", "value4"])
-    end function)
-
-    ts.addTest("expect(received).not.toContainsSubset(expected)", function (ts as Object) as String
-      ' Given
-      arr = { key1: "value1", key2: "value2" }
-  
-      ' Then
-      return expect(arr).not.toContainsSubset({ key3: "value2" })
+      return expect(parentNode).not.toContain(childNode)
     end function)
 
     ' ---------------------------------------------------------
