@@ -1,7 +1,3 @@
-' @import /components/_testUtils/ternary.brs
-' @import /components/_testUtils/getType.brs
-' @import /components/_testUtils/NodeUtils.brs
-
 ' Assert functions in this file:
 '
 '     toBe
@@ -63,9 +59,9 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertEqual(value, m._received)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
-    return ternary(assertMsg = "", "", errorMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -80,7 +76,7 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertFalse(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -97,7 +93,7 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertInvalid(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -114,7 +110,7 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertTrue(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -131,7 +127,7 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertNotInvalid(m._received, errorMsg)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
     return assertMsg
   end function
@@ -158,9 +154,9 @@ function expect(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -181,9 +177,9 @@ function expect(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg)
 
-    return ternary(assertMsg = "", "", errorMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -200,9 +196,9 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertAAHasKey(m._received, key)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -219,9 +215,9 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertAAHasKeys(m._received, keys)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -243,9 +239,9 @@ function expect(value as Dynamic) as Object
   
     passed = (numberOfCalls > 0)
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, ">=1", numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, ">=1", numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
   end function
 
   ' ----------------------------------------------------------------
@@ -269,9 +265,9 @@ function expect(value as Dynamic) as Object
 
     passed = (numberOfCalls = number)
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, number, numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, number, numberOfCalls, { isNot : m._isNot }, EXPECTED_STR, RECEIVED_STR))
   end function
 
   ' ----------------------------------------------------------------
@@ -305,9 +301,9 @@ function expect(value as Dynamic) as Object
     end for
 
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, callsParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, callsParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -337,9 +333,9 @@ function expect(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -370,9 +366,9 @@ function expect(value as Dynamic) as Object
     end if
 
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, params, actualParams, { isNot : m._isNot }) + Substitute("Number of calls: {0}", m._asString(numberOfCalls)))
   end function
 
   ' ----------------------------------------------------------------
@@ -389,9 +385,9 @@ function expect(value as Dynamic) as Object
     assertMsg = m._ts.assertArrayCount(m._received, number)
 
     ' if matcher has been called with expect.not
-    if (m._isNot) then return ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
+    if (m._isNot) then return m._ts.ternary(TF_Utils__IsNotEmptyString(assertMsg), "", errorMsg + assertMsg)
 
-    return ternary(assertMsg = "", "", errorMsg + assertMsg)
+    return m._ts.ternary(assertMsg = "", "", errorMsg + assertMsg)
   end function
 
   ' ----------------------------------------------------------------
@@ -414,9 +410,9 @@ function expect(value as Dynamic) as Object
     end try
 
     ' if matcher has been called with expect.not
-    passed = ternary(m._isNot, NOT passed, passed)
+    passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, "throws", e, { isNot : m._isNot }))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, "throws", e, { isNot : m._isNot }))
   end function
 
   ' ----------------------------------------------------------------
@@ -427,11 +423,11 @@ function expect(value as Dynamic) as Object
     TRAILING_STR = " ; "
     isNot = (options.isNot <> Invalid AND options.isNot)
     ' format matcher name
-    matcherString = "expect(received)" + ternary(isNot, ".not", "") + "." + matcherName + " - "
+    matcherString = "expect(received)" + m._ts.ternary(isNot, ".not", "") + "." + matcherName + " - "
 
     if (TF_Utils__IsNotEmptyString(expectedString))
       ' format expected string
-      matcherString += Substitute("{0}: {1} {2}", expectedString, ternary(isNot, "[not]", ""), m._asString(expected)) + TRAILING_STR
+      matcherString += Substitute("{0}: {1} {2}", expectedString, m._ts.ternary(isNot, "[not]", ""), m._asString(expected)) + TRAILING_STR
     end if
 
     if (TF_Utils__IsNotEmptyString(receivedString))
@@ -457,19 +453,19 @@ function expect(value as Dynamic) as Object
   end function
 
   context._isArray = function (value as Dynamic) as boolean
-    return TF_Utils__IsValid(value) AND getType(value) = "roArray"
+    return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roArray"
   end function
 
   context._isAssociativeArray = function (value as Dynamic) as boolean
-    return TF_Utils__IsValid(value) AND getType(value) = "roAssociativeArray"
+    return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roAssociativeArray"
   end function
 
   context._isSGNode = function (value as Dynamic) as boolean
-    return TF_Utils__IsValid(value) AND getType(value) = "roSGNode"
+    return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roSGNode"
   end function
 
   context._isList = function (value as Dynamic) as boolean
-    return TF_Utils__IsValid(value) AND getType(value) = "roList"
+    return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roList"
   end function
   
   context._assertNodeContains = function (node as Object, subset as Dynamic) as String
@@ -481,8 +477,7 @@ function expect(value as Dynamic) as Object
         end if
       end for
     else if (m._isSGNode(subset))
-      _nodeUtils = NodeUtils()
-      return ternary(_nodeUtils.findChildById(node, (subset.getFields()).id) <> Invalid, "", "Node does not contain expected child node")
+      return m._ts.ternary(m._ts.NodeUtils().findChildById(node, (subset.getFields()).id) <> Invalid, "", "Node does not contain expected child node")
     else
       return "Received value is a Node. Expected value should be an AssociativeArray or Node."
     end if

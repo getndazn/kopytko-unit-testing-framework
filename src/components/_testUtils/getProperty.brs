@@ -6,7 +6,7 @@
 ' @param {Object} source
 ' @param {String[]|String} path
 ' @param {Dynamic} [defaultValue=Invalid]
-function getProperty(source as Object, path as Dynamic, defaultValue = Invalid as Dynamic) as Dynamic
+function kopytkoUnitTestingFramework__getProperty(source as Object, path as Dynamic, defaultValue = Invalid as Dynamic) as Dynamic
   if (path = Invalid)
     return defaultValue
   end if

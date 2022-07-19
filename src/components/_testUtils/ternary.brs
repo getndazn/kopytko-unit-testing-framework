@@ -5,7 +5,7 @@
 ' @param {Dynamic} trueReturnValue
 ' @param {Dynamic} falseReturnValue
 ' @returns {Dynamic}
-function ternary(conditionResult as Boolean, trueReturnValue as Dynamic, falseReturnValue as Dynamic) as Dynamic
+function kopytkoUnitTestingFramework__ternary(conditionResult as Boolean, trueReturnValue as Dynamic, falseReturnValue as Dynamic) as Dynamic
   if (conditionResult)
     return trueReturnValue
   end if
