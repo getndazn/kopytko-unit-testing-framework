@@ -1,5 +1,10 @@
-' @import /source/UnitTestFramework.brs
+' @import /components/_testUtils/getProperty.brs
+' @import /components/_testUtils/getType.brs
+' @import /components/_testUtils/NodeUtils.brs
+' @import /components/_testUtils/ternary.brs
 ' @import /components/KopytkoExpect.brs
+' @import /source/UnitTestFramework.brs
+
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
   GetGlobalAA()["$$ts"] = ts
@@ -262,31 +267,10 @@ function KopytkoTestSuite() as Object
   end function
 
   ' Copied from codebase since we can't have dependencies in test framework
-  ts.getProperty = function (source as Object, path as Dynamic, defaultValue = Invalid as Dynamic) as Dynamic
-    if (path = Invalid)
-      return defaultValue
-    end if
-
-    if (Type(path) = "String" OR Type(path) = "roString")
-      keys = path.split(".")
-    else
-      keys = path
-    end if
-    currentSource = source
-
-    for each key in keys
-      if (currentSource = Invalid) then return defaultValue
-      if (Type(currentSource) <> "roAssociativeArray" AND Type(currentSource) <> "roSGNode") then return defaultValue
-
-      currentSource = currentSource[key]
-    end for
-
-    if (currentSource = Invalid)
-      return defaultValue
-    end if
-
-    return currentSource
-  end function
+  ts.getProperty = kopytkoUnitTestingFramework__getProperty
+  ts.getType = kopytkoUnitTestingFramework__getType
+  ts.NodeUtils = kopytkoUnitTestingFramework__NodeUtils
+  ts.ternary = kopytkoUnitTestingFramework__ternary
 
   ts._getByTextIterator = function (regExp as Object, container as Object) as Object
     childCount = container.getChildCount()
