@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.2.0...v1.2.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* utils function names collision ([#32](https://github.com/getndazn/kopytko-unit-testing-framework/issues/32)) ([866946e](https://github.com/getndazn/kopytko-unit-testing-framework/commit/866946e11f52bdf194971d8a73c3a3b1d3e63216))
+
 # [1.2.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.1.1...v1.2.0) (2022-07-18)
 
 

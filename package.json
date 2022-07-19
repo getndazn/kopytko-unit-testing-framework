@@ -1,6 +1,6 @@
 {
   "name": "@dazn/kopytko-unit-testing-framework",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Kopytko Unit Testing Framework",
   "scripts": {
     "lint": "eslint ./"
