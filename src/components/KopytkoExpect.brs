@@ -135,7 +135,7 @@ function expect(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   ' To ensure if Array/AssociativeArray/node contains the expected value/subset/node
   '
-  ' @param value (dynamic) - Expected value 
+  ' @param value (dynamic) - Expected value
   '
   ' @return Empty string (if contains) OR an error message
   ' ----------------------------------------------------------------
@@ -283,6 +283,7 @@ function expect(value as Dynamic) as Object
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     methodMockCalls = []
     callsParams = []
+    passed = false
     
     if (TF_Utils__IsValid(methodMock.calls))
       methodMockCalls = methodMock.calls
@@ -396,23 +397,37 @@ function expect(value as Dynamic) as Object
   '
   ' @return empty string (if throws) OR an error message
   ' ----------------------------------------------------------------
-  context.toThrow = function ()
+  context.toThrow = function (expectedError = Invalid as Dynamic) as String
     ' return error if received value is not a function
     if (NOT TF_Utils__IsFunction(m._received)) then return "Received value must be a function"
 
-    MATCHER_NAME = "toThrow()"
+    MATCHER_NAME = "toThrow([error])"
     passed = false
+    expected = m._ts.ternary(expectedError = Invalid, "throws", expectedError)
+    received = Invalid
 
     try
       m._received()
-    catch e
-      passed = true
+    catch error
+      if (expectedError <> Invalid)
+        if (m._ts.getType(expectedError) = "roString")
+          passed = (expectedError = error.message)
+          received = error.message
+        else if (m._ts.getType(expectedError) = "roAssociativeArray")
+          passed = m._ts.isMatch(expectedError, error)
+          received = error
+        else
+          return "The received error is not a String nor an AssociativeArray"
+        end if
+      else
+        passed = true
+      end if
     end try
 
     ' if matcher has been called with expect.not
     passed = m._ts.ternary(m._isNot, NOT passed, passed)
 
-    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, "throws", e, { isNot : m._isNot }))
+    return m._ts.ternary(passed, "", m._matcherErrorMessage(MATCHER_NAME, expected, received, { isNot : m._isNot }))
   end function
 
   ' ----------------------------------------------------------------
@@ -452,19 +467,19 @@ function expect(value as Dynamic) as Object
     end if
   end function
 
-  context._isArray = function (value as Dynamic) as boolean
+  context._isArray = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roArray"
   end function
 
-  context._isAssociativeArray = function (value as Dynamic) as boolean
+  context._isAssociativeArray = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roAssociativeArray"
   end function
 
-  context._isSGNode = function (value as Dynamic) as boolean
+  context._isSGNode = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roSGNode"
   end function
 
-  context._isList = function (value as Dynamic) as boolean
+  context._isList = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roList"
   end function
   

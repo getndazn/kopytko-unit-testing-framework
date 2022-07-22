@@ -1,14 +1,15 @@
 # Kopytko Unit Testing Framework
 
-- [App Structure](#app-structure)
-- [Setup](#setup)
-- [Running Unit Tests](#running-unit-tests)
-- [Kopytko Unit Test Philosophy](#kopytko-unit-test-philosophy)
-- [Test Mocks](#test-mocks)
-- [Setup and Teardown](#setup-and-teardown)
-- [Limitations](#limitations)
-- [API](#api)
-- [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
+- [Kopytko Unit Testing Framework](#kopytko-unit-testing-framework)
+  - [App Structure](#app-structure)
+  - [Setup](#setup)
+  - [Running Unit Tests](#running-unit-tests)
+  - [Kopytko Unit Test Philosophy](#kopytko-unit-test-philosophy)
+  - [Test Mocks](#test-mocks)
+  - [Setup and Teardown](#setup-and-teardown)
+  - [Limitations](#limitations)
+  - [API](#api)
+  - [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
 
 The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between those two frameworks.
 
@@ -111,9 +112,9 @@ end function
 function MyServiceTestSuite() as Object
   ts = KopytkoTestSuite()
 
-  ts.setBeforeAll = sub (ts as Object)
+  beforeAll(sub (_ts as Object)
     ' do something
-  end sub
+  end sub)
 
   return ts
 end function
@@ -124,8 +125,8 @@ function TestSuite__MyService_Main() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - Main"
 
-  ts.addTest("it should create new instance of the service", function (ts as Object) as String
-    return ts.assertNotInvalid(MyService())
+  it("should create new instance of the service", function (_ts as Object) as String
+    return expect(MyService()).toBeValid()
   end function)
 
   return ts
@@ -137,7 +138,7 @@ function TestSuite__MyService_getData() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - getData"
 
-  ts.addTest("it should return some data", function (ts as Object) as String
+  it("should return some data", function (_ts as Object) as String
    ' Given
     service = MyService()
     expected = { arg: "abc" }
@@ -146,7 +147,7 @@ function TestSuite__MyService_getData() as Object
     result = service.getData("abc")
 
     'Then
-    return ts.assertEqual(result, expected)
+    return expect(result).toEqual(expected)
   end function)
 
   return ts
@@ -215,14 +216,14 @@ The service can be used like a regular object:
 
 Calls to the methods or constructor can be inspected:
 ```brightscript
-?m.__mocks.exampleService.getData.calls[0].params.arg
-?m.__mocks.exampleService.constructorCalls[0].params.dependency
+? mockFunction("ExampleService.getData").getCalls()[0].params.arg
+? mockFunction("ExampleService").getConstructorCalls()[0].params.dependency
 ```
 
 ## Setup and Teardown
 
 Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
-However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite, so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
+However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite, so you shouldn't use them. Instead, add your function via `beforeAll` or `afterAll` methods of `KopytkoTestSuite`.
 `KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem related stuff.
 Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all `beforeAll` and `afterAll` callbacks will be executed once per a file.
 
@@ -238,6 +239,9 @@ Functions passed into all these methods and arrays should have just one `ts` arg
 
 - [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
 - [KopytkoFrameworkTestSuite](docs/api/KopytkoFrameworkTestSuite.md)
+- [KopytkoTestFunctions](docs/api/KopytkoTestFunctions.md)
+- [KopytkoExpect](docs/api/KopytkoExpect.md)
+- [KopytkoMockFunction](docs/api/KopytkoMockFunction.md)
 
 ## Example test app config and unit tests
 

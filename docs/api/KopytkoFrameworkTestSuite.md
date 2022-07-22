@@ -1,8 +1,11 @@
 # KopytkoFrameworkTestSuite API
 
 ## Methods
-- [`assertDataWasSetOnStore`](#assertdatawassetonstore)
-- [`assertRequestWasMade`](#assertrequestwasmade)
+- [KopytkoFrameworkTestSuite API](#kopytkoframeworktestsuite-api)
+  - [Methods](#methods)
+  - [Reference](#reference)
+    - [`assertDataWasSetOnStore`](#assertdatawassetonstore)
+    - [`assertRequestWasMade`](#assertrequestwasmade)
 
 ---
 
