@@ -1,27 +1,31 @@
 # KopytkoFrameworkTestSuite API
 
 ## Methods
-- [KopytkoFrameworkTestSuite API](#kopytkoframeworktestsuite-api)
-  - [Methods](#methods)
-  - [Reference](#reference)
-    - [`assertDataWasSetOnStore`](#assertdatawassetonstore)
-    - [`assertRequestWasMade`](#assertrequestwasmade)
+
+- [Methods](#methods)
+- [Reference](#reference)
+  - [`assertDataWasSetOnStore`](#assertdatawassetonstore)
+  - [`assertRequestWasMade`](#assertrequestwasmade)
 
 ---
 
 ## Reference
 
 ### `assertDataWasSetOnStore`
+
 It checks if data was set on `Store` (part of [Roku Framework](https://github.com/getndazn/kopytko-framework)).
 
 Params:
+
 - `data`: `Object` - the data that should be set on `Store`
 - `msg = ""`: `String` - additional message when test fails
 
 ### `assertRequestWasMade`
+
 It checks if request was made via `createRequest` (part of [Roku Framework](https://github.com/getndazn/kopytko-framework)).
 
 Params:
+
 - `params = {}`: `Object` - arguments passed to `createRequest` method
 - `options = {}`: `Object`
   - `times`: `Integer` - how many times it should be called

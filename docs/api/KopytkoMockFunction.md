@@ -11,16 +11,15 @@ mockFunction("functionName")
 mockFunction("Service.serviceMethod")
 ```
 
-- [KopytkoMockFunction API](#kopytkomockfunction-api)
-  - [Methods](#methods)
-    - [`clear`](#clear)
-    - [`getCalls`](#getcalls)
-    - [`getContructorCalls`](#getcontructorcalls)
-    - [`implementation`](#implementation)
-    - [`returnValue`](#returnvalue)
-    - [`resolvedValue`](#resolvedvalue)
-    - [`rejectedValue`](#rejectedvalue)
-    - [`throw`](#throw)
+- [Methods](#methods)
+  - [`clear`](#clear)
+  - [`getCalls`](#getcalls)
+  - [`getContructorCalls`](#getcontructorcalls)
+  - [`implementation`](#implementation)
+  - [`returnValue`](#returnvalue)
+  - [`resolvedValue`](#resolvedvalue)
+  - [`rejectedValue`](#rejectedvalue)
+  - [`throw`](#throw)
 
 ## Methods
 

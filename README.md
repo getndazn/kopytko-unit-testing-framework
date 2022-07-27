@@ -1,15 +1,14 @@
 # Kopytko Unit Testing Framework
 
-- [Kopytko Unit Testing Framework](#kopytko-unit-testing-framework)
-  - [App Structure](#app-structure)
-  - [Setup](#setup)
-  - [Running Unit Tests](#running-unit-tests)
-  - [Kopytko Unit Test Philosophy](#kopytko-unit-test-philosophy)
-  - [Test Mocks](#test-mocks)
-  - [Setup and Teardown](#setup-and-teardown)
-  - [Limitations](#limitations)
-  - [API](#api)
-  - [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
+- [App Structure](#app-structure)
+- [Setup](#setup)
+- [Running Unit Tests](#running-unit-tests)
+- [Kopytko Unit Test Philosophy](#kopytko-unit-test-philosophy)
+- [Test Mocks](#test-mocks)
+- [Setup and Teardown](#setup-and-teardown)
+- [Limitations](#limitations)
+- [API](#api)
+- [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
 
 The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between those two frameworks.
 
@@ -18,6 +17,7 @@ The unit testing framework works on top of the [Roku Unit Testing framework](htt
 We believe tests should be close to the tested objects.
 
 The expected structure of the app:
+
 ```
  components
   _mocks
@@ -28,7 +28,9 @@ The expected structure of the app:
   MyComponent.xml
   MyService.brs
 ```
+
 The `_tests` folders should be placed near to the tested entity. Each test suite gains extra powers:
+
 - no need for xml files
 - no need to define test suites functions in an array
 - ability to import dependencies

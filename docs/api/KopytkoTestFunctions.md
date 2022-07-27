@@ -1,13 +1,12 @@
 # KopytkoTestFunctions API
 
-- [KopytkoTestFunctions API](#kopytkotestfunctions-api)
-  - [Functions](#functions)
-    - [`it`](#it)
-    - [`itEach`](#iteach)
-    - [`beforeAll`](#beforeall)
-    - [`beforeEach`](#beforeeach)
-    - [`afterEach`](#aftereach)
-    - [`afterAll`](#afterall)
+- [Functions](#functions)
+  - [`it`](#it)
+  - [`itEach`](#iteach)
+  - [`beforeAll`](#beforeall)
+  - [`beforeEach`](#beforeeach)
+  - [`afterEach`](#aftereach)
+  - [`afterAll`](#afterall)
 
 In order to make developer live easier there are shorhands for all test function
 
