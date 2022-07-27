@@ -230,41 +230,41 @@ function TestSuite__expectExamples() as Object
     end function)
 
     ' ---------------------------------------------------------
-    ' toHasKey()
+    ' toHaveKey()
     ' ---------------------------------------------------------
-    it("expect({ key1: value1, key2: value2, key3: value3 }).toHasKey(key2)", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKey(key2)", function (_ts as Object) as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return expect(assArray).toHasKey("key2")
+      return expect(assArray).toHaveKey("key2")
     end function)
   
-    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHasKey(key4)", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKey(key4)", function (_ts as Object) as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return expect(assArray).not.toHasKey("key4")
+      return expect(assArray).not.toHaveKey("key4")
     end function)
 
     ' ---------------------------------------------------------
-    ' toHasKeys()
+    ' toHaveKeys()
     ' ---------------------------------------------------------
-    it("expect({ key1: value1, key2: value2, key3: value3 }).toHasKeys([key1, key2])", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKeys([key1, key2])", function (_ts as Object) as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return expect(assArray).toHasKeys(["key1", "key2"])
+      return expect(assArray).toHaveKeys(["key1", "key2"])
     end function)
   
-    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHasKeys([key1, key4])", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKeys([key1, key4])", function (_ts as Object) as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
       ' Then
-      return expect(assArray).not.toHasKeys(["key1", "key4"])
+      return expect(assArray).not.toHaveKeys(["key1", "key4"])
     end function)
 
     ' ---------------------------------------------------------

@@ -7,8 +7,8 @@
 '     toBeValid
 '     toContain
 '     toEqual
-'     toHasKey
-'     toHasKeys
+'     toHaveKey
+'     toHaveKeys
 '     toHaveLength
 '     toHaveBeenCalled
 '     toHaveBeenCalledTimes
@@ -189,7 +189,7 @@ function expect(value as Dynamic) as Object
   '
   ' @return Empty string (if contains) OR an error message
   ' ----------------------------------------------------------------
-  context.toHasKey = function (key as Dynamic) as String
+  context.toHaveKey = function (key as Dynamic) as String
     MATCHER_NAME = "toHaveKey(expected)"
     errorMsg = m._matcherErrorMessage(MATCHER_NAME, key, m._received, { isNot : m._isNot })
 
@@ -208,7 +208,7 @@ function expect(value as Dynamic) as Object
   '
   ' @return Empty string (if contains) OR an error message
   ' ----------------------------------------------------------------
-  context.toHasKeys = function (keys as Object) as String
+  context.toHaveKeys = function (keys as Object) as String
     MATCHER_NAME = "toHaveKeys(expected)"
     errorMsg = m._matcherErrorMessage(MATCHER_NAME, keys, m._received, { isNot : m._isNot })
 

@@ -13,8 +13,8 @@ It can take any value, or mocked function name as an argument and you can call o
     - [`toBeFalse`](#tobefalse)
     - [`toEqual`](#toequal)
     - [`toContain`](#tocontain)
-    - [`toHasKey`](#tohaskey)
-    - [`toHasKeys`](#tohaskeys)
+    - [`toHaveKey`](#tohavekey)
+    - [`toHaveKeys`](#tohavekeys)
     - [`toHaveLength`](#tohavelength)
     - [`toHaveBeenCalled`](#tohavebeencalled)
     - [`toHaveBeenCalledTimes`](#tohavebeencalledtimes)
@@ -150,23 +150,23 @@ it("should pass", function (_ts as Object) as String
 end function)
 ```
 
-### `toHasKey`
+### `toHaveKey`
 
 Checks if AssociativeArray contains given key.
 
 ```brs
 it("should pass", function (_ts as Object) as String
-  return expect({ a: 2 }).toHasKey("a")
+  return expect({ a: 2 }).toHaveKey("a")
 end function)
 ```
 
-### `toHasKeys`
+### `toHaveKeys`
 
 Checks if AssociativeArray contains given keys.
 
 ```brs
 it("should pass", function (_ts as Object) as String
-  return expect({ a: 2, b: "asd" }).toHasKeys(["a", "b"])
+  return expect({ a: 2, b: "asd" }).toHaveKeys(["a", "b"])
 end function)
 ```
 
