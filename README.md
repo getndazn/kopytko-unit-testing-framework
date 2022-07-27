@@ -216,6 +216,42 @@ The service can be used like a regular object:
  data = service.getData("/test")
 ```
 
+When dependency is mocked (`@mock`).
+You can use our `mockFunction` to set returned value of the mocked function. For example.
+
+```brs
+it("should return mocked function value", function (_ts as Object) as String
+  ' Given
+  expected = 123
+  mockFunction("functionName").returnedValue(expected)
+
+  ' When
+  result = functionReturningFunctionNameResult()
+
+  'Then
+  return expect(result).toEqual(expected)
+end function)
+```
+
+Or you can check if mocked function was called properly
+
+```brs
+it("should call functionName once with argument a = 1", function (_ts as Object) as String
+  ' When
+  result = functionReturningFunctionNameResult()
+
+  'Then
+  return [
+    expect("functionName").toHaveBeenCalledTimes(1),
+    expect("functionName").toHaveBeenCalledWith({ a: 1 }),
+  ]
+end function)
+```
+
+[Here](docs/api/KopytkoMockFunction.md) are listed all `mockFunction` methods.
+
+There are also plenty of examples [here](/example/app/components/_tests/mockExamples.test.brs).
+
 Calls to the methods or constructor can be inspected:
 ```brightscript
 ? mockFunction("ExampleService.getData").getCalls()[0].params.arg
