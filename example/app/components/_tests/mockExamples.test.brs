@@ -6,16 +6,16 @@ function TestSuite__mockExamples() as Object
   ts = KopytkoTestSuite()
   ts.name = "Mock Examples"
 
-  beforeEach(sub (_ts as Object)
+  beforeEach(sub ()
     mockFunction("sum").returnValue(111)
   end sub)
 
-  it("should return sum value passed in before each hook", function (_ts as Object) as String
+  it("should return sum value passed in before each hook", function () as String
     ' Then
     return expect(funcCallingSum()).toBe(111)
   end function)
 
-  it("should be able to mock Math.multiply implementation", function (_ts as Object) as String
+  it("should be able to mock Math.multiply implementation", function () as String
     ' When
     m.__expected = 222
     mockFunction("Math.multiply").implementation(function (_params as Object, context as Object) as Integer
@@ -26,7 +26,7 @@ function TestSuite__mockExamples() as Object
     return expect(funcCallingMultiply()).toBe(m.__expected)
   end function)
 
-  it("should be able to mock Math.multiply return value", function (_ts as Object) as String
+  it("should be able to mock Math.multiply return value", function () as String
     ' When
     expected = 333
     mockFunction("Math.multiply").returnValue(expected)
@@ -35,7 +35,7 @@ function TestSuite__mockExamples() as Object
     return expect(funcCallingMultiply()).toBe(expected)
   end function)
 
-  it("should be able to mock Math.multiply error", function (_ts as Object) as String
+  it("should be able to mock Math.multiply error", function () as String
     ' When
     expected = "Some mocked error"
     mockFunction("Math.multiply").throw(expected)
@@ -44,7 +44,7 @@ function TestSuite__mockExamples() as Object
     return expect(funcCallingMultiply).toThrow(expected)
   end function)
 
-  it("should be able to reset all previous mocks", function (_ts as Object) as String
+  it("should be able to reset all previous mocks", function () as String
     ' Given
     mockFunction("Math.multiply").returnValue(444)
 
@@ -56,7 +56,7 @@ function TestSuite__mockExamples() as Object
   end function)
 
   ' This test needs to be at the bottom
-  it("should clear all mock calls from previous tests", function (_ts as Object) as Object
+  it("should clear all mock calls from previous tests", function () as Object
     ' Then
     return [
       expect("Math.multiply").toHaveBeenCalledTimes(0),

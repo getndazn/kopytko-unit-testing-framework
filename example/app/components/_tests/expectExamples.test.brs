@@ -8,7 +8,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toBeInvalid()
     ' ---------------------------------------------------------
-    it("expect(Invalid).toBeInvalid()", function (_ts as Object) as String
+    it("expect(Invalid).toBeInvalid()", function () as String
       ' Given
       value = Invalid
   
@@ -23,7 +23,7 @@ function TestSuite__expectExamples() as Object
       { key: "value" },
       [1, 2, 3],
       CreateObject("roSGNode", "rectangle"),
-    ], "expect(nonInvalidValue).not.toBeInvalid()", function (_ts as Object, value as Object) as String
+    ], "expect(nonInvalidValue).not.toBeInvalid()", function (value as Object) as String
   
       ' Then
       return expect(value).not.toBeInvalid()
@@ -39,13 +39,13 @@ function TestSuite__expectExamples() as Object
       { key: "value" },
       [1, 2, 3],
       CreateObject("roSGNode", "rectangle"),
-    ], "expect(nonInvalidValue).toBeValid()", function (_ts as Object, value as Object) as String
+    ], "expect(nonInvalidValue).toBeValid()", function (value as Object) as String
   
       ' Then
       return expect(value).toBeValid()
     end function)
   
-    it("expect(Invalid).not.toBeValid()", function (_ts as Object) as String
+    it("expect(Invalid).not.toBeValid()", function () as String
       ' Given
       value = Invalid
   
@@ -56,7 +56,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toBeTrue()
     ' ---------------------------------------------------------
-    it("expect(true).toBeTrue()", function (_ts as Object) as String
+    it("expect(true).toBeTrue()", function () as String
       ' Given
       value = true
   
@@ -64,7 +64,7 @@ function TestSuite__expectExamples() as Object
       return expect(value).toBeTrue()
     end function)
   
-    it("expect(false).not.toBeTrue()", function (_ts as Object) as String
+    it("expect(false).not.toBeTrue()", function () as String
       ' Given
       value = false
   
@@ -75,7 +75,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toBeFalse()
     ' ---------------------------------------------------------
-    it("expect(false).toBeFalse()", function (_ts as Object) as String
+    it("expect(false).toBeFalse()", function () as String
       ' Given
       value = false
   
@@ -83,7 +83,7 @@ function TestSuite__expectExamples() as Object
       return expect(value).toBeFalse()
     end function)
   
-    it("expect(true).not.toBeFalse()", function (_ts as Object) as String
+    it("expect(true).not.toBeFalse()", function () as String
       ' Given
       value = true
   
@@ -98,13 +98,13 @@ function TestSuite__expectExamples() as Object
       { value: 4, expectedValue: 4 },
       { value: true, expectedValue: true },
       { value: "Test Value", expectedValue: "Test Value" },
-    ], "expect(${value}).toBe(${expectedValue})", function (_ts as Object, params as Object) as String
+    ], "expect(${value}).toBe(${expectedValue})", function (params as Object) as String
   
       ' Then
       return expect(params.value).toBe(params.expectedValue)
     end function)
 
-    it("expect(nodeObjectReference).toBe(theSameNodeObjectReference) for scenegraph node", function (_ts as Object) as String
+    it("expect(nodeObjectReference).toBe(theSameNodeObjectReference) for scenegraph node", function () as String
       ' Given
       value = CreateObject("roSGNode", "rectangle")
       expectedValue = value
@@ -118,7 +118,7 @@ function TestSuite__expectExamples() as Object
       { value: true, expectedValue: false },
       { value: "Test Value", expectedValue: "Another Value" },
       { value: CreateObject("roSGNode", "rectangle"), expectedValue: CreateObject("roSGNode", "rectangle") }
-    ], "expect(${value}).not.toBe(${expectedValue})", function (_ts as Object, params as Object) as String
+    ], "expect(${value}).not.toBe(${expectedValue})", function (params as Object) as String
 
       ' Then
       return expect(params.value).not.toBe(params.expectedValue)
@@ -134,13 +134,13 @@ function TestSuite__expectExamples() as Object
       { value: ["a", "b", "c"], expectedValue: ["a", "b", "c"] }
       { value: { key1: "value1", key2: "value2" }, expectedValue: { key1: "value1", key2: "value2" } }
       { value: CreateObject("roSGNode", "rectangle"), expectedValue: CreateObject("roSGNode", "rectangle") }
-    ], "expect(value).toEqual(theSameValue)", function (_ts as Object, params as Object) as String
+    ], "expect(value).toEqual(theSameValue)", function (params as Object) as String
   
       ' Then
       return expect(params.value).toEqual(params.expectedValue)
     end function)
 
-    it("expect(node).toEqual(anotherNodeWithSameFieldsAndChildren) for scenegraph node", function (_ts as Object) as String
+    it("expect(node).toEqual(anotherNodeWithSameFieldsAndChildren) for scenegraph node", function () as String
       ' When
       value = CreateObject("roSGNode", "rectangle")
       value.id = "TestID"
@@ -159,13 +159,13 @@ function TestSuite__expectExamples() as Object
       { value: "Test Value", expectedValue: "Another Value" },
       { value: ["a", "b", "c"], expectedValue: ["a", "b", "c", "d"] }
       { value: { key1: "value1", key2: "value2" }, expectedValue: { key1: "value1", key3: "value3" } }
-    ], "expect(value).not.toEqual(notTheSameValue)", function (_ts as Object, params as Object) as String
+    ], "expect(value).not.toEqual(notTheSameValue)", function (params as Object) as String
 
       ' Then
       return expect(params.value).not.toEqual(params.expectedValue)
     end function)
 
-    it("expect(node).not.toEqual(nodeWithDifferentFields)", function (_ts as Object) as String
+    it("expect(node).not.toEqual(nodeWithDifferentFields)", function () as String
       ' Given
       value = CreateObject("roSGNode", "rectangle")
       value.id = "id_1"
@@ -183,13 +183,13 @@ function TestSuite__expectExamples() as Object
       { value: ["a", "b", "c"], expectedValue: "b" },
       { value: ["a", "b", "c", "d"], expectedValue: ["b", "c"] },
       { value: { key1: "value1", key2: "value2" }, expectedValue: {key2: "value2"} },
-    ], "expect(object).toContain(valueOrFields)", function (_ts as Object, params as Object) as String
+    ], "expect(object).toContain(valueOrFields)", function (params as Object) as String
   
       ' Then
       return expect(params.value).toContain(params.expectedValue)
     end function)
 
-    it("expect(node).toContain(fields)", function (_ts as Object) as String
+    it("expect(node).toContain(fields)", function () as String
       ' Given
       node = CreateObject("roSGNode", "rectangle")
       node.width = 100.0
@@ -199,7 +199,7 @@ function TestSuite__expectExamples() as Object
       return expect(node).toContain({ width: 100.0, height: 50.0 })
     end function)
 
-    it("expect(node).toContain(child)", function (_ts as Object) as String
+    it("expect(node).toContain(child)", function () as String
       ' Given
       parentNode = CreateObject("roSGNode", "rectangle")
       childNode = CreateObject("roSGNode", "rectangle")
@@ -214,13 +214,13 @@ function TestSuite__expectExamples() as Object
       { value: ["a", "b", "c", "d"], expectedValue: ["b", "e"] },
       { value: { key1: "value1", key2: "value2" }, expectedValue: { key3: "value3" } },
       { value: CreateObject("roSGNode", "rectangle"), expectedValue: { someKey: "someValue" } }
-    ], "expect(object).not.toContain(valueOrFields)", function (_ts as Object, params as Object) as String
+    ], "expect(object).not.toContain(valueOrFields)", function (params as Object) as String
   
       ' Then
       return expect(params.value).not.toContain(params.expectedValue)
     end function)
 
-    it("expect(parentSGNode).not.toContain(childSGNode)", function (_ts as Object) as String
+    it("expect(parentSGNode).not.toContain(childSGNode)", function () as String
       ' Given
       parentNode = CreateObject("roSGNode", "rectangle")
       childNode = CreateObject("roSGNode", "rectangle")
@@ -232,7 +232,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveKey()
     ' ---------------------------------------------------------
-    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKey(key2)", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKey(key2)", function () as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
@@ -240,7 +240,7 @@ function TestSuite__expectExamples() as Object
       return expect(assArray).toHaveKey("key2")
     end function)
   
-    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKey(key4)", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKey(key4)", function () as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
@@ -251,7 +251,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveKeys()
     ' ---------------------------------------------------------
-    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKeys([key1, key2])", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).toHaveKeys([key1, key2])", function () as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
@@ -259,7 +259,7 @@ function TestSuite__expectExamples() as Object
       return expect(assArray).toHaveKeys(["key1", "key2"])
     end function)
   
-    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKeys([key1, key4])", function (_ts as Object) as String
+    it("expect({ key1: value1, key2: value2, key3: value3 }).not.toHaveKeys([key1, key4])", function () as String
       ' Given
       assArray = { key1: "value1", key2: "value2", key3: "value3" }
   
@@ -270,7 +270,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveLength()
     ' ---------------------------------------------------------
-    it("expect([value1, value2, value3]).toHaveLength(3)", function (_ts as Object) as String
+    it("expect([value1, value2, value3]).toHaveLength(3)", function () as String
       ' Given
       arr = ["value1", "value2", "value3"]
   
@@ -278,7 +278,7 @@ function TestSuite__expectExamples() as Object
       return expect(arr).toHaveLength(3)
     end function)
   
-    it("expect([value1, value2, value3]).not.toHaveLength(6)", function (_ts as Object) as String
+    it("expect([value1, value2, value3]).not.toHaveLength(6)", function () as String
       ' Given
       arr = ["value1", "value2", "value3"]
   
@@ -289,7 +289,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenCalled()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenCalled()", function (_ts as Object) as String
+    it("expect(funcCallingSum).toHaveBeenCalled()", function () as String
       ' When
       funcCallingSum()
   
@@ -297,7 +297,7 @@ function TestSuite__expectExamples() as Object
       return expect("sum").toHaveBeenCalled()
     end function)
 
-    it("expect(funcNotCallingSum).not.toHaveBeenCalled()", function (_ts as Object) as String
+    it("expect(funcNotCallingSum).not.toHaveBeenCalled()", function () as String
       ' When
       funcNotCallingSum()
   
@@ -308,7 +308,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenCalledTimes()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenCalledTimes(2)", function (_ts as Object) as String
+    it("expect(funcCallingSum).toHaveBeenCalledTimes(2)", function () as String
       ' When
       funcCallingSum()
       funcCallingSum()
@@ -317,7 +317,7 @@ function TestSuite__expectExamples() as Object
       return expect("sum").toHaveBeenCalledTimes(2)
     end function)
 
-    it("expect(funcCallingSum).not.toHaveBeenCalledTimes(1)", function (_ts as Object) as String
+    it("expect(funcCallingSum).not.toHaveBeenCalledTimes(1)", function () as String
       ' When
       funcCallingSum()
       funcCallingSum()
@@ -329,7 +329,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenCalledWith({ a: 1, b: 2 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).toHaveBeenCalledWith({ a: 1, b: 2 })", function () as String
       ' When
       funcCallingSum(1, 2)
   
@@ -337,7 +337,7 @@ function TestSuite__expectExamples() as Object
       return expect("sum").toHaveBeenCalledWith({ a: 1, b: 2 })
     end function)
 
-    it("expect(funcCallingSum).not.toHaveBeenCalledWith({ a: 3, b: 2 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).not.toHaveBeenCalledWith({ a: 3, b: 2 })", function () as String
       ' When
       funcCallingSum(2, 3)
   
@@ -348,7 +348,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenLastCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenLastCalledWith({ a: 5, b: 6 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).toHaveBeenLastCalledWith({ a: 5, b: 6 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
@@ -358,7 +358,7 @@ function TestSuite__expectExamples() as Object
       return expect("sum").toHaveBeenLastCalledWith({ a: 5, b: 6 })
     end function)
 
-    it("expect(funcCallingSum).not.toHaveBeenLastCalledWith({ a: 3, b: 4 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).not.toHaveBeenLastCalledWith({ a: 3, b: 4 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
@@ -371,7 +371,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenNthCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenNthCalledWith(2, { a: 3, b: 4 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).toHaveBeenNthCalledWith(2, { a: 3, b: 4 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
@@ -381,7 +381,7 @@ function TestSuite__expectExamples() as Object
       return expect("sum").toHaveBeenNthCalledWith(2, { a: 3, b: 4 })
     end function)
 
-    it("expect(funcCallingSum).not.toHaveBeenNthCalledWith(2, { a: 1, b: 2 })", function (_ts as Object) as String
+    it("expect(funcCallingSum).not.toHaveBeenNthCalledWith(2, { a: 1, b: 2 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
@@ -394,16 +394,12 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toThrow()
     ' ---------------------------------------------------------
-    it("expect(funcWithException).toThrow()", function (_ts as Object) as String
-      return expect(function()
-        funcWithException()
-      end function).toThrow()
+    it("expect(funcWithException).toThrow()", function () as String
+      return expect(funcWithException).toThrow()
     end function)
   
-    it("expect(funcWithNoException).not.toThrow()", function (_ts as Object) as String
-      return expect(function()
-        funcWithNoException()
-      end function).not.toThrow()
+    it("expect(funcWithNoException).not.toThrow()", function () as String
+      return expect(funcWithNoException).not.toThrow()
     end function)
   
     return ts

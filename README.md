@@ -9,6 +9,7 @@
 - [Limitations](#limitations)
 - [API](#api)
 - [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
+- [Migration from v1 to v2](#migration-from-v1-to-v2)
 
 The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between those two frameworks.
 
@@ -68,6 +69,15 @@ Remark: You can use any name for the test environment, just be consistent.
 {
   "scripts": {
     "test": "ENV=test node ../scripts/test.js"
+  }
+}
+```
+
+4. \[Temporary\] To not force [migration from v1 to v2](#migration-from-v1-to-v2) to be imidiate we introduced a bs_const flag (details in Migration part). The flag will be temporary for the depreciation period. In your manifest file please add bs_const:
+```js
+{
+  bs_const: {
+    insertKopytkoUnitTestSuiteArgument: false,
   }
 }
 ```
@@ -284,3 +294,16 @@ Functions passed into all these methods and arrays should have just one `ts` arg
 ## Example test app config and unit tests
 
 Go to [/example](example) directory
+
+## Migration from v1 to v2
+
+Version 2 introduces new shorthand functions and because of that, we were able to remove the test suite object argument from the test case function.
+
+Now if you want to get the `ts` (test suite) object, you can get it by calling the `ts()` function in a test case.
+
+In order to not make trouble for projects that already use v1, we introduced a **bs_const** flag [**insertKopytkoUnitTestSuiteArgument**](/example/manifest.js). So if you **don't want to change the current test cases implementation** add it to your manifest with the value **set to true**.
+
+When you want to use our new shorthand methods and you **don't need a test suite object argument**, as you don't use it, **set this flag to false**.
+
+**IMPORTANT: This flag is only temporary and will be removed in the future.
+The desired solution is to not use the test suite argument.**

@@ -4,7 +4,7 @@ function TestSuite__sum() as Object
   ts = KopytkoTestSuite()
   ts.name = "Example - function"
 
-  it("should return a sum of two numbers", function (_ts as Object) as String
+  it("should return a sum of two numbers", function () as String
     ' Given
     a = 1
     b = 1
@@ -19,7 +19,7 @@ function TestSuite__sum() as Object
   itEach([
     { a: 2, b: 4, expectedSum: 6 },
     { a: 5, b: 10, expectedSum: 15 },
-  ], "should return ${expectedSum} when sum ${a} and ${b}", function (_ts as Object, params as Object) as String
+  ], "should return ${expectedSum} when sum ${a} and ${b}", function (params as Object) as String
     ' When
     result = sum(params.a, params.b)
 

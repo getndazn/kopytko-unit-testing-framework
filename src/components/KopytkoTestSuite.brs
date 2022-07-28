@@ -18,16 +18,28 @@ function KopytkoTestSuite() as Object
   ' @protected
   ts._afterAll = []
   ' @protected
-  ts._beforeEach = [sub (_ts as Object)
-    m.__mocks = {}
-  end sub]
+  ts._beforeEach = []
   ' @protected
   ts._afterEach = []
+
+  #if insertKopytkoUnitTestSuiteArgument
+    ts._beforeEach.push(sub (_ts as Object)
+      m.__mocks = {}
+    end sub)
+  #else
+    ts._beforeEach.push(sub ()
+      m.__mocks = {}
+    end sub)
+  #end if
 
   ts.setUp = sub ()
     for each _beforeAll in m._beforeAll
       if (TF_Utils__IsFunction(beforeAll))
-        _beforeAll(m)
+        #if insertKopytkoUnitTestSuiteArgument
+          _beforeAll(m)
+        #else
+          _beforeAll()
+        #end if
       end if
     end for
   end sub
@@ -35,7 +47,11 @@ function KopytkoTestSuite() as Object
   ts.tearDown = sub ()
     for each _afterAll in m._afterAll
       if (TF_Utils__IsFunction(afterAll))
-        _afterAll(m)
+        #if insertKopytkoUnitTestSuiteArgument
+          _afterAll(m)
+        #else
+          _afterAll()
+        #end if
       end if
     end for
   end sub
@@ -71,15 +87,27 @@ function KopytkoTestSuite() as Object
         ' TestRunner runs this method within TestSuite context
         for each _beforeEach in m._beforeEach
           if (TF_Utils__IsFunction(_beforeEach))
-            _beforeEach(m)
+            #if insertKopytkoUnitTestSuiteArgument
+              _beforeEach(m)
+            #else
+              _beforeEach()
+            #end if
           end if
         end for
 
         try
           if (m.testInstance.hasArguments)
-            result = m.testInstance._func[0](m, m.testInstance.arg)
+            #if insertKopytkoUnitTestSuiteArgument
+              result = m.testInstance._func[0](m, m.testInstance.arg)
+            #else
+              result = m.testInstance._func[0](m.testInstance.arg)
+            #end if
           else
-            result = m.testInstance._func[0](m)
+            #if insertKopytkoUnitTestSuiteArgument
+              result = m.testInstance._func[0](m)
+            #else
+              result = m.testInstance._func[0]()
+            #end if
           end if
         catch e
           sourceObj = e.backtrace[e.backtrace.count() - 1]
@@ -88,7 +116,11 @@ function KopytkoTestSuite() as Object
 
         for each _afterEach in m._afterEach
           if (TF_Utils__IsFunction(_afterEach))
-            _afterEach(m)
+            #if insertKopytkoUnitTestSuiteArgument
+              _afterEach(m)
+            #else
+              _afterEach()
+            #end if
           end if
         end for
 

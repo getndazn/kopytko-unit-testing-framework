@@ -11,6 +11,24 @@
 
 In order to make developer live easier there are shorhands for all test function
 
+There is bs_const variable - **insertKopytkoUnitTestSuiteArgument**
+
+- when **true** all test case functions and hooks need ts (TestSuite) argument
+
+```brs
+it("should check if true is true", function (_ts as Object) as String
+  return expect(true).toBeTrue()
+end function)
+```
+
+- when **false** all test case functions and hooks do not need ts (TestSuite) argument
+
+```brs
+it("should check if true is true", function () as String
+  return expect(true).toBeTrue()
+end function)
+```
+
 ## Functions
 
 ### `it`

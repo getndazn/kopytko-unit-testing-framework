@@ -5,7 +5,7 @@ function TestSuite__Math() as Object
   ts = KopytkoTestSuite()
   ts.name = "Example - function returning object"
 
-  it("should return a proper value for multiply", function (_ts as Object) as String
+  it("should return a proper value for multiply", function () as String
     ' When
     result = Math().multiply(3, 4)
 
@@ -13,7 +13,7 @@ function TestSuite__Math() as Object
     return expect(result).toBe(12)
   end function)
 
-  it("should properly invoke and return a mocked divide return value", function (_ts as Object) as Object
+  it("should properly invoke and return a mocked divide return value", function () as Object
     ' Given
     expected = 100
     mockFunction("divide").returnValue(expected)
