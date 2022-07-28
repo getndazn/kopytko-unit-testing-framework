@@ -7,6 +7,7 @@
   - [`beforeEach`](#beforeeach)
   - [`afterEach`](#aftereach)
   - [`afterAll`](#afterall)
+  - [`ts`](#ts)
 
 In order to make developer live easier there are shorhands for all test function
 
@@ -77,4 +78,12 @@ This is a shorthand for the `ts.setAfterAll`.
 afterAll(sub (_ts as Object)
   ? "This will be printed after last test case execution"
 end sub)
+```
+
+### `ts`
+
+Returns Test Suite object (ts).
+
+```brs
+ts().isMatch({ a: 1 }, { a: 1 })
 ```
