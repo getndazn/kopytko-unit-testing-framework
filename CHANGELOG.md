@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.2.1...v1.3.0) (2022-08-02)
+
+
+### Features
+
+* add mockFunction and other testFunctions ([#34](https://github.com/getndazn/kopytko-unit-testing-framework/issues/34)) ([bc48b89](https://github.com/getndazn/kopytko-unit-testing-framework/commit/bc48b8999724f927e02cee77949c780f3f50cfd2))
+
 ## [1.2.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.2.0...v1.2.1) (2022-07-19)
 
 
