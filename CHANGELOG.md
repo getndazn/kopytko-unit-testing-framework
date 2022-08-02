@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.3.1...v2.0.0) (2022-08-02)
+
+
+### Features
+
+* add mock function and test functions ([#36](https://github.com/getndazn/kopytko-unit-testing-framework/issues/36)) ([bc75923](https://github.com/getndazn/kopytko-unit-testing-framework/commit/bc75923996f6f5b92400e81797a313595a59f337))
+
+
+### BREAKING CHANGES
+
+* adds insertKopytkoUnitTestSuiteArgument bs_const flag
+
 ## [1.3.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.3.0...v1.3.1) (2022-08-02)
 
 
