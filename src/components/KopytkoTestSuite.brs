@@ -3,35 +3,55 @@
 ' @import /components/_testUtils/NodeUtils.brs
 ' @import /components/_testUtils/ternary.brs
 ' @import /components/KopytkoExpect.brs
+' @import /components/KopytkoMockFunction.brs
+' @import /components/KopytkoTestFunctions.brs
 ' @import /source/UnitTestFramework.brs
 
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
   GetGlobalAA()["$$ts"] = ts
 
+  ts._ERROR_MESSAGE_LINE_BREAK = Chr(10) + "---                  "
+
   ' @protected
   ts._beforeAll = []
   ' @protected
   ts._afterAll = []
   ' @protected
-  ts._beforeEach = [sub (ts as Object)
-    m.__mocks = {}
-  end sub]
+  ts._beforeEach = []
   ' @protected
   ts._afterEach = []
 
+  #if insertKopytkoUnitTestSuiteArgument
+    ts._beforeEach.push(sub (_ts as Object)
+      m.__mocks = {}
+    end sub)
+  #else
+    ts._beforeEach.push(sub ()
+      m.__mocks = {}
+    end sub)
+  #end if
+
   ts.setUp = sub ()
-    for each beforeAll in m._beforeAll
+    for each _beforeAll in m._beforeAll
       if (TF_Utils__IsFunction(beforeAll))
-        beforeAll(m)
+        #if insertKopytkoUnitTestSuiteArgument
+          _beforeAll(m)
+        #else
+          _beforeAll()
+        #end if
       end if
     end for
   end sub
 
   ts.tearDown = sub ()
-    for each afterAll in m._afterAll
+    for each _afterAll in m._afterAll
       if (TF_Utils__IsFunction(afterAll))
-        afterAll(m)
+        #if insertKopytkoUnitTestSuiteArgument
+          _afterAll(m)
+        #else
+          _afterAll()
+        #end if
       end if
     end for
   end sub
@@ -59,34 +79,64 @@ function KopytkoTestSuite() as Object
   end sub
 
   ' "func as Function" crashes the app
-  ts.createTest = function (name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean) as Object
+  ts.createTest = function (name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, _skip = false as Boolean) as Object
     return {
       Name: name,
       _func: [func],
       Func: function () as String
         ' TestRunner runs this method within TestSuite context
-        for each beforeEach in m._beforeEach
-          if (TF_Utils__IsFunction(beforeEach))
-            beforeEach(m)
+        for each _beforeEach in m._beforeEach
+          if (TF_Utils__IsFunction(_beforeEach))
+            #if insertKopytkoUnitTestSuiteArgument
+              _beforeEach(m)
+            #else
+              _beforeEach()
+            #end if
           end if
         end for
 
         try
           if (m.testInstance.hasArguments)
-            result = m.testInstance._func[0](m, m.testInstance.arg)
+            #if insertKopytkoUnitTestSuiteArgument
+              result = m.testInstance._func[0](m, m.testInstance.arg)
+            #else
+              result = m.testInstance._func[0](m.testInstance.arg)
+            #end if
           else
-            result = m.testInstance._func[0](m)
+            #if insertKopytkoUnitTestSuiteArgument
+              result = m.testInstance._func[0](m)
+            #else
+              result = m.testInstance._func[0]()
+            #end if
           end if
         catch e
           sourceObj = e.backtrace[e.backtrace.count() - 1]
           result = Substitute("{0} at {1}", e.message, FormatJson(sourceObj))
         end try
 
-        for each afterEach in m._afterEach
-          if (TF_Utils__IsFunction(afterEach))
-            afterEach(m)
+        for each _afterEach in m._afterEach
+          if (TF_Utils__IsFunction(_afterEach))
+            #if insertKopytkoUnitTestSuiteArgument
+              _afterEach(m)
+            #else
+              _afterEach()
+            #end if
           end if
         end for
+
+        if (Type(result) = "roArray")
+          if (result.join("") <> "")
+            notPassedResults = []
+
+            for each assertResult in result
+              if (assertResult <> "") then notPassedResults.push(assertResult)
+            end for
+
+            result = notPassedResults.join(m._ERROR_MESSAGE_LINE_BREAK)
+          else
+            result = ""
+          end if
+        end if
 
         return result
       end function,
