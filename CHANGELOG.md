@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.3.0...v1.3.1) (2022-08-02)
+
+
+### Reverts
+
+* Revert "feat: add mockFunction and other testFunctions" (#35) ([b0cd075](https://github.com/getndazn/kopytko-unit-testing-framework/commit/b0cd075f8bcc49bcf1860a4c18fb09b61571e55a)), closes [#35](https://github.com/getndazn/kopytko-unit-testing-framework/issues/35) [#34](https://github.com/getndazn/kopytko-unit-testing-framework/issues/34)
+
 # [1.3.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.2.1...v1.3.0) (2022-08-02)
 
 
