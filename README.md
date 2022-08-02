@@ -9,7 +9,6 @@
 - [Limitations](#limitations)
 - [API](#api)
 - [Example test app config and unit tests](#example-test-app-config-and-unit-tests)
-- [Migration from v1 to v2](#migration-from-v1-to-v2)
 
 The unit testing framework works on top of the [Roku Unit Testing framework](https://github.com/rokudev/unit-testing-framework). There are some differences between those two frameworks.
 
@@ -18,7 +17,6 @@ The unit testing framework works on top of the [Roku Unit Testing framework](htt
 We believe tests should be close to the tested objects.
 
 The expected structure of the app:
-
 ```
  components
   _mocks
@@ -29,9 +27,7 @@ The expected structure of the app:
   MyComponent.xml
   MyService.brs
 ```
-
 The `_tests` folders should be placed near to the tested entity. Each test suite gains extra powers:
-
 - no need for xml files
 - no need to define test suites functions in an array
 - ability to import dependencies
@@ -69,15 +65,6 @@ Remark: You can use any name for the test environment, just be consistent.
 {
   "scripts": {
     "test": "ENV=test node ../scripts/test.js"
-  }
-}
-```
-
-4. \[Temporary\] To not force [migration from v1 to v2](#migration-from-v1-to-v2) to be imidiate we introduced a bs_const flag (details in Migration part). The flag will be temporary for the depreciation period. In your manifest file please add bs_const:
-```js
-{
-  bs_const: {
-    insertKopytkoUnitTestSuiteArgument: false,
   }
 }
 ```
@@ -124,9 +111,9 @@ end function
 function MyServiceTestSuite() as Object
   ts = KopytkoTestSuite()
 
-  beforeAll(sub (_ts as Object)
+  ts.setBeforeAll = sub (ts as Object)
     ' do something
-  end sub)
+  end sub
 
   return ts
 end function
@@ -137,8 +124,8 @@ function TestSuite__MyService_Main() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - Main"
 
-  it("should create new instance of the service", function (_ts as Object) as String
-    return expect(MyService()).toBeValid()
+  ts.addTest("it should create new instance of the service", function (ts as Object) as String
+    return ts.assertNotInvalid(MyService())
   end function)
 
   return ts
@@ -150,7 +137,7 @@ function TestSuite__MyService_getData() as Object
   ts = MyServiceTestSuite()
   ts.name = "MyService - getData"
 
-  it("should return some data", function (_ts as Object) as String
+  ts.addTest("it should return some data", function (ts as Object) as String
    ' Given
     service = MyService()
     expected = { arg: "abc" }
@@ -159,7 +146,7 @@ function TestSuite__MyService_getData() as Object
     result = service.getData("abc")
 
     'Then
-    return expect(result).toEqual(expected)
+    return ts.assertEqual(result, expected)
   end function)
 
   return ts
@@ -226,52 +213,16 @@ The service can be used like a regular object:
  data = service.getData("/test")
 ```
 
-When dependency is mocked (`@mock`).
-You can use our `mockFunction` to set returned value of the mocked function. For example.
-
-```brs
-it("should return mocked function value", function (_ts as Object) as String
-  ' Given
-  expected = 123
-  mockFunction("functionName").returnedValue(expected)
-
-  ' When
-  result = functionReturningFunctionNameResult()
-
-  'Then
-  return expect(result).toEqual(expected)
-end function)
-```
-
-Or you can check if mocked function was called properly
-
-```brs
-it("should call functionName once with argument a = 1", function (_ts as Object) as String
-  ' When
-  result = functionReturningFunctionNameResult()
-
-  'Then
-  return [
-    expect("functionName").toHaveBeenCalledTimes(1),
-    expect("functionName").toHaveBeenCalledWith({ a: 1 }),
-  ]
-end function)
-```
-
-[Here](docs/api/KopytkoMockFunction.md) are listed all `mockFunction` methods.
-
-There are also plenty of examples [here](/example/app/components/_tests/mockExamples.test.brs).
-
 Calls to the methods or constructor can be inspected:
 ```brightscript
-? mockFunction("ExampleService.getData").getCalls()[0].params.arg
-? mockFunction("ExampleService").getConstructorCalls()[0].params.dependency
+?m.__mocks.exampleService.getData.calls[0].params.arg
+?m.__mocks.exampleService.constructorCalls[0].params.dependency
 ```
 
 ## Setup and Teardown
 
 Roku Unit Testing Framework provides the way to execute your custom code before/after every test suite.
-However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite, so you shouldn't use them. Instead, add your function via `beforeAll` or `afterAll` methods of `KopytkoTestSuite`.
+However, to give more flexibility, Kopytko Unit Testing Framework overwrites `setUp` and `tearDown` properties of a test suite, so you shouldn't use them. Instead, add your function via `setBeforeAll` or `setAfterAll` methods of `KopytkoTestSuite`.
 `KopytkoFrameworkTestSuite` already contains some additional code to prepare and clean a test suite from Kopytko ecosystem related stuff.
 Notice that if you have test cases of a unit split into few files, every file creates a separate test suite, therefore all `beforeAll` and `afterAll` callbacks will be executed once per a file.
 
@@ -287,23 +238,7 @@ Functions passed into all these methods and arrays should have just one `ts` arg
 
 - [KopytkoTestSuite](docs/api/KopytkoTestSuite.md)
 - [KopytkoFrameworkTestSuite](docs/api/KopytkoFrameworkTestSuite.md)
-- [KopytkoTestFunctions](docs/api/KopytkoTestFunctions.md)
-- [KopytkoExpect](docs/api/KopytkoExpect.md)
-- [KopytkoMockFunction](docs/api/KopytkoMockFunction.md)
 
 ## Example test app config and unit tests
 
 Go to [/example](example) directory
-
-## Migration from v1 to v2
-
-Version 2 introduces new shorthand functions and because of that, we were able to remove the test suite object argument from the test case function.
-
-Now if you want to get the `ts` (test suite) object, you can get it by calling the `ts()` function in a test case.
-
-In order to not make trouble for projects that already use v1, we introduced a **bs_const** flag [**insertKopytkoUnitTestSuiteArgument**](/example/manifest.js). So if you **don't want to change the current test cases implementation** add it to your manifest with the value **set to true**.
-
-When you want to use our new shorthand methods and you **don't need a test suite object argument**, as you don't use it, **set this flag to false**.
-
-**IMPORTANT: This flag is only temporary and will be removed in the future.
-The desired solution is to not use the test suite argument.**

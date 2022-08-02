@@ -1,15 +1,15 @@
 ' @import /components/sum.brs
 
-sub funcWithException()
-  throw "dummy exception!"
-end sub
-
-sub funcWithNoException()
-end sub
-
-function funcCallingSum(aValue = 1 as Integer, bValue = 2 as Integer) as Integer
-  return sum(aValue, bValue)
+function funcWithException()
+    throw "dummy exception!"
 end function
 
-sub funcNotCallingSum()
-end sub
+function funcWithNoException()
+end function
+
+function funcCallingSum(aValue = 1 as Integer, bValue = 2 as Integer)
+    value = sum(aValue, bValue)
+end function
+
+function funcNotCallingSum()
+end function
