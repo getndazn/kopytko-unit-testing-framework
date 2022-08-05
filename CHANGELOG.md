@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.0...v2.0.1) (2022-08-05)
+
+
+### Bug Fixes
+
+* add missing bs_const to manifest ([#37](https://github.com/getndazn/kopytko-unit-testing-framework/issues/37)) ([46fcda6](https://github.com/getndazn/kopytko-unit-testing-framework/commit/46fcda64d1c19867692a1e9afe272f9437cbaef1))
+
 # [2.0.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v1.3.1...v2.0.0) (2022-08-02)
 
 
