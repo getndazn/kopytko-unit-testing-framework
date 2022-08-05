@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.1...v2.0.2) (2022-08-05)
+
+
+### Bug Fixes
+
+* kopytko framework test suite ([#38](https://github.com/getndazn/kopytko-unit-testing-framework/issues/38)) ([d4d4a6c](https://github.com/getndazn/kopytko-unit-testing-framework/commit/d4d4a6c46810f2b8c009cc074e502a02c162d7ff))
+
 ## [2.0.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.0...v2.0.1) (2022-08-05)
 
 
