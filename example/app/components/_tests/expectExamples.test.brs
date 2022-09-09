@@ -329,12 +329,20 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenCalledWith({ a: 1, b: 2 })", function () as String
+    it("expect(funcCallingSum).toHaveBeenCalledWith({ a: 1 })", function () as String
       ' When
       funcCallingSum(1, 2)
   
       ' Then
-      return expect("sum").toHaveBeenCalledWith({ a: 1, b: 2 })
+      return expect("sum").toHaveBeenCalledWith({ a: 1 })
+    end function)
+
+    it("expect(funcCallingSum).toHaveBeenCalledWith({ a: 1, b: 2 }) with strict mode", function () as String
+      ' When
+      funcCallingSum(1, 2)
+  
+      ' Then
+      return expect("sum").toHaveBeenCalledWith({ a: 1, b: 2 }, { strict: true })
     end function)
 
     it("expect(funcCallingSum).not.toHaveBeenCalledWith({ a: 3, b: 2 })", function () as String
@@ -348,14 +356,24 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenLastCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenLastCalledWith({ a: 5, b: 6 })", function () as String
+    it("expect(funcCallingSum).toHaveBeenLastCalledWith({ a: 5 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
       funcCallingSum(5, 6)
   
       ' Then
-      return expect("sum").toHaveBeenLastCalledWith({ a: 5, b: 6 })
+      return expect("sum").toHaveBeenLastCalledWith({ a: 5 })
+    end function)
+
+    it("expect(funcCallingSum).toHaveBeenLastCalledWith({ a: 5, b: 6 }) with strict mode", function () as String
+      ' When
+      funcCallingSum(1, 2)
+      funcCallingSum(3, 4)
+      funcCallingSum(5, 6)
+  
+      ' Then
+      return expect("sum").toHaveBeenLastCalledWith({ a: 5, b: 6 }, { strict: true })
     end function)
 
     it("expect(funcCallingSum).not.toHaveBeenLastCalledWith({ a: 3, b: 4 })", function () as String
@@ -371,14 +389,24 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toHaveBeenNthCalledWith()
     ' ---------------------------------------------------------
-    it("expect(funcCallingSum).toHaveBeenNthCalledWith(2, { a: 3, b: 4 })", function () as String
+    it("expect(funcCallingSum).toHaveBeenNthCalledWith(2, { a: 3 })", function () as String
       ' When
       funcCallingSum(1, 2)
       funcCallingSum(3, 4)
       funcCallingSum(5, 6)
   
       ' Then
-      return expect("sum").toHaveBeenNthCalledWith(2, { a: 3, b: 4 })
+      return expect("sum").toHaveBeenNthCalledWith(2, { a: 3 })
+    end function)
+
+    it("expect(funcCallingSum).toHaveBeenNthCalledWith(2, { a: 3, b: 4 }) with strict mode", function () as String
+      ' When
+      funcCallingSum(1, 2)
+      funcCallingSum(3, 4)
+      funcCallingSum(5, 6)
+  
+      ' Then
+      return expect("sum").toHaveBeenNthCalledWith(2, { a: 3, b: 4 }, { strict: true })
     end function)
 
     it("expect(funcCallingSum).not.toHaveBeenNthCalledWith(2, { a: 1, b: 2 })", function () as String

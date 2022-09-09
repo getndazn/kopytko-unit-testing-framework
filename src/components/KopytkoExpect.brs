@@ -274,17 +274,20 @@ function expect(value as Dynamic) as Object
   ' To ensure if a mock function was called with specific arguments
   '
   ' @param params (object) - Expected arguments
+  ' @param options (object) - Additional assert options
+  ' @param options.strict (boolean) - If true checks if params are identical, when false just checks the equality of expected params values
   '
   ' @return empty string (if called) OR an error message
   ' ----------------------------------------------------------------
-  context.toHaveBeenCalledWith = function (params as Object) as String
+  context.toHaveBeenCalledWith = function (params as Object, options = {} as Object) as String
     MATCHER_NAME = "toHaveBeenCalledWith(expected)"
 
+    callsParams = []
+    isStrict = (options.strict <> Invalid AND options.strict)
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     methodMockCalls = []
-    callsParams = []
     passed = false
-    
+
     if (TF_Utils__IsValid(methodMock.calls))
       methodMockCalls = methodMock.calls
     end if
@@ -293,11 +296,9 @@ function expect(value as Dynamic) as Object
 
     for each methodCall in methodMockCalls
       callsParams.push(methodCall.params)
-      if (m._ts.eqValues(methodCall.params, params))
+      if ((isStrict AND m._ts.eqValues(methodCall.params, params)) OR (NOT isStrict AND m._ts.isMatch(methodCall.params, params)))
         passed = true
         exit for
-      else
-        passed = false
       end if
     end for
 
@@ -311,15 +312,18 @@ function expect(value as Dynamic) as Object
   ' To ensure if a mock function was last called with specific arguments
   '
   ' @param params (object) - Expected arguments
+  ' @param options (object) - Additional assert options
+  ' @param options.strict (boolean) - If true checks if params are identical, when false just checks the equality of expected params values
   '
   ' @return empty string (if called) OR an error message
   ' ----------------------------------------------------------------
-  context.toHaveBeenLastCalledWith = function (params as Object) as String
+  context.toHaveBeenLastCalledWith = function (params as Object, options = {} as Object) as String
     MATCHER_NAME = "toHaveBeenLastCalledWith(expected)"
 
+    actualParams = Invalid
+    isStrict = (options.strict <> Invalid AND options.strict)
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     numberOfCalls = 0
-    actualParams = Invalid
     passed = false
 
     if (TF_Utils__IsValid(methodMock.calls))
@@ -330,7 +334,7 @@ function expect(value as Dynamic) as Object
       ' check if last call of the function made with expected params
       lastCall = methodMock.calls[numberOfCalls - 1]
       actualParams = lastCall.params
-      passed = m._ts.eqValues(actualParams, params)
+      passed = ((isStrict AND m._ts.eqValues(actualParams, params)) OR (NOT isStrict AND m._ts.isMatch(actualParams, params)))
     end if
 
     ' if matcher has been called with expect.not
@@ -344,15 +348,18 @@ function expect(value as Dynamic) as Object
   '
   ' @param nthCall (Integer) - Call index which needs to be checked
   ' @param params (object) - Expected arguments
+  ' @param options (object) - Additional assert options
+  ' @param options.strict (boolean) - If true checks if params are identical, when false just checks the equality of expected params values
   '
   ' @return empty string (if called) OR an error message
   ' ----------------------------------------------------------------
-  context.toHaveBeenNthCalledWith = function (nthCall as Integer, params as Object) as String
+  context.toHaveBeenNthCalledWith = function (nthCall as Integer, params as Object, options = {} as Object) as String
     MATCHER_NAME = "toHaveBeenNthCalledWith(expected)"
 
+    actualParams = Invalid
+    isStrict = (options.strict <> Invalid AND options.strict)
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     numberOfCalls = 0
-    actualParams = Invalid
     passed = false
 
     if (TF_Utils__IsValid(methodMock.calls))
@@ -363,7 +370,7 @@ function expect(value as Dynamic) as Object
       ' check if nth call of the function made with expected params
       methodNthCall = methodMock.calls[nthCall - 1]
       actualParams = methodNthCall.params
-      passed = m._ts.eqValues(actualParams, params)
+      passed = ((isStrict AND m._ts.eqValues(actualParams, params)) OR (NOT isStrict AND m._ts.isMatch(actualParams, params)))
     end if
 
     ' if matcher has been called with expect.not

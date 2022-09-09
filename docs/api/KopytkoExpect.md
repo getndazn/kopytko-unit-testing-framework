@@ -32,7 +32,7 @@ Checks equality of two values, or Node reference.
 This does not work for object references (only Node).
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(2).toBe(2)
 end function)
 ```
@@ -42,7 +42,7 @@ end function)
 Checks if value is invalid.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(Invalid).toBeInvalid()
 end function)
 ```
@@ -52,7 +52,7 @@ end function)
 Checks if value is valid.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(1).toBeValid()
 end function)
 ```
@@ -62,7 +62,7 @@ end function)
 Checks if value is true.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(true).toBeTrue()
 end function)
 ```
@@ -72,7 +72,7 @@ end function)
 Checks if value is false.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(false).toBeFalse()
 end function)
 ```
@@ -86,7 +86,7 @@ Examples:
 For AssociativeArray
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect({ a: 2 }).toEqual({ a: 2 })
 end function)
 ```
@@ -94,7 +94,7 @@ end function)
 For Nodes
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   nodeA = CreateNode("roSGNode", "Rectangle")
   nodeA.id = "asd"
   nodeB = CreateNode("roSGNode", "Rectangle")
@@ -113,7 +113,7 @@ Examples:
 For Array entries
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(["a", "b"]).toContain("a")
 end function)
 ```
@@ -121,7 +121,7 @@ end function)
 For AssociativeArray subset
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect({ a: 2, b: 5 }).toContain({ a: 2 })
 end function)
 ```
@@ -129,7 +129,7 @@ end function)
 For Nodes fields
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   node = CreateNode("roSGNode", "Rectangle")
   node.id = "asd"
 
@@ -140,7 +140,7 @@ end function)
 For Nodes children
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   parent = CreateNode("roSGNode", "Rectangle")
   child = CreateNode("roSGNode", "Rectangle")
   parent.appendChild(child)
@@ -154,7 +154,7 @@ end function)
 Checks if AssociativeArray contains given key.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect({ a: 2 }).toHaveKey("a")
 end function)
 ```
@@ -164,7 +164,7 @@ end function)
 Checks if AssociativeArray contains given keys.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect({ a: 2, b: "asd" }).toHaveKeys(["a", "b"])
 end function)
 ```
@@ -174,7 +174,7 @@ end function)
 Checks if Array or AssociativeArray has given lenght/count.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect({ a: 2, b: "asd" }).toHaveLength(2)
 end function)
 ```
@@ -187,7 +187,7 @@ Checks if mocked function was called at least once.
 ' @mock /path/to/functionName
 
 
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect("functionName").toHaveBeenCalled()
 end function)
 ```
@@ -200,7 +200,7 @@ Checks if mocked function was called given times.
 ' @mock /path/to/functionName
 
 
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect("functionName").toHaveBeenCalledTimes(1)
 end function)
 ```
@@ -215,8 +215,24 @@ Checks if mocked function was called given times.
 ' @mock /path/to/functionName
 
 
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect("functionName").toHaveBeenCalledWith({ a: 2 })
+end function)
+```
+
+#### Strict mode
+
+By default, this function is not in strict mode.
+So it will validate only against given arguments.
+With strict mode, it checks if all arguments are identical
+So this will throw an error.
+
+```brs
+' @mock /path/to/functionWithThreeArguments
+
+
+it("should pass", function () as String
+  return expect("functionWithThreeArguments").toHaveBeenCalledWith({ a: 2, b: 3 }, { strict: true })
 end function)
 ```
 
@@ -228,8 +244,24 @@ Checks if mocked function last call was with given arguments.
 ' @mock /path/to/functionName
 
 
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect("functionName").toHaveBeenLastCalledWith({ a: 2 })
+end function)
+```
+
+#### Strict mode
+
+By default, this function is not in strict mode.
+So it will validate only against given arguments.
+With strict mode, it checks if all arguments are identical
+So this will throw an error.
+
+```brs
+' @mock /path/to/functionWithThreeArguments
+
+
+it("should pass", function () as String
+  return expect("functionWithThreeArguments").toHaveBeenLastCalledWith({ a: 2, b: 3 }, { strict: true })
 end function)
 ```
 
@@ -241,8 +273,24 @@ Checks if mocked function nth, given, call was executed with given arguments.
 ' @mock /path/to/functionName
 
 
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect("functionName").toHaveBeenNthCalledWith(1, { a: 2 })
+end function)
+```
+
+#### Strict mode
+
+By default, this function is not in strict mode.
+So it will validate only against given arguments.
+With strict mode, it checks if all arguments are identical
+So this will throw an error.
+
+```brs
+' @mock /path/to/functionWithThreeArguments
+
+
+it("should pass", function () as String
+  return expect("functionWithThreeArguments").toHaveBeenNthCalledWith(1, { a: 2, b: 3 }, { strict: true })
 end function)
 ```
 
@@ -251,7 +299,7 @@ end function)
 Checks if the function throws an exception.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(functionThatThrow).toThrow("Error message")
 end function)
 ```
@@ -261,7 +309,7 @@ end function)
 Check the opposite of the assert function.
 
 ```brs
-it("should pass", function (_ts as Object) as String
+it("should pass", function () as String
   return expect(1)not.toBe(4)
 end function)
 ```
