@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.2...v2.1.0) (2022-09-12)
+
+
+### Features
+
+* add strict mode for function related asserts ([#39](https://github.com/getndazn/kopytko-unit-testing-framework/issues/39)) ([e456a13](https://github.com/getndazn/kopytko-unit-testing-framework/commit/e456a1328a5aa95834fc80cf9b729658e8a53594))
+
 ## [2.0.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.1...v2.0.2) (2022-08-05)
 
 
