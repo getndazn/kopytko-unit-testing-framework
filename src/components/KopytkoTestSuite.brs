@@ -57,7 +57,7 @@ function KopytkoTestSuite() as Object
   end sub
 
   ts.addParameterizedTests = sub (paramsList as Object, testName as String, testFunction as Function)
-    index = 0
+    index = 1
     for each param in paramsList
       parsedTestName = testName
 
@@ -75,7 +75,7 @@ function KopytkoTestSuite() as Object
         parsedTestName = Substitute(parsedTestName, "")
       end if
 
-      if (parsedTestName = testName) then parsedTestName += " #" + index.toStr()
+      parsedTestName += " #" + index.toStr()
 
       m.addTest(parsedTestName, testFunction, Invalid, Invalid, param, true)
       index++
