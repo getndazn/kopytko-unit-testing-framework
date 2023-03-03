@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.1.0...v2.2.0) (2023-03-03)
+
+
+### Bug Fixes
+
+* update release workflow ([#42](https://github.com/getndazn/kopytko-unit-testing-framework/issues/42)) ([a8b86f0](https://github.com/getndazn/kopytko-unit-testing-framework/commit/a8b86f0eb2d3a6af51f4d5e423255423e786fa79))
+
+
+### Features
+
+* Adding index to the name of a parameterized test ([#41](https://github.com/getndazn/kopytko-unit-testing-framework/issues/41)) ([0d0064b](https://github.com/getndazn/kopytko-unit-testing-framework/commit/0d0064b726e2599a70f5e625083fa2c3224d7d79))
+
 # [2.1.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.0.2...v2.1.0) (2022-09-12)
 
 
