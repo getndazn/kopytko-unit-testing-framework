@@ -16,5 +16,13 @@ function funcCallingMultiply(aValue = 1 as Integer, bValue = 2 as Integer) as In
   return Math().multiply(aValue, bValue)
 end function
 
+function funcReturningPi() as Float
+  return Math().Pi
+end function
+
+function funcReturningTau() as Float
+  return Math().Tau
+end function
+
 function funcNotCallingSum()
 end function

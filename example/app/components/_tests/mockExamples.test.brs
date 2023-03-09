@@ -55,6 +55,28 @@ function TestSuite__mockExamples() as Object
     return expect(funcCallingMultiply()).toBe(0)
   end function)
 
+  it("should be able to mock property value", function () as String
+    ' When
+    mockFunction("Math").setProperty("Pi", 4.123)
+
+    ' Then
+    return expect(funcReturningPi()).toBe(4.123)
+  end function)
+
+  it("should be able to mock multiple property values", function () as Object
+    ' When
+    mockFunction("Math").setProperties({
+      Pi: 10.1112,
+      Tau: 55555.1,
+    })
+
+    ' Then
+    return [
+      expect(funcReturningPi()).toBe(10.1112),
+      expect(funcReturningTau()).toBe(55555.1),
+    ]
+  end function)
+
   ' This test needs to be at the bottom
   it("should clear all mock calls from previous tests", function () as Object
     ' Then
