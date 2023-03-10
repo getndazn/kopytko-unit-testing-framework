@@ -34,7 +34,7 @@ function mockFunction(functionName as String) as Object
   end function
 
   ' ----------------------------------------------------------------
-  ' [DEPRECATED] This method name has been misspelled and will be removed in the future
+  ' @deprecated This method name has been misspelled and will be removed in the future
   ' Returns mock constructor calls
   '
   ' @return An array with function calls
