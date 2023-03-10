@@ -14,7 +14,6 @@ mockFunction("Service.serviceMethod")
 - [Methods](#methods)
   - [`clear`](#clear)
   - [`getCalls`](#getcalls)
-  - [`getContructorCalls`](#getcontructorcalls)
   - [`getConstructorCalls`](#getconstructorcalls)
   - [`implementation`](#implementation)
   - [`returnValue`](#returnvalue)
@@ -46,7 +45,7 @@ calls = mockFunction("functionName").getCalls()
 
 ### `getContructorCalls`
 
-! [DEPRECATED] This method name has been misspelled and will be removed in the future
+**! [DEPRECATED]** This method name has been misspelled and will be removed in the future
 
 Returns an array with all function mock constructor calls,
 
