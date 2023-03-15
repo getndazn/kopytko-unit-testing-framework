@@ -14,11 +14,13 @@ mockFunction("Service.serviceMethod")
 - [Methods](#methods)
   - [`clear`](#clear)
   - [`getCalls`](#getcalls)
-  - [`getContructorCalls`](#getcontructorcalls)
+  - [`getConstructorCalls`](#getconstructorcalls)
   - [`implementation`](#implementation)
   - [`returnValue`](#returnvalue)
   - [`resolvedValue`](#resolvedvalue)
   - [`rejectedValue`](#rejectedvalue)
+  - [`setProperties`](#setproperties)
+  - [`setProperty`](#setproperty)
   - [`throw`](#throw)
 
 ## Methods
@@ -43,12 +45,24 @@ calls = mockFunction("functionName").getCalls()
 
 ### `getContructorCalls`
 
+**! [DEPRECATED]** This method name has been misspelled and will be removed in the future
+
 Returns an array with all function mock constructor calls,
 
 remember that all calls are cleared before each test case execution.
 
 ```brs
 contructorCalls = mockFunction("functionName").getContructorCalls()
+```
+
+### `getConstructorCalls`
+
+Returns an array with all function mock constructor calls,
+
+remember that all calls are cleared before each test case execution.
+
+```brs
+constructorCalls = mockFunction("functionName").getConstructorCalls()
 ```
 
 ### `implementation`
@@ -96,6 +110,30 @@ It mocks function promise rejected value
 ```brs
 mockFunction("functionName").rejectedValue("error message")
 ```
+
+### `setProperties`
+
+It mocks multiple properties of the object returned by the function.
+
+```brs
+mockFunction("functionName").setProperties({
+  propertyName: "propertyValue",
+  yetAnotherPropertyName: 123.33,
+})
+```
+
+And further in the test `functionName().propertyName` will be set to `"propertyValue"`,
+`functionName().yetAnotherPropertyName` to 123.33.
+
+### `setProperty`
+
+It mocks the property of the object returned by the function.
+
+```brs
+mockFunction("functionName").setProperty("propertyName", "propertyValue")
+```
+
+And further in the test `functionName().propertyName` will be set to `"propertyValue"`.
 
 ### `throw`
 

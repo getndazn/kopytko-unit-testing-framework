@@ -34,11 +34,23 @@ function mockFunction(functionName as String) as Object
   end function
 
   ' ----------------------------------------------------------------
+  ' @deprecated This method name has been misspelled and will be removed in the future
   ' Returns mock constructor calls
   '
   ' @return An array with function calls
   ' ----------------------------------------------------------------
   context.getContructorCalls = function () as Object
+    print "getContructorCalls is DEPRECATED, please use correct version - getConstructorCalls"
+
+    return m._ts.getProperty(GetGlobalAA()["__mocks"], m._functionName + ".constructorCalls", [])
+  end function
+
+  ' ----------------------------------------------------------------
+  ' Returns mock constructor calls
+  '
+  ' @return An array with function constructor calls
+  ' ----------------------------------------------------------------
+  context.getConstructorCalls = function () as Object
     return m._ts.getProperty(GetGlobalAA()["__mocks"], m._functionName + ".constructorCalls", [])
   end function
 
@@ -97,6 +109,33 @@ function mockFunction(functionName as String) as Object
       ]
       throw error.join(Chr(10))
     end if
+  end sub
+
+  ' ----------------------------------------------------------------
+  ' Mocks function set of properties
+  '
+  ' @param properties (object) - Properties Associative Array
+  ' ----------------------------------------------------------------
+  context.setProperties = sub (properties as Object)
+    if (m._mock.properties = Invalid)
+      m._mock.properties = {}
+    end if
+
+    m._mock.properties.append(properties)
+  end sub
+
+  ' ----------------------------------------------------------------
+  ' Mocks function property
+  '
+  ' @param name (string) - Property name
+  ' @param value (dynamic) - Property value
+  ' ----------------------------------------------------------------
+  context.setProperty = sub (name as String, value as Dynamic)
+    if (m._mock.properties = Invalid)
+      m._mock.properties = {}
+    end if
+
+    m._mock.properties[name] = value
   end sub
 
   ' ----------------------------------------------------------------
