@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.0...v2.3.1) (2023-07-14)
+
+
+### Bug Fixes
+
+* Mock identifiers collisions ([#44](https://github.com/getndazn/kopytko-unit-testing-framework/issues/44)) ([ca99ed2](https://github.com/getndazn/kopytko-unit-testing-framework/commit/ca99ed2634130930d66433cfe497fdee6be27044))
+
 # [2.3.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.2.0...v2.3.0) (2023-03-15)
 
 
