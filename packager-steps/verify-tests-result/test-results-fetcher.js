@@ -11,7 +11,7 @@ module.exports = class TestResultsFetcher {
     timeout: 'Telnet connection timeout',
   }
   _CONNECTION_PORT = 8085;
-  _CONNECTION_TIMEOUT = 20000;
+  _CONNECTION_TIMEOUT = 60000;
 
   _connection = null;
   _outputInterpreter;
