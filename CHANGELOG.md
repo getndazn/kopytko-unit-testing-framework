@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.1...v2.3.2) (2023-11-21)
+
+
+### Bug Fixes
+
+* extend telnet timeout for connection ([#45](https://github.com/getndazn/kopytko-unit-testing-framework/issues/45)) ([3e60a3e](https://github.com/getndazn/kopytko-unit-testing-framework/commit/3e60a3e8aa867e1582dee2295aa3146aca2fc3c5))
+
 ## [2.3.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.0...v2.3.1) (2023-07-14)
 
 
