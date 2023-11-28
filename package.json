@@ -48,7 +48,7 @@
     "eslint": "^8.10.0"
   },
   "peerDependencies": {
-    "@dazn/kopytko-packager": "^1.2.3"
+    "@dazn/kopytko-packager": "^1.2.5"
   },
   "publishConfig": {
     "access": "public"
