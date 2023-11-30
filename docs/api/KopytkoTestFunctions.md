@@ -60,7 +60,7 @@ end function)
 
 This is a shorthand for the `ts.addTest`.
 
-It adds "it " to the beggining of thhe test name.
+It adds "it " to the beggining of the test name.
 
 ```brs
 it("should check if true is true", function (_ts as Object) as String
@@ -72,7 +72,7 @@ end function)
 
 This is a shorthand for the `ts.addParameterizedTests`.
 
-It adds "it " to the beggining of thhe test name.
+It adds "it " to the beggining of the test name.
 
 ```brs
 itEach([
