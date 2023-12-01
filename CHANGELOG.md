@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.2...v2.4.0) (2023-12-01)
+
+
+### Features
+
+* add test and testEach functions ([#46](https://github.com/getndazn/kopytko-unit-testing-framework/issues/46)) ([56f93c9](https://github.com/getndazn/kopytko-unit-testing-framework/commit/56f93c91a97992e5fbbe74447a3d2c9a3526bd20))
+
 ## [2.3.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.1...v2.3.2) (2023-11-21)
 
 
