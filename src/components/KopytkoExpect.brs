@@ -442,19 +442,19 @@ function expect(value as Dynamic) as Object
   ' ----------------------------------------------------------------
 
   context._matcherErrorMessage = function (matcherName as String, expected = Invalid as Dynamic, actual = Invalid as Dynamic, options = {} as Object, expectedString = "Expected" as String, receivedString = "Received" as String) as String
-    TRAILING_STR = " ; "
+    NEW_LINE = Substitute("{0}---   ", Chr(10))
     isNot = (options.isNot <> Invalid AND options.isNot)
     ' format matcher name
-    matcherString = "expect(received)" + m._ts.ternary(isNot, ".not", "") + "." + matcherName + " - "
+    matcherString = Substitute("expect(received){0}.{1}{2}", m._ts.ternary(isNot, ".not", ""), matcherName, NEW_LINE)
 
     if (TF_Utils__IsNotEmptyString(expectedString))
       ' format expected string
-      matcherString += Substitute("{0}: {1} {2}", expectedString, m._ts.ternary(isNot, "[not]", ""), m._asString(expected)) + TRAILING_STR
+      matcherString += Substitute("{0}: {1}{2}{3}", expectedString, m._ts.ternary(isNot, "[not] ", ""), m._asString(expected), NEW_LINE)
     end if
 
     if (TF_Utils__IsNotEmptyString(receivedString))
       ' format received string
-      matcherString += Substitute("{0}: {1}", receivedString, m._asString(actual)) + TRAILING_STR
+      matcherString += Substitute("{0}: {1}{2}", receivedString, m._asString(actual), NEW_LINE)
     end if
 
     return matcherString
@@ -465,14 +465,84 @@ function expect(value as Dynamic) as Object
       return "Invalid"
     else if (TF_Utils__IsValid(GetInterface(value, "ifToStr")))
       return value.toStr()
-    else if (m._isAssociativeArray(value) OR m._isArray(value))
-      return FormatJson(value)
-    else if (m._isSGNode(value))
-      return FormatJson(value.getFields())
+    else if (m._isArray(value) OR m._isAssociativeArray(value) OR m._isSGNode(value))
+      return FormatJson(m._prepareToFormat(value))
     else
       return ""
     end if
   end function
+
+  context._prepareToFormat = function (value as Dynamic) as Dynamic
+    if (m._isArray(value))
+      return m._prepareArrayToFormat(value)
+    else if (m._isAssociativeArray(value))
+      return m._prepareAssociativeArrayToFormat(value)
+    else if (m._isSGNode(value))
+      return m._prepareNodeToFormat(value)
+    else if (m._isFunction(value))
+      return value.toStr()
+    end if
+
+    return value
+  end function
+
+  context._prepareArrayToFormat = function (array as Object) as Object
+    arrayToFormat = {
+      items: [],
+      type: "roArray",
+    }
+
+    for each item in array
+      arrayToFormat.items.push(m._prepareToFormat(item))
+    end for
+
+    return arrayToFormat
+  end function
+
+  context._prepareAssociativeArrayToFormat = function (associativeArray as Object) as Object
+    associativeArrayToFormat = {
+      fields: {},
+      type: "roAssociativeArray",
+    }
+
+    m._setFormatterFields(associativeArray, associativeArrayToFormat.fields)
+
+    return associativeArrayToFormat
+  end function
+
+  context._prepareNodeToFormat = function (node as Object) as Object
+    nodeFields = node.getFields()
+    nodeToFormat = {
+      children: [],
+      fields: {},
+      type: "roSGNode",
+    }
+
+    for each child in node.getChildren(-1, 0)
+      nodeToFormat.children.push(m._prepareNodeToFormat(child))
+    end for
+
+    m._setFormatterFields(nodeFields, nodeToFormat.fields)
+
+    return nodeToFormat
+  end function
+
+  context._setFormatterFields = sub (fields as Object, destination as Object)
+    for each key in fields
+      ' For node fields do not format as this could lead to inifinite loop
+      ' Set the "<Component: roSGNode:nodeSubtype : id:\"nodeId\"" string instead
+      if (m._isSGNode(fields[key]))
+        destination[key] = Substitute("<Component: roSGNode:{0} : id:{1}{2}{3}>", fields[key].subtype(), Chr(34), fields[key].id, Chr(34))
+      ' It is possible for a user to pass somewhere self-reference to the tested entity.
+      ' We can recognize it by $$ts field that we add to it.
+      ' Set the "<Component: roAssociativeArray : Self Reference>" string instead.
+      else if (m._isAssociativeArray(fields[key]) AND fields[key]["$$ts"] <> Invalid)
+        destination[key] = "<Component: roAssociativeArray : Self Reference>"
+      else
+        destination[key] = m._prepareToFormat(fields[key])
+      end if
+    end for
+  end sub
 
   context._isArray = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roArray"
@@ -480,6 +550,10 @@ function expect(value as Dynamic) as Object
 
   context._isAssociativeArray = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roAssociativeArray"
+  end function
+
+  context._isFunction = function (value as Dynamic) as Boolean
+    return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roFunction"
   end function
 
   context._isSGNode = function (value as Dynamic) as Boolean
