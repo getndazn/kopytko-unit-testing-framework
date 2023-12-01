@@ -1,4 +1,18 @@
 ' ----------------------------------------------------------------
+' Calls ts.addTest with the same arguments
+' ----------------------------------------------------------------
+sub test(testName as String, func as Function)
+  ts().addTest(testName, func)
+end sub
+
+' ----------------------------------------------------------------
+' Calls ts.addParameterizedTests with the same arguments
+' ----------------------------------------------------------------
+sub testEach(paramsList as Object, testName as String, func as Function)
+  ts().addParameterizedTests(paramsList, testName, func)
+end sub
+
+' ----------------------------------------------------------------
 ' Calls ts.addTest with the same arguments,
 ' adds "it " to the beginning of the test name
 ' ----------------------------------------------------------------

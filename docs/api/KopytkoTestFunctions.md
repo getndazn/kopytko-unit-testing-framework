@@ -1,6 +1,8 @@
 # KopytkoTestFunctions API
 
 - [Functions](#functions)
+  - [`test`](#test)
+  - [`testEach`](#testeach)
   - [`it`](#it)
   - [`itEach`](#iteach)
   - [`beforeAll`](#beforeall)
@@ -31,11 +33,34 @@ end function)
 
 ## Functions
 
+### `test`
+
+This is a shorthand for the `ts.addTest`.
+
+```brs
+test("it should check if true is true", function (_ts as Object) as String
+  return expect(true).toBeTrue()
+end function)
+```
+
+### `testEach`
+
+This is a shorthand for the `ts.addParameterizedTests`.
+
+```brs
+testEach([
+  { value: 2, expectedValue: 2 },
+  { value: "asd", expectedValue: "asd" },
+], "it should check if ${value} is ${expectedValue}", function (_ts as Object, params as Object) as String
+  return expect(params.value).toBe(params.expectedValue)
+end function)
+```
+
 ### `it`
 
 This is a shorthand for the `ts.addTest`.
 
-It adds "it " to the beggining of thhe test name.
+It adds "it " to the beggining of the test name.
 
 ```brs
 it("should check if true is true", function (_ts as Object) as String
@@ -47,7 +72,7 @@ end function)
 
 This is a shorthand for the `ts.addParameterizedTests`.
 
-It adds "it " to the beggining of thhe test name.
+It adds "it " to the beggining of the test name.
 
 ```brs
 itEach([

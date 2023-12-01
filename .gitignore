@@ -1,6 +1,8 @@
 .DS_Store
 .idea/
 .vscode/
-dazn-kopytko-unit-testing-framework-*
 
 node_modules/
+.env
+
+dazn-kopytko-unit-testing-framework-*

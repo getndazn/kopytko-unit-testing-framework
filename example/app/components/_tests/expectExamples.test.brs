@@ -8,7 +8,7 @@ function TestSuite__expectExamples() as Object
     ' ---------------------------------------------------------
     ' toBeInvalid()
     ' ---------------------------------------------------------
-    it("expect(Invalid).toBeInvalid()", function () as String
+    test("it expect(Invalid).toBeInvalid()", function () as String
       ' Given
       value = Invalid
   
@@ -16,14 +16,14 @@ function TestSuite__expectExamples() as Object
       return expect(value).toBeInvalid()
     end function)
   
-    itEach([
+    testEach([
       4,
       true,
       "Test Value",
       { key: "value" },
       [1, 2, 3],
       CreateObject("roSGNode", "rectangle"),
-    ], "expect(nonInvalidValue).not.toBeInvalid()", function (value as Object) as String
+    ], "it expect(nonInvalidValue).not.toBeInvalid()", function (value as Object) as String
   
       ' Then
       return expect(value).not.toBeInvalid()
