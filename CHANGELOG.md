@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.4.0...v2.4.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* formatting for test failed results ([#47](https://github.com/getndazn/kopytko-unit-testing-framework/issues/47)) ([01bc9fa](https://github.com/getndazn/kopytko-unit-testing-framework/commit/01bc9fa41860b7cf1cf6f5cc64e25790eadc33ca))
+
 # [2.4.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.3.2...v2.4.0) (2023-12-01)
 
 
