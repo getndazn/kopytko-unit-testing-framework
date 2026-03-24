@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.4.1...v2.5.0) (2026-03-24)
+
+
+### Features
+
+* node 22, telnet rewrite and new force connect options ([#49](https://github.com/getndazn/kopytko-unit-testing-framework/issues/49)) ([a09db61](https://github.com/getndazn/kopytko-unit-testing-framework/commit/a09db61c3cfa131f1a2d50f4b34ea187b87b06c7))
+
 ## [2.4.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.4.0...v2.4.1) (2023-12-05)
 
 
