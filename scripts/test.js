@@ -5,11 +5,19 @@ const buildStepConfig = require('@dazn/kopytko-packager/src/step-runner/steps/bu
 const DeployStep = require('@dazn/kopytko-packager/src/step-runner/steps/deploy/deploy-step');
 const deployStepConfig = require('@dazn/kopytko-packager/src/step-runner/steps/deploy/deploy-step-config');
 
+const args = require('../packager-steps/args');
+const TestResultsFetcher = require('../packager-steps/verify-tests-result/test-results-fetcher');
 const VerifyTestsResultStep = require('../packager-steps/verify-tests-result/verify-tests-result-step');
 const verifyTestsResultStepConfig = require('../packager-steps/verify-tests-result/verify-tests-result-step-config');
 
 (async () => {
   await validateArgs();
+
+  const fetcher = new TestResultsFetcher(verifyTestsResultStepConfig.rokuIP);
+
+  if (args.forceConnect) {
+    await fetcher.forceDisconnectExistingClients();
+  }
 
   await new StepRunner([
     { step: BuildStep, config: buildStepConfig },

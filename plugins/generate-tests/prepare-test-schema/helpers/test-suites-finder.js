@@ -1,4 +1,4 @@
-const glob = require('glob-promise');
+const { glob } = require('glob');
 
 const TestSuite = require('./test-suite');
 

@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
-const glob = require('glob-promise');
-const uuid = require('uuid').v4;
+const { glob } = require('glob');
+const { randomUUID } = require('crypto');
 
 const TestSceneGenerator = require('./helpers/test-scene-generator');
 const TestMainFileContentGenerator = require('./helpers/test-main-file-content-generator');
@@ -31,7 +31,7 @@ async function prepareSchema(testFilePath, testXmlGenerator, rootDir) {
     return;
   }
 
-  const outputLocation = `${rootDir}${TESTS_LOCATION}/${testSchema.unit.name}/${uuid()}/`;
+  const outputLocation = `${rootDir}${TESTS_LOCATION}/${testSchema.unit.name}/${randomUUID()}/`;
 
   await fs.mkdir(outputLocation, { recursive: true });
 
