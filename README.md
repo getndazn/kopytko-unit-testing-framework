@@ -95,6 +95,38 @@ npm test -- MyTestableUnit
 ```
 This is a shortcut for `npm test -- --testFileName=MyTestableUnit`
 
+### CLI flags
+
+| Flag | Description |
+|------|-------------|
+| `--testFileName=<name>` | Run only tests whose file name matches `<name>` |
+| `--forceConnect` | Before deploying, kill any local process connected to port 8085 and proceed (see below) |
+
+### Port 8085 and debug session behaviour
+
+Roku exposes a debug console on **port 8085**. Only one client can be connected at a time.
+
+**Default behaviour (no flags)**
+
+`npm test` always builds and deploys. After deployment, it connects to port 8085 to read results. If another client is already connected (e.g. a developer monitoring logs with `telnet` or `nc`), the run **fails immediately** with:
+
+```
+Console port 8085 is occupied by another client. Close the existing connection or run with --forceConnect to break it.
+```
+
+Close the existing connection and re-run, or use `--forceConnect`.
+
+**`--forceConnect`**
+
+Before deploying, the test runner finds any local process connected to port 8085 (via `lsof`) and kills it, freeing the port. Build → deploy → connect then proceed normally.
+
+```shell
+npm test -- --forceConnect
+npm test -- --testFileName=MyUnit --forceConnect
+```
+
+Use this when you intentionally want to take over the debug port regardless of who else is connected.
+
 ## Kopytko Unit Test Philosophy
 
 The unit tests can be split into multiple files and imported by the packager automatically. Let's consider the following example:

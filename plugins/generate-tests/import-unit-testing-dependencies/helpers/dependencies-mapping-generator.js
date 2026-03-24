@@ -1,4 +1,4 @@
-const glob = require('glob-promise');
+const { glob } = require('glob');
 const path = require('path');
 
 const KopytkoError = require('@dazn/kopytko-packager/src/errors/kopytko-error');
