@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.0...v2.5.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* bump kopytko-packager ([#50](https://github.com/getndazn/kopytko-unit-testing-framework/issues/50)) ([fcb488a](https://github.com/getndazn/kopytko-unit-testing-framework/commit/fcb488acc62521ab013243036a515f5328c32784))
+
 # [2.5.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.4.1...v2.5.0) (2026-03-24)
 
 
