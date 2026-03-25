@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.1...v2.5.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* update dependencies with node 24 ([#51](https://github.com/getndazn/kopytko-unit-testing-framework/issues/51)) ([1f736f7](https://github.com/getndazn/kopytko-unit-testing-framework/commit/1f736f75f4e10dd64bc0890fe763ddf73ef7ea72))
+
 ## [2.5.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.0...v2.5.1) (2026-03-25)
 
 
