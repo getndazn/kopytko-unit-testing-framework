@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.0...v2.6.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* switch --tests flag to on-device filtering to fix Kopytko node component tests ([96a5d49](https://github.com/getndazn/kopytko-unit-testing-framework/commit/96a5d49cdbe189a3e7ffc9c72f873083bea09834))
+
 # [2.6.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.2...v2.6.0) (2026-04-01)
 
 
