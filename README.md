@@ -100,7 +100,28 @@ This is a shortcut for `npm test -- --testFileName=MyTestableUnit`
 | Flag | Description |
 |------|-------------|
 | `--testFileName=<name>` | Run only tests whose file name matches `<name>` |
+| `--tests=<patterns>` | Run only tests matching semicolon-separated glob patterns, filtered at build time (see below) |
 | `--forceConnect` | Before deploying, kill any local process connected to port 8085 and proceed (see below) |
+
+### Filtering tests with `--tests`
+
+`--tests` accepts semicolon-separated glob patterns (supports `*` and `?` wildcards) matched case-insensitively against unit names (i.e. the filename without `.test.brs`). Only matching test files are compiled and deployed — making it significantly faster than running the full suite.
+
+```shell
+# Run all tests whose name starts with "Home"
+npm test -- --tests="Home*"
+
+# Run tests for multiple groups in a single build+deploy
+npm test -- --tests="Home*;Video*;Button"
+
+# Exact names (no wildcards needed)
+npm test -- --tests="SomeService;Button"
+
+# Via environment variable
+TESTS="Home*;Video*" npm test
+```
+
+Use `--testFileName` instead when you want to filter at the Roku device runtime level (all files still get deployed). Use `--tests` when you want to reduce build and deploy time by excluding unrelated tests entirely.
 
 ### Port 8085 and debug session behaviour
 

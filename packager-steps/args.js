@@ -18,4 +18,18 @@ if (args.env === 'test' && ((scriptName === 'test' && args._.length) || args._.l
   args.testFileName = args._.slice(-1)[0];
 }
 
+/**
+ * @type {string} Semicolon-separated list of glob patterns to filter which test files are built and run.
+ * Supports * and ? wildcards. Matched against the unit name (filename without .test.brs).
+ * Takes precedence over --testFileName when provided.
+ *
+ * npm test -- --tests=Rail*;Video*;Tile*
+ * npm test -- --tests=RailsService;Tile
+ * TESTS=Rail*;Video* npm test
+ */
+
+if (!args.tests && process.env.TESTS) {
+  args.tests = process.env.TESTS;
+}
+
 module.exports = args;
