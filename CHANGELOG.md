@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.2...v2.6.0) (2026-04-01)
+
+
+### Features
+
+* add --tests flag for multi-pattern build-time test filtering ([#52](https://github.com/getndazn/kopytko-unit-testing-framework/issues/52)) ([e1e01cb](https://github.com/getndazn/kopytko-unit-testing-framework/commit/e1e01cbe4dea7183552212c98c55a8dc66849723))
+
 ## [2.5.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.5.1...v2.5.2) (2026-03-25)
 
 
