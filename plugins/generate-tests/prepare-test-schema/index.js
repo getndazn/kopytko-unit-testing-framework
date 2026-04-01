@@ -10,7 +10,6 @@ const TestXmlGenerator = require('./helpers/test-xml-generator');
 
 const IGNORED_TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*_*.brs';
 const MAIN_FILE_LOCATION = '/source/Main.brs';
-const TEST_FILE_NAME_REGEX = /[^/]+(?=\.test\.brs)/;
 const TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*.test.brs';
 const TESTS_LOCATION = '/components/tests/auto-generated/';
 
@@ -31,15 +30,6 @@ module.exports = async function prepareTestSchema(dir) {
   await Promise.all(
     testFilePaths.map(filePath => prepareSchema(filePath, testXmlGenerator, dir)),
   );
-}
-
-function _matchesPattern(str, pattern) {
-  const regex = new RegExp(
-    '^' + pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.') + '$',
-    'i',
-  );
-
-  return regex.test(str);
 }
 
 async function prepareSchema(testFilePath, testXmlGenerator, rootDir) {
