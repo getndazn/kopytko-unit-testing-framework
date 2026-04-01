@@ -3,6 +3,15 @@
 
 ### Bug Fixes
 
+* bump version ([#55](https://github.com/getndazn/kopytko-unit-testing-framework/issues/55)) ([56405fc](https://github.com/getndazn/kopytko-unit-testing-framework/commit/56405fc3e13298888e9c4b6cf71a5d2edf3eaca6))
+* bump version with minor fixes ([#54](https://github.com/getndazn/kopytko-unit-testing-framework/issues/54)) ([3f75f6e](https://github.com/getndazn/kopytko-unit-testing-framework/commit/3f75f6efbc58ac1a60ff0429699154e4c4175182))
+* tests are not accepting wildcard ([#53](https://github.com/getndazn/kopytko-unit-testing-framework/issues/53)) ([57d387d](https://github.com/getndazn/kopytko-unit-testing-framework/commit/57d387d8b2e2fb7e0cbde04e420f4d6b26d5e47b))
+
+## [2.6.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.1...v2.6.2) (2026-04-01)
+
+
+### Bug Fixes
+
 * bump version with minor fixes ([#54](https://github.com/getndazn/kopytko-unit-testing-framework/issues/54)) ([3f75f6e](https://github.com/getndazn/kopytko-unit-testing-framework/commit/3f75f6efbc58ac1a60ff0429699154e4c4175182))
 * tests are not accepting wildcard ([#53](https://github.com/getndazn/kopytko-unit-testing-framework/issues/53)) ([57d387d](https://github.com/getndazn/kopytko-unit-testing-framework/commit/57d387d8b2e2fb7e0cbde04e420f4d6b26d5e47b))
 
