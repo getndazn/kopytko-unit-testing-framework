@@ -1,3 +1,10 @@
+## [2.6.3](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.2...v2.6.3) (2026-04-01)
+
+
+### Bug Fixes
+
+* npm repository url issue ([#56](https://github.com/getndazn/kopytko-unit-testing-framework/issues/56)) ([1014cbb](https://github.com/getndazn/kopytko-unit-testing-framework/commit/1014cbb312f3a8ef22e0257f769acacb6f57b2db))
+
 ## [2.6.2](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.1...v2.6.2) (2026-04-01)
 
 
