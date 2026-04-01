@@ -1711,8 +1711,13 @@ function TestRunner__Run(statObj = m.Logger.CreateTotalStatistic() as Object, te
         if m.testsFilter.count() > 0
             filteredNodes = []
             for each testNodeName in testNodes
-                for each filterName in m.testsFilter
-                    if testNodeName = filterName then filteredNodes.push(testNodeName)
+                for each filterPattern in m.testsFilter
+                    regexStr = filterPattern.replace("*", ".*")
+                    regex = CreateObject("roRegex", "^" + regexStr + "$", "i")
+                    if regex.isMatch(testNodeName)
+                        filteredNodes.push(testNodeName)
+                        exit for
+                    end if
                 end for
             end for
             testNodes = filteredNodes
