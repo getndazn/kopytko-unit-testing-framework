@@ -1498,6 +1498,7 @@ function TestRunner() as Object
     this.testSuiteName = ""
     this.testCaseName = ""
     this.failFast = false
+    this.testsFilter = []
 
     ' Interface
     this.Run = TestRunner__Run
@@ -1510,6 +1511,7 @@ function TestRunner() as Object
     this.SetFunctions = TestRunner__SetFunctions
     this.SetIncludeFilter = TestRunner__SetIncludeFilter
     this.SetExcludeFilter = TestRunner__SetExcludeFilter
+    this.SetTestsFilter = TestRunner__SetTestsFilter
 
     ' Internal functions
     this.GetTestFilesList = TestRunner__GetTestFilesList
@@ -1706,6 +1708,15 @@ function TestRunner__Run(statObj = m.Logger.CreateTotalStatistic() as Object, te
         return totalStatObj
     else
         testNodes = m.getTestNodesList()
+        if m.testsFilter.count() > 0
+            filteredNodes = []
+            for each testNodeName in testNodes
+                for each filterName in m.testsFilter
+                    if testNodeName = filterName then filteredNodes.push(testNodeName)
+                end for
+            end for
+            testNodes = filteredNodes
+        end if
         for each testNodeName in testNodes
             testNode = CreateObject("roSGNode", testNodeName)
             if testNode <> invalid
@@ -1757,6 +1768,15 @@ end sub
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestFilePrefix(testFilePrefix as String)
     m.testFilePrefix = testFilePrefix
+end sub
+
+' ----------------------------------------------------------------
+' Set testsFilter property.
+' When non-empty, only test nodes whose names are in the filter list will be run.
+' Each entry should be a full test node name, e.g. "Test__Tile_".
+' ----------------------------------------------------------------
+sub TestRunner__SetTestsFilter(testsFilter as Object)
+    m.testsFilter = testsFilter
 end sub
 
 ' ----------------------------------------------------------------

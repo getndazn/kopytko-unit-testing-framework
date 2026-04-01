@@ -21,12 +21,7 @@ module.exports = async function prepareTestSchema(dir) {
 
   if (args.tests) {
     const patterns = args.tests.split(';').map((pattern) => pattern.trim()).filter(Boolean);
-    testFilePaths = testFilePaths.filter((filePath) => {
-      const unitName = filePath.match(TEST_FILE_NAME_REGEX)?.[0];
-
-      return unitName && patterns.some((pattern) => _matchesPattern(unitName, pattern));
-    });
-    console.log(`[generate-tests] --tests filter: ${patterns.join(', ')} → ${testFilePaths.length} test file(s)`);
+    console.log(`[generate-tests] --tests filter (on-device): ${patterns.join(', ')}`);
   }
 
   const testXmlGenerator = new TestXmlGenerator(dir);
