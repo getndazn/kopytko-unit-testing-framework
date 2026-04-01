@@ -3,7 +3,7 @@ const args = require('../../../../packager-steps/args');
 
 function _buildContent() {
   const testsFilter = args.tests
-    ? args.tests.split(';').map((t) => `"Test__${t.trim()}_"`).join(', ')
+    ? args.tests.split(';').map((testPattern) => `"Test__${testPattern.trim()}_"`).join(', ')
     : '';
   const setTestsFilterLine = testsFilter
     ? `\n  runner.setTestsFilter([${testsFilter}])`

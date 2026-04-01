@@ -14,7 +14,7 @@ const TEST_FILES_PATH_PATTERN = '/components/**/_tests/**/*.test.brs';
 const TESTS_LOCATION = '/components/tests/auto-generated/';
 
 module.exports = async function prepareTestSchema(dir) {
-  let testFilePaths = await glob(`${dir}${TEST_FILES_PATH_PATTERN}`, {
+  const testFilePaths = await glob(`${dir}${TEST_FILES_PATH_PATTERN}`, {
     ignore: `${dir}${IGNORED_TEST_FILES_PATH_PATTERN}`,
   });
 
