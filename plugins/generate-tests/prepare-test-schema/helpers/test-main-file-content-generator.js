@@ -15,7 +15,7 @@ function _buildContent() {
   screen.setMessagePort(port)
   screen.show()
 
-  scene = screen.createScene("UnitTestingScene")
+  _scene = screen.createScene("UnitTestingScene")
   verbosity = CreateObject("roAppInfo").getValue("testRunnerVerbosity").toInt()
 
   runner = TestRunner()
