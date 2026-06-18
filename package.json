@@ -1,6 +1,6 @@
 {
   "name": "@dazn/kopytko-unit-testing-framework",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "description": "Kopytko Unit Testing Framework",
   "scripts": {
     "format": "kopytko-format --write \"src/**/*.brs\"",

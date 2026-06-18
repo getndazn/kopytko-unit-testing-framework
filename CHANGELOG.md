@@ -1,3 +1,10 @@
+## [2.6.5](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.4...v2.6.5) (2026-06-18)
+
+
+### Bug Fixes
+
+* unused scene variable ([#58](https://github.com/getndazn/kopytko-unit-testing-framework/issues/58)) ([90a0caf](https://github.com/getndazn/kopytko-unit-testing-framework/commit/90a0cafcf522d4d6d1cdfe73533a8a43fa676745))
+
 ## [2.6.4](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.3...v2.6.4) (2026-06-18)
 
 
