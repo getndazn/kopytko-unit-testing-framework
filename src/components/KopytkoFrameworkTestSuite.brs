@@ -1,4 +1,5 @@
 ' @import /components/KopytkoTestSuite.brs
+
 function KopytkoFrameworkTestSuite() as Object
   ts = KopytkoTestSuite()
 
@@ -14,7 +15,7 @@ function KopytkoFrameworkTestSuite() as Object
       end if
     end sub)
 
-    ts._beforeEach.push(sub (ts as Object)
+    ts._beforeEach.push(sub (_ts as Object)
       componentAA = GetGlobalAA()
       componentAA.global.removeField("eventBus")
     end sub)
@@ -28,7 +29,7 @@ function KopytkoFrameworkTestSuite() as Object
       ' Setting defaultProps only for Kopytko components because other components may have observers set in the init()
       ' function (should be avoided in Kopytko) and setting defaultProps after each test would call these callbacks
       if (componentInterface.isSubtype("KopytkoGroup"))
-        ts = GetGlobalAA()["$$ts"]
+        ts = GetGlobalAA()["$$testSuite"]
         ts._defaultProps = componentInterface.getFields()
         ts._defaultProps.delete("change")
         ts._defaultProps.delete("focusedChild")
@@ -41,7 +42,7 @@ function KopytkoFrameworkTestSuite() as Object
     end sub)
 
     ts._afterEach.push(sub ()
-      ts = GetGlobalAA()["$$ts"]
+      ts = GetGlobalAA()["$$testSuite"]
       ts._clearComponent(m)
     end sub)
   #end if
@@ -61,8 +62,8 @@ function KopytkoFrameworkTestSuite() as Object
   end function
 
   ts._clearComponent = sub (componentScope as Object)
-    if (Type(destroyKopytko) <> "Invalid")
-      destroyKopytko()
+    if (Type(destroyKopytko) <> "Invalid") ' kopytko-disable-line identifier/undefined-variable
+      destroyKopytko() ' kopytko-disable-line identifier/undefined-function
       componentScope.top.setFocus(true)
 
       ' Unobserving fields only of Kopytko components because non-kopytko may set up observers in the init() function

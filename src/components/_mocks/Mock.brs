@@ -72,20 +72,20 @@ function ObjectMock(options as Object) as Object
     options.testComponent.__mocks[options.name] = {}
   end if
 
-  mock = options.testComponent.__mocks[options.name]
+  objectPropertyMock = options.testComponent.__mocks[options.name]
 
   if (options.properties <> Invalid)
     prototype.append(options.properties)
   end if
 
-  if (mock.properties <> Invalid)
-    prototype.append(mock.properties)
+  if (objectPropertyMock.properties <> Invalid)
+    prototype.append(objectPropertyMock.properties)
   end if
 
-  if (mock.constructorCalls = Invalid)
-    mock.constructorCalls = []
+  if (objectPropertyMock.constructorCalls = Invalid)
+    objectPropertyMock.constructorCalls = []
   end if
-  mock.constructorCalls.push({ params: options.constructorParams })
+  objectPropertyMock.constructorCalls.push({ params: options.constructorParams })
 
   for each methodName in options.methods
     prototype[methodName] = options.methods[methodName]
@@ -104,7 +104,7 @@ function ObjectMock(options as Object) as Object
 
       m.testComponent.__mocks[m.name][methodName].calls.push({ params: methodParams })
 
-      if (m.testComponent.__mocks[m.name][methodName].getReturnValue <> Invalid AND type(m.testComponent.__mocks[m.name][methodName].getReturnValue) = "roFunction")
+      if (m.testComponent.__mocks[m.name][methodName].getReturnValue <> Invalid AND Type(m.testComponent.__mocks[m.name][methodName].getReturnValue) = "roFunction")
         return m.testComponent.__mocks[m.name][methodName].getReturnValue(methodParams, m.testComponent)
       end if
 

@@ -12,4 +12,3 @@ function kopytkoUnitTestingFramework__ternary(conditionResult as Boolean, trueRe
 
   return falseReturnValue
 end function
-  

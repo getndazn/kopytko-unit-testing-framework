@@ -31,4 +31,3 @@ function kopytkoUnitTestingFramework__getProperty(source as Object, path as Dyna
 
   return currentSource
 end function
-  

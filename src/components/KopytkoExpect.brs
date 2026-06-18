@@ -18,10 +18,9 @@
 '     toThrow
 '     not
 
-
 ' ----------------------------------------------------------------
-' The expect function is used every time you want to test a value. 
-' You will rarely call expect by itself. 
+' The expect function is used every time you want to test a value.
+' You will rarely call expect by itself.
 ' Instead, you will use expect along with a "matcher" function to assert something about a value
 
 ' @param value (dynamic) - Value which needs to be asserted
@@ -30,7 +29,7 @@
 ' ----------------------------------------------------------------
 function expect(value as Dynamic) as Object
   context = {}
-  context._ts = GetGlobalAA()["$$ts"]
+  context._ts = GetGlobalAA()["$$testSuite"]
   context._received = Invalid
   context._isNot = false
 
@@ -43,7 +42,7 @@ function expect(value as Dynamic) as Object
   ' To compare primitive values or to check referential identity of node instances
   ' It fails for object types as object referencee check is not supported in BrightScript
   '
-  ' @param value (dynamic) - Expected value 
+  ' @param value (dynamic) - Expected value
   '
   ' @return Empty string (if equal) OR an error message
   ' ----------------------------------------------------------------
@@ -162,7 +161,7 @@ function expect(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   ' To ensure if value is eqaul to the expected value
   '
-  ' @param value (dynamic) - Expected value 
+  ' @param value (dynamic) - Expected value
   '
   ' @return Empty string (if equal) OR an error message
   ' ----------------------------------------------------------------
@@ -229,14 +228,14 @@ function expect(value as Dynamic) as Object
     MATCHER_NAME = "toHaveBeenCalled()"
     EXPECTED_STR = "Expected number of calls"
     RECEIVED_STR = "Received number of calls"
-    
+
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     numberOfCalls = 0
-    
+
     if (TF_Utils__IsValid(methodMock.calls))
       numberOfCalls = methodMock.calls.count()
     end if
-  
+
     passed = (numberOfCalls > 0)
     ' if matcher has been called with expect.not
     passed = m._ts.ternary(m._isNot, NOT passed, passed)
@@ -258,7 +257,7 @@ function expect(value as Dynamic) as Object
 
     methodMock = m._ts.getProperty(GetGlobalAA().__mocks, m._received, { calls: [] })
     numberOfCalls = 0
-    
+
     if (TF_Utils__IsValid(methodMock.calls))
       numberOfCalls = methodMock.calls.count()
     end if
@@ -382,7 +381,7 @@ function expect(value as Dynamic) as Object
   ' ----------------------------------------------------------------
   ' To ensure if Array or AssociativeArray has expected length
   '
-  ' @param number (dynamic) - Expected length 
+  ' @param number (dynamic) - Expected length
   '
   ' @return Empty string (if expected length) OR an error message
   ' ----------------------------------------------------------------
@@ -533,10 +532,10 @@ function expect(value as Dynamic) as Object
       ' Set the "<Component: roSGNode:nodeSubtype : id:\"nodeId\"" string instead
       if (m._isSGNode(fields[key]))
         destination[key] = Substitute("<Component: roSGNode:{0} : id:{1}{2}{3}>", fields[key].subtype(), Chr(34), fields[key].id, Chr(34))
-      ' It is possible for a user to pass somewhere self-reference to the tested entity.
-      ' We can recognize it by $$ts field that we add to it.
-      ' Set the "<Component: roAssociativeArray : Self Reference>" string instead.
-      else if (m._isAssociativeArray(fields[key]) AND fields[key]["$$ts"] <> Invalid)
+        ' It is possible for a user to pass somewhere self-reference to the tested entity.
+        ' We can recognize it by $$testSuite field that we add to it.
+        ' Set the "<Component: roAssociativeArray : Self Reference>" string instead.
+      else if (m._isAssociativeArray(fields[key]) AND fields[key]["$$testSuite"] <> Invalid)
         destination[key] = "<Component: roAssociativeArray : Self Reference>"
       else
         destination[key] = m._prepareToFormat(fields[key])
@@ -563,7 +562,7 @@ function expect(value as Dynamic) as Object
   context._isList = function (value as Dynamic) as Boolean
     return TF_Utils__IsValid(value) AND m._ts.getType(value) = "roList"
   end function
-  
+
   context._assertNodeContains = function (node as Object, subset as Dynamic) as String
     if (m._isAssociativeArray(subset))
       obj = node.getFields()
@@ -616,6 +615,7 @@ function expect(value as Dynamic) as Object
     notExpect = {}
     notExpect.append(this)
     notExpect.addReplace("_isNot", true)
+
     return notExpect
   end function)(context)
 

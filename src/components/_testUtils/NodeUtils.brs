@@ -11,7 +11,7 @@ function kopytkoUnitTestingFramework__NodeUtils() as Object
   ' @returns {Boolean}
   prototype.areNodesTheSame = function (node1 as Object, node2 as Object) as Boolean
     if (node1 <> Invalid)
-    return node1.isSameNode(node2)
+      return node1.isSameNode(node2)
     end if
 
     return (node2 = Invalid)
@@ -108,4 +108,3 @@ function kopytkoUnitTestingFramework__NodeUtils() as Object
 
   return prototype
 end function
-  

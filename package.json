@@ -3,7 +3,10 @@
   "version": "2.6.3",
   "description": "Kopytko Unit Testing Framework",
   "scripts": {
-    "lint": "eslint ./"
+    "format": "kopytko-format --write \"src/**/*.brs\"",
+    "format:check": "kopytko-format --check \"src/**/*.brs\"",
+    "lint": "kopytko-lint --check --source-dir src",
+    "lint:fix": "kopytko-lint --fix --source-dir src"
   },
   "keywords": [
     "roku",
@@ -36,8 +39,8 @@
   },
   "kopytkoModuleDir": "src/",
   "dependencies": {
-    "fs-extra": "^11.3.4",
-    "glob": "^10.4.5"
+    "fs-extra": "^11.3.5",
+    "glob": "^10.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -45,9 +48,10 @@
     "@babel/preset-env": "^7.29.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.6",
-    "eslint": "^8.57.1",
-    "semantic-release": "^25.0.3"
+    "@semantic-release/github": "^12.0.8",
+    "kopytko-formatter": "^1.1.2",
+    "kopytko-linter": "^1.3.1",
+    "semantic-release": "^25.0.5"
   },
   "peerDependencies": {
     "@dazn/kopytko-packager": "^1.4.2"
