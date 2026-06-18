@@ -2,14 +2,16 @@
 ' @import /components/_testUtils/getType.brs
 ' @import /components/_testUtils/NodeUtils.brs
 ' @import /components/_testUtils/ternary.brs
+' kopytko-disable-next-line import/unused
 ' @import /components/KopytkoExpect.brs
+' kopytko-disable-next-line import/unused
 ' @import /components/KopytkoMockFunction.brs
 ' @import /components/KopytkoTestFunctions.brs
 ' @import /source/UnitTestFramework.brs
 
 function KopytkoTestSuite() as Object
   ts = BaseTestSuite()
-  GetGlobalAA()["$$ts"] = ts
+  GetGlobalAA()["$$testSuite"] = ts
 
   ts._ERROR_MESSAGE_LINE_BREAK = Chr(10) + "---                  "
 
@@ -83,7 +85,7 @@ function KopytkoTestSuite() as Object
   end sub
 
   ' "func as Function" crashes the app
-  ts.createTest = function (name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, _skip = false as Boolean) as Object
+  ts.createTest = function (name as String, func as Object, setup = Invalid as Object, teardown = Invalid as Object, arg = Invalid as Dynamic, hasArgs = false as Boolean, _skip = false as Boolean) as Object
     return {
       Name: name,
       _func: [func],
@@ -161,7 +163,7 @@ function KopytkoTestSuite() as Object
       hasArguments: hasArgs,
       arg: arg,
     }
-  End Function
+  end function
 
   ts.setBeforeAll = sub (callback as Function)
     m._beforeAll.push(callback)
@@ -189,15 +191,15 @@ function KopytkoTestSuite() as Object
     end if
 
     if (container = Invalid)
-      container = getGlobalAA().top
+      container = GetGlobalAA().top
     end if
 
     return m._getByTextIterator(regExp, container)
   end function
 
-  ''''''''''''''''''''''
+  ' '''''''''''''''''''''
   ' Custom assertions: '
-  ''''''''''''''''''''''
+  ' '''''''''''''''''''''
   ts.assertNodesAreEqual = function (expected as Object, tested as Object, msg = "" as String) as String
     expectedType = Type(Box(expected), 3)
     testedType = Type(Box(tested), 3)
@@ -247,9 +249,9 @@ function KopytkoTestSuite() as Object
     return "The method was called"
   end function
 
-  ''''''''''
+  ' '''''''''
   ' Utils: '
-  ''''''''''
+  ' '''''''''
   ts.wasMethodCalled = function (methodPath as String, expectedParams = {} as Object, options = {} as Object) as Boolean
     expectedCallsCount = options.times
     isStrict = (options.strict <> Invalid AND options.strict)

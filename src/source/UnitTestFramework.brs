@@ -1,18 +1,18 @@
-'*****************************************************************
-'* Roku Unit Testing Framework
-'* Automating test suites for Roku channels.
-'*
-'* Build Version: 2.1.1
-'* Build Date: 05/06/2019
-'*
-'* Public Documentation is avaliable on GitHub:
-'* 		https://github.com/rokudev/unit-testing-framework
-'*
-'*****************************************************************
-'*****************************************************************
-'* Copyright Roku 2011-2019
-'* All Rights Reserved
-'*****************************************************************
+' *****************************************************************
+' * Roku Unit Testing Framework
+' * Automating test suites for Roku channels.
+' *
+' * Build Version: 2.1.1
+' * Build Date: 05/06/2019
+' *
+' * Public Documentation is avaliable on GitHub:
+' * 		https://github.com/rokudev/unit-testing-framework
+' *
+' *****************************************************************
+' *****************************************************************
+' * Copyright Roku 2011-2019
+' * All Rights Reserved
+' *****************************************************************
 
 ' Functions in this file:
 
@@ -44,46 +44,46 @@
 
 ' @return A BaseTestSuite object.
 ' ----------------------------------------------------------------
-function BaseTestSuite()
-    this = {}
-    this.Name = "BaseTestSuite"
-    this.SKIP_TEST_MESSAGE_PREFIX = "SKIP_TEST_MESSAGE_PREFIX__"
-    ' Test Cases methods
-    this.testCases = []
-    this.IS_NEW_APPROACH = false
-    this.addTest = BTS__AddTest
-    this.createTest = BTS__CreateTest
-    this.StorePerformanceData = BTS__StorePerformanceData
+function BaseTestSuite() as Object
+  this = {}
+  this.Name = "BaseTestSuite"
+  this.SKIP_TEST_MESSAGE_PREFIX = "SKIP_TEST_MESSAGE_PREFIX__"
+  ' Test Cases methods
+  this.testCases = []
+  this.IS_NEW_APPROACH = false
+  this.addTest = BTS__AddTest
+  this.createTest = BTS__CreateTest
+  this.StorePerformanceData = BTS__StorePerformanceData
 
-    ' Assertion methods which determine test failure or skipping
-    this.skip = BTS__Skip
-    this.fail = BTS__Fail
-    this.assertFalse = BTS__AssertFalse
-    this.assertTrue = BTS__AssertTrue
-    this.assertEqual = BTS__AssertEqual
-    this.assertNotEqual = BTS__AssertNotEqual
-    this.assertInvalid = BTS__AssertInvalid
-    this.assertNotInvalid = BTS__AssertNotInvalid
-    this.assertAAHasKey = BTS__AssertAAHasKey
-    this.assertAANotHasKey = BTS__AssertAANotHasKey
-    this.assertAAHasKeys = BTS__AssertAAHasKeys
-    this.assertAANotHasKeys = BTS__AssertAANotHasKeys
-    this.assertArrayContains = BTS__AssertArrayContains
-    this.assertArrayNotContains = BTS__AssertArrayNotContains
-    this.assertArrayContainsSubset = BTS__AssertArrayContainsSubset
-    this.assertArrayNotContainsSubset = BTS__AssertArrayNotContainsSubset
-    this.assertArrayCount = BTS__AssertArrayCount
-    this.assertArrayNotCount = BTS__AssertArrayNotCount
-    this.assertEmpty = BTS__AssertEmpty
-    this.assertNotEmpty = BTS__AssertNotEmpty
+  ' Assertion methods which determine test failure or skipping
+  this.skip = BTS__Skip
+  this.fail = BTS__Fail
+  this.assertFalse = BTS__AssertFalse
+  this.assertTrue = BTS__AssertTrue
+  this.assertEqual = BTS__AssertEqual
+  this.assertNotEqual = BTS__AssertNotEqual
+  this.assertInvalid = BTS__AssertInvalid
+  this.assertNotInvalid = BTS__AssertNotInvalid
+  this.assertAAHasKey = BTS__AssertAAHasKey
+  this.assertAANotHasKey = BTS__AssertAANotHasKey
+  this.assertAAHasKeys = BTS__AssertAAHasKeys
+  this.assertAANotHasKeys = BTS__AssertAANotHasKeys
+  this.assertArrayContains = BTS__AssertArrayContains
+  this.assertArrayNotContains = BTS__AssertArrayNotContains
+  this.assertArrayContainsSubset = BTS__AssertArrayContainsSubset
+  this.assertArrayNotContainsSubset = BTS__AssertArrayNotContainsSubset
+  this.assertArrayCount = BTS__AssertArrayCount
+  this.assertArrayNotCount = BTS__AssertArrayNotCount
+  this.assertEmpty = BTS__AssertEmpty
+  this.assertNotEmpty = BTS__AssertNotEmpty
 
-    ' Type Comparison Functionality
-    this.eqValues = TF_Utils__EqValues
-    this.eqAssocArrays = TF_Utils__EqAssocArray
-    this.eqArrays = TF_Utils__EqArray
-    this.baseComparator = TF_Utils__BaseComparator
+  ' Type Comparison Functionality
+  this.eqValues = TF_Utils__EqValues
+  this.eqAssocArrays = TF_Utils__EqAssocArray
+  this.eqArrays = TF_Utils__EqArray
+  this.baseComparator = TF_Utils__BaseComparator
 
-    return this
+  return this
 end function
 
 ' ----------------------------------------------------------------
@@ -97,8 +97,8 @@ end function
 ' @param hasArgs (boolean) True if test function has parameters.
 ' @param skip (boolean) Skip test run.
 ' ----------------------------------------------------------------
-sub BTS__AddTest(name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean)
-    m.testCases.Push(m.createTest(name, func, setup, teardown, arg, hasArgs, skip))
+sub BTS__AddTest(name as String, func as Object, setup = Invalid as Object, teardown = Invalid as Object, arg = Invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean)
+  m.testCases.Push(m.createTest(name, func, setup, teardown, arg, hasArgs, skip))
 end sub
 
 ' ----------------------------------------------------------------
@@ -114,39 +114,39 @@ end sub
 '
 ' @return TestCase object.
 ' ----------------------------------------------------------------
-function BTS__CreateTest(name as String, func as Object, setup = invalid as Object, teardown = invalid as Object, arg = invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean) as Object
-    return {
-        Name: name
-        Func: func
-        SetUp: setup
-        TearDown: teardown
+function BTS__CreateTest(name as String, func as Object, setup = Invalid as Object, teardown = Invalid as Object, arg = Invalid as Dynamic, hasArgs = false as Boolean, skip = false as Boolean) as Object
+  return {
+    Name: name,
+    Func: func,
+    SetUp: setup,
+    TearDown: teardown,
 
-	    perfData: {}
+    perfData: {},
 
-        hasArguments: hasArgs
-        arg: arg
+    hasArguments: hasArgs,
+    arg: arg,
 
-        skip: skip
-    }
+    skip: skip,
+  }
 end function
 
-'----------------------------------------------------------------
+' ----------------------------------------------------------------
 ' Store performance data to current test instance.
 '
 ' @param name (string) A property name.
 ' @param value (Object) A value of data.
-'----------------------------------------------------------------
-Sub BTS__StorePerformanceData(name as String, value as Object)
-    timestamp = StrI(CreateObject("roDateTime").AsSeconds())
-    m.testInstance.perfData.Append({
-        name: {
-            "value" : value
-            "timestamp": timestamp
-        }
-    })
-    ' print performance data to console
-    ? "PERF_DATA: " + m.testInstance.Name + ": " + timestamp + ": " + name + "|" + TF_Utils__AsString(value)
-End Sub
+' ----------------------------------------------------------------
+sub BTS__StorePerformanceData(name as String, value as Object)
+  timestamp = StrI(CreateObject("roDateTime").AsSeconds())
+  m.testInstance.perfData.Append({
+    name: {
+      "value" : value,
+      "timestamp": timestamp,
+    }
+  })
+  ' print performance data to console
+  ? "PERF_DATA: " + m.testInstance.Name + ": " + timestamp + ": " + name + "|" + TF_Utils__AsString(value)
+end sub
 
 ' ----------------------------------------------------------------
 ' Assertion methods which determine test failure or skipping
@@ -161,8 +161,8 @@ End Sub
 ' @return A skip message, with a specific prefix added, in order to runner know that this test should be skipped.
 ' ----------------------------------------------------------------
 function BTS__Skip(message = "" as String) as String
-    ' add prefix so we know that this test is skipped, but not failed
-    return m.SKIP_TEST_MESSAGE_PREFIX + message
+  ' add prefix so we know that this test is skipped, but not failed
+  return m.SKIP_TEST_MESSAGE_PREFIX + message
 end function
 
 ' ----------------------------------------------------------------
@@ -174,7 +174,7 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__Fail(msg = "Error" as String) as String
-    return msg
+  return msg
 end function
 
 ' ----------------------------------------------------------------
@@ -187,10 +187,11 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertFalse(expr as Dynamic, msg = "Expression evaluates to true" as String) as String
-    if not TF_Utils__IsBoolean(expr) or expr
-        return BTS__Fail(msg)
-    end if
-    return ""
+  if (NOT TF_Utils__IsBoolean(expr) OR expr)
+    return BTS__Fail(msg)
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -203,10 +204,11 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertTrue(expr as Dynamic, msg = "Expression evaluates to false" as String) as String
-    if not TF_Utils__IsBoolean(expr) or not expr then
-        return msg
-    end if
-    return ""
+  if (NOT TF_Utils__IsBoolean(expr) OR NOT expr)
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -220,15 +222,17 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertEqual(first as Dynamic, second as Dynamic, msg = "" as String) as String
-    if not TF_Utils__EqValues(first, second)
-        if msg = ""
-            first_as_string = TF_Utils__AsString(first)
-            second_as_string = TF_Utils__AsString(second)
-            msg = first_as_string + " != " + second_as_string
-        end if
-        return msg
+  if (NOT TF_Utils__EqValues(first, second))
+    if msg = ""
+      first_as_string = TF_Utils__AsString(first)
+      second_as_string = TF_Utils__AsString(second)
+      msg = first_as_string + " != " + second_as_string
     end if
-    return ""
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -242,15 +246,17 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertNotEqual(first as Dynamic, second as Dynamic, msg = "" as String) as String
-    if TF_Utils__EqValues(first, second)
-        if msg = ""
-            first_as_string = TF_Utils__AsString(first)
-            second_as_string = TF_Utils__AsString(second)
-            msg = first_as_string + " == " + second_as_string
-        end if
-        return msg
+  if (TF_Utils__EqValues(first, second))
+    if msg = ""
+      first_as_string = TF_Utils__AsString(first)
+      second_as_string = TF_Utils__AsString(second)
+      msg = first_as_string + " == " + second_as_string
     end if
-    return ""
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -263,14 +269,16 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertInvalid(value as Dynamic, msg = "" as String) as String
-    if TF_Utils__IsValid(value)
-        if msg = ""
-            expr_as_string = TF_Utils__AsString(value)
-            msg = expr_as_string + " <> Invalid"
-        end if
-        return msg
+  if (TF_Utils__IsValid(value))
+    if msg = ""
+      expr_as_string = TF_Utils__AsString(value)
+      msg = expr_as_string + " <> Invalid"
     end if
-    return ""
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -283,15 +291,17 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertNotInvalid(value as Dynamic, msg = "" as String) as String
-    if not TF_Utils__IsValid(value)
-        if msg = ""
-            if LCase(Type(value)) = "<uninitialized>" then value = invalid
-            expr_as_string = TF_Utils__AsString(value)
-            msg = expr_as_string + " = Invalid"
-        end if
-        return msg
+  if (NOT TF_Utils__IsValid(value))
+    if msg = ""
+      if LCase(Type(value)) = "<uninitialized>" then value = Invalid
+      expr_as_string = TF_Utils__AsString(value)
+      msg = expr_as_string + " = Invalid"
     end if
-    return ""
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -305,23 +315,25 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertAAHasKey(array as Dynamic, key as Dynamic, msg = "" as String) as String
-    if not TF_Utils__IsString(key)
-        return "Key value has invalid type."
-    end if
+  if (NOT TF_Utils__IsString(key))
+    return "Key value has invalid type."
+  end if
 
-    if TF_Utils__IsAssociativeArray(array)
-        if not array.DoesExist(key)
-            if msg = ""
-                msg = "Array doesn't have the '" + key + "' key."
-            end if
-            return msg
-        end if
-    else
-        msg = "Input value is not an Associative Array."
-        return msg
-    end if
+  if (TF_Utils__IsAssociativeArray(array))
+    if (NOT array.DoesExist(key))
+      if msg = ""
+        msg = "Array doesn't have the '" + key + "' key."
+      end if
 
-    return ""
+      return msg
+    end if
+  else
+    msg = "Input value is not an Associative Array."
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -335,23 +347,25 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertAANotHasKey(array as Dynamic, key as Dynamic, msg = "" as String) as String
-    if not TF_Utils__IsString(key)
-        return "Key value has invalid type."
-    end if
+  if (NOT TF_Utils__IsString(key))
+    return "Key value has invalid type."
+  end if
 
-    if TF_Utils__IsAssociativeArray(array)
-        if array.DoesExist(key)
-            if msg = ""
-                msg = "Array has the '" + key + "' key."
-            end if
-            return msg
-        end if
-    else
-        msg = "Input value is not an Associative Array."
-        return msg
-    end if
+  if (TF_Utils__IsAssociativeArray(array))
+    if (array.DoesExist(key))
+      if msg = ""
+        msg = "Array has the '" + key + "' key."
+      end if
 
-    return ""
+      return msg
+    end if
+  else
+    msg = "Input value is not an Associative Array."
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -365,34 +379,35 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertAAHasKeys(array as Dynamic, keys as Object, msg = "" as String) as String
-    if not TF_Utils__IsAssociativeArray(array)
-        return "Input value is not an Associative Array."
-    end if
+  if (NOT TF_Utils__IsAssociativeArray(array))
+    return "Input value is not an Associative Array."
+  end if
 
-    if not TF_Utils__IsArray(keys) or keys.Count() = 0
-        return "Keys value is not an Array or is empty."
-    end if
+  if NOT TF_Utils__IsArray(keys) OR keys.Count() = 0
+    return "Keys value is not an Array or is empty."
+  end if
 
-    if TF_Utils__IsAssociativeArray(array) and TF_Utils__IsArray(keys)
-        for each key in keys
-            if not TF_Utils__IsString(key)
-                return "Key value has invalid type."
-            end if
+  if (TF_Utils__IsAssociativeArray(array) AND TF_Utils__IsArray(keys))
+    for each key in keys
+      if (NOT TF_Utils__IsString(key))
+        return "Key value has invalid type."
+      end if
 
-            if not array.DoesExist(key)
-                if msg = ""
-                    msg = "Array doesn't have the '" + key + "' key."
-                end if
+      if (NOT array.DoesExist(key))
+        if msg = ""
+          msg = "Array doesn't have the '" + key + "' key."
+        end if
 
-                return msg
-            end if
-        end for
-    else
-        msg = "Input value is not an Associative Array."
         return msg
-    end if
+      end if
+    end for
+  else
+    msg = "Input value is not an Associative Array."
 
-    return ""
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -406,32 +421,35 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertAANotHasKeys(array as Dynamic, keys as Object, msg = "" as String) as String
-    if not TF_Utils__IsAssociativeArray(array)
-        return "Input value is not an Associative Array."
-    end if
+  if (NOT TF_Utils__IsAssociativeArray(array))
+    return "Input value is not an Associative Array."
+  end if
 
-    if not TF_Utils__IsArray(keys) or keys.Count() = 0
-        return "Keys value is not an Array or is empty."
-    end if
+  if NOT TF_Utils__IsArray(keys) OR keys.Count() = 0
+    return "Keys value is not an Array or is empty."
+  end if
 
-    if TF_Utils__IsAssociativeArray(array) and TF_Utils__IsArray(keys)
-        for each key in keys
-            if not TF_Utils__IsString(key)
-                return "Key value has invalid type."
-            end if
+  if (TF_Utils__IsAssociativeArray(array) AND TF_Utils__IsArray(keys))
+    for each key in keys
+      if (NOT TF_Utils__IsString(key))
+        return "Key value has invalid type."
+      end if
 
-            if array.DoesExist(key)
-                if msg = ""
-                    msg = "Array has the '" + key + "' key."
-                end if
-                return msg
-            end if
-        end for
-    else
-        msg = "Input value is not an Associative Array."
+      if (array.DoesExist(key))
+        if msg = ""
+          msg = "Array has the '" + key + "' key."
+        end if
+
         return msg
-    end if
-    return ""
+      end if
+    end for
+  else
+    msg = "Input value is not an Associative Array."
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -445,24 +463,24 @@ end function
 
 ' @return An error message.
 ' ----------------------------------------------------------------
-function BTS__AssertArrayContains(array as Dynamic, value as Dynamic, key = invalid as Dynamic, msg = "" as String) as String
-    if key <> invalid and not TF_Utils__IsString(key)
-        return "Key value has invalid type."
+function BTS__AssertArrayContains(array as Dynamic, value as Dynamic, key = Invalid as Dynamic, msg = "" as String) as String
+  if (key <> Invalid AND NOT TF_Utils__IsString(key))
+    return "Key value has invalid type."
+  end if
+
+  if (TF_Utils__IsAssociativeArray(array) OR TF_Utils__IsArray(array))
+    if (NOT TF_Utils__ArrayContains(array, value, key))
+      msg = "Array doesn't have the '" + TF_Utils__AsString(value) + "' value."
+
+      return msg
     end if
+  else
+    msg = "Input value is not an Array."
 
-    if TF_Utils__IsAssociativeArray(array) or TF_Utils__IsArray(array)
-        if not TF_Utils__ArrayContains(array, value, key)
-            msg = "Array doesn't have the '" + TF_Utils__AsString(value) + "' value."
+    return msg
+  end if
 
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array."
-
-        return msg
-    end if
-
-    return ""
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -476,24 +494,24 @@ end function
 
 ' @return An error message.
 ' ----------------------------------------------------------------
-function BTS__AssertArrayNotContains(array as Dynamic, value as Dynamic, key = invalid as Dynamic, msg = "" as String) as String
-    if key <> invalid and not TF_Utils__IsString(key)
-        return "Key value has invalid type."
+function BTS__AssertArrayNotContains(array as Dynamic, value as Dynamic, key = Invalid as Dynamic, msg = "" as String) as String
+  if (key <> Invalid AND NOT TF_Utils__IsString(key))
+    return "Key value has invalid type."
+  end if
+
+  if (TF_Utils__IsAssociativeArray(array) OR TF_Utils__IsArray(array))
+    if (TF_Utils__ArrayContains(array, value, key))
+      msg = "Array has the '" + TF_Utils__AsString(value) + "' value."
+
+      return msg
     end if
+  else
+    msg = "Input value is not an Array."
 
-    if TF_Utils__IsAssociativeArray(array) or TF_Utils__IsArray(array)
-        if TF_Utils__ArrayContains(array, value, key)
-            msg = "Array has the '" + TF_Utils__AsString(value) + "' value."
+    return msg
+  end if
 
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array."
-
-        return msg
-    end if
-
-    return ""
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -507,29 +525,29 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertArrayContainsSubset(array as Dynamic, subset as Dynamic, msg = "" as String) as String
-    if (TF_Utils__IsAssociativeArray(array) and TF_Utils__IsAssociativeArray(subset)) or (TF_Utils__IsArray(array) and TF_Utils__IsArray(subset))
-        isAA = TF_Utils__IsAssociativeArray(subset)
-        for each item in subset
-            key = invalid
-            value = item
-            if isAA
-                key = item
-                value = subset[key]
-            end if
+  if ((TF_Utils__IsAssociativeArray(array) AND TF_Utils__IsAssociativeArray(subset)) OR (TF_Utils__IsArray(array) AND TF_Utils__IsArray(subset)))
+    isAA = TF_Utils__IsAssociativeArray(subset)
+    for each item in subset
+      key = Invalid
+      value = item
+      if (isAA)
+        key = item
+        value = subset[key]
+      end if
 
-            if not TF_Utils__ArrayContains(array, value, key)
-                msg = "Array doesn't have the '" + TF_Utils__AsString(value) + "' value."
-
-                return msg
-            end if
-        end for
-    else
-        msg = "Input value is not an Array."
+      if (NOT TF_Utils__ArrayContains(array, value, key))
+        msg = "Array doesn't have the '" + TF_Utils__AsString(value) + "' value."
 
         return msg
-    end if
+      end if
+    end for
+  else
+    msg = "Input value is not an Array."
 
-    return ""
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -543,29 +561,29 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertArrayNotContainsSubset(array as Dynamic, subset as Dynamic, msg = "" as String) as String
-    if (TF_Utils__IsAssociativeArray(array) and TF_Utils__IsAssociativeArray(subset)) or (TF_Utils__IsArray(array) and TF_Utils__IsArray(subset))
-        isAA = TF_Utils__IsAssociativeArray(subset)
-        for each item in subset
-            key = invalid
-            value = item
-            if isAA
-                key = item
-                value = subset[key]
-            end if
+  if ((TF_Utils__IsAssociativeArray(array) AND TF_Utils__IsAssociativeArray(subset)) OR (TF_Utils__IsArray(array) AND TF_Utils__IsArray(subset)))
+    isAA = TF_Utils__IsAssociativeArray(subset)
+    for each item in subset
+      key = Invalid
+      value = item
+      if (isAA)
+        key = item
+        value = subset[key]
+      end if
 
-            if TF_Utils__ArrayContains(array, value, key)
-                msg = "Array has the '" + TF_Utils__AsString(value) + "' value."
-
-                return msg
-            end if
-        end for
-    else
-        msg = "Input value is not an Array."
+      if (TF_Utils__ArrayContains(array, value, key))
+        msg = "Array has the '" + TF_Utils__AsString(value) + "' value."
 
         return msg
-    end if
+      end if
+    end for
+  else
+    msg = "Input value is not an Array."
 
-    return ""
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -579,23 +597,23 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertArrayCount(array as Dynamic, count as Dynamic, msg = "" as String) as String
-    if not TF_Utils__IsInteger(count)
-        return "Count value should be an integer."
+  if (NOT TF_Utils__IsInteger(count))
+    return "Count value should be an integer."
+  end if
+
+  if (TF_Utils__IsAssociativeArray(array) OR TF_Utils__IsArray(array))
+    if (array.Count() <> count)
+      msg = "Array items count <> " + TF_Utils__AsString(count) + "."
+
+      return msg
     end if
+  else
+    msg = "Input value is not an Array."
 
-    if TF_Utils__IsAssociativeArray(array) or TF_Utils__IsArray(array)
-        if array.Count() <> count
-            msg = "Array items count <> " + TF_Utils__AsString(count) + "."
+    return msg
+  end if
 
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array."
-
-        return msg
-    end if
-
-    return ""
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -609,23 +627,23 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertArrayNotCount(array as Dynamic, count as Dynamic, msg = "" as String) as String
-    if not TF_Utils__IsInteger(count)
-        return "Count value should be an integer."
+  if (NOT TF_Utils__IsInteger(count))
+    return "Count value should be an integer."
+  end if
+
+  if (TF_Utils__IsAssociativeArray(array) OR TF_Utils__IsArray(array))
+    if array.Count() = count
+      msg = "Array items count = " + TF_Utils__AsString(count) + "."
+
+      return msg
     end if
+  else
+    msg = "Input value is not an Array."
 
-    if TF_Utils__IsAssociativeArray(array) or TF_Utils__IsArray(array)
-        if array.Count() = count
-            msg = "Array items count = " + TF_Utils__AsString(count) + "."
+    return msg
+  end if
 
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array."
-
-        return msg
-    end if
-
-    return ""
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -638,25 +656,25 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertEmpty(item as Dynamic, msg = "" as String) as String
-    if TF_Utils__IsAssociativeArray(item) or TF_Utils__IsArray(item)
-        if item.Count() > 0
-            msg = "Array is not empty."
+  if (TF_Utils__IsAssociativeArray(item) OR TF_Utils__IsArray(item))
+    if (item.Count() > 0)
+      msg = "Array is not empty."
 
-            return msg
-        end if
-    else if TF_Utils__IsString(item)
-        if Len(item) <> 0
-            msg = "Input value is not empty."
-
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array, AssociativeArray or String."
-
-        return msg
+      return msg
     end if
+  else if (TF_Utils__IsString(item))
+    if (Len(item) <> 0)
+      msg = "Input value is not empty."
 
-    return ""
+      return msg
+    end if
+  else
+    msg = "Input value is not an Array, AssociativeArray or String."
+
+    return msg
+  end if
+
+  return ""
 end function
 
 ' ----------------------------------------------------------------
@@ -669,31 +687,31 @@ end function
 ' @return An error message.
 ' ----------------------------------------------------------------
 function BTS__AssertNotEmpty(item as Dynamic, msg = "" as String) as String
-    if TF_Utils__IsAssociativeArray(item) or TF_Utils__IsArray(item)
-        if item.Count() = 0
-            msg = "Array is empty."
+  if (TF_Utils__IsAssociativeArray(item) OR TF_Utils__IsArray(item))
+    if item.Count() = 0
+      msg = "Array is empty."
 
-            return msg
-        end if
-    else if TF_Utils__IsString(item)
-        if Len(item) = 0
-            msg = "Input value is empty."
-
-            return msg
-        end if
-    else
-        msg = "Input value is not an Array, AssociativeArray or String."
-
-        return msg
+      return msg
     end if
+  else if (TF_Utils__IsString(item))
+    if Len(item) = 0
+      msg = "Input value is empty."
 
-    return ""
+      return msg
+    end if
+  else
+    msg = "Input value is not an Array, AssociativeArray or String."
+
+    return msg
+  end if
+
+  return ""
 end function
 
-'*****************************************************************
-'* Copyright Roku 2011-2019
-'* All Rights Reserved
-'*****************************************************************
+' *****************************************************************
+' * Copyright Roku 2011-2019
+' * All Rights Reserved
+' *****************************************************************
 
 ' Functions in this file:
 '     ItemGenerator
@@ -720,22 +738,22 @@ end function
 ' if scheme is not valid.
 ' ----------------------------------------------------------------
 function ItemGenerator(scheme as Object) as Object
-    this = {}
+  this = {}
 
-    this.getItem = IG_GetItem
-    this.getAssocArray = IG_GetAssocArray
-    this.getArray = IG_GetArray
-    this.getSimpleType = IG_GetSimpleType
-    this.getInteger = IG_GetInteger
-    this.getFloat = IG_GetFloat
-    this.getString = IG_GetString
-    this.getBoolean = IG_GetBoolean
+  this.getItem = IG_GetItem
+  this.getAssocArray = IG_GetAssocArray
+  this.getArray = IG_GetArray
+  this.getSimpleType = IG_GetSimpleType
+  this.getInteger = IG_GetInteger
+  this.getFloat = IG_GetFloat
+  this.getString = IG_GetString
+  this.getBoolean = IG_GetBoolean
 
-    if not TF_Utils__IsValid(scheme)
-        return invalid
-    end if
+  if (NOT TF_Utils__IsValid(scheme))
+    return Invalid
+  end if
 
-    return this.getItem(scheme)
+  return this.getItem(scheme)
 end function
 
 ' TODO: Create IG_GetInvalidItem function with random type fields
@@ -751,17 +769,17 @@ end function
 ' associative array.
 ' ----------------------------------------------------------------
 function IG_GetItem(scheme as Object) as Object
-    item = invalid
+  item = Invalid
 
-    if TF_Utils__IsAssociativeArray(scheme)
-        item = IG_GetAssocArray(scheme)
-    else if TF_Utils__IsArray(scheme)
-        item = IG_GetArray(scheme)
-    else if TF_Utils__IsString(scheme)
-        item = IG_GetSimpleType(LCase(scheme))
-    end if
+  if (TF_Utils__IsAssociativeArray(scheme))
+    item = IG_GetAssocArray(scheme)
+  else if (TF_Utils__IsArray(scheme))
+    item = IG_GetArray(scheme)
+  else if (TF_Utils__IsString(scheme))
+    item = IG_GetSimpleType(LCase(scheme))
+  end if
 
-    return item
+  return item
 end function
 
 ' ----------------------------------------------------------------
@@ -777,15 +795,15 @@ end function
 ' @return An associative array according to specified scheme.
 ' ----------------------------------------------------------------
 function IG_GetAssocArray(scheme as Object) as Object
-    item = {}
+  item = {}
 
-    for each key in scheme
-        if not item.DoesExist(key)
-            item[key] = IG_GetItem(scheme[key])
-        end if
-    end for
+  for each key in scheme
+    if (NOT item.DoesExist(key))
+      item[key] = IG_GetItem(scheme[key])
+    end if
+  end for
 
-    return item
+  return item
 end function
 
 ' ----------------------------------------------------------------
@@ -796,13 +814,13 @@ end function
 ' @return An array according to specified scheme.
 ' ----------------------------------------------------------------
 function IG_GetArray(scheme as Object) as Object
-    item = []
+  item = []
 
-    for each key in scheme
-        item.Push(IG_GetItem(key))
-    end for
+  for each key in scheme
+    item.Push(IG_GetItem(key))
+  end for
 
-    return item
+  return item
 end function
 
 ' ----------------------------------------------------------------
@@ -813,19 +831,19 @@ end function
 ' @return A simple type object or invalid if type is not supported.
 ' ----------------------------------------------------------------
 function IG_GetSimpleType(typeStr as String) as Object
-    item = invalid
+  item = Invalid
 
-    if typeStr = "integer" or typeStr = "int" or typeStr = "roint"
-        item = IG_GetInteger()
-    else if typeStr = "float" or typeStr = "rofloat"
-        item = IG_GetFloat()
-    else if typeStr = "string" or typeStr = "rostring"
-        item = IG_GetString(10)
-    else if typeStr = "boolean" or typeStr = "roboolean"
-        item = IG_GetBoolean()
-    end if
+  if typeStr = "integer" OR typeStr = "int" OR typeStr = "roint"
+    item = IG_GetInteger()
+  else if typeStr = "float" OR typeStr = "rofloat"
+    item = IG_GetFloat()
+  else if typeStr = "string" OR typeStr = "rostring"
+    item = IG_GetString(10)
+  else if typeStr = "boolean" OR typeStr = "roboolean"
+    item = IG_GetBoolean()
+  end if
 
-    return item
+  return item
 end function
 
 ' ----------------------------------------------------------------
@@ -834,7 +852,7 @@ end function
 ' @return A random boolean value.
 ' ----------------------------------------------------------------
 function IG_GetBoolean() as Boolean
-    return TF_Utils__AsBoolean(Rnd(2) \ Rnd(2))
+  return TF_Utils__AsBoolean(Rnd(2) \ Rnd(2))
 end function
 
 ' ----------------------------------------------------------------
@@ -846,7 +864,7 @@ end function
 ' @return A random integer value.
 ' ----------------------------------------------------------------
 function IG_GetInteger(seed = 100 as Integer) as Integer
-    return Rnd(seed)
+  return Rnd(seed)
 end function
 
 ' ----------------------------------------------------------------
@@ -855,7 +873,7 @@ end function
 ' @return A random float value.
 ' ----------------------------------------------------------------
 function IG_GetFloat() as Float
-    return Rnd(0)
+  return Rnd(0)
 end function
 
 ' ----------------------------------------------------------------
@@ -866,31 +884,31 @@ end function
 ' @return A random string value or empty string if seed is 0.
 ' ----------------------------------------------------------------
 function IG_GetString(seed as Integer) as String
-    item = ""
-    if seed > 0
-        stringLength = Rnd(seed)
+  item = ""
+  if (seed > 0)
+    stringLength = Rnd(seed)
 
-        for i = 0 to stringLength
-            chType = Rnd(3)
+    for _i = 0 to stringLength
+      chType = Rnd(3)
 
-            if chType = 1       ' Chr(48-57) - numbers
-                chNumber = 47 + Rnd(10)
-            else if chType = 2  ' Chr(65-90) - Uppercase Letters
-                chNumber = 64 + Rnd(26)
-            else                ' Chr(97-122) - Lowercase Letters
-                chNumber = 96 + Rnd(26)
-            end if
+      if chType = 1       ' Chr(48-57) - numbers
+        chNumber = 47 + Rnd(10)
+      else if chType = 2  ' Chr(65-90) - Uppercase Letters
+        chNumber = 64 + Rnd(26)
+      else                ' Chr(97-122) - Lowercase Letters
+        chNumber = 96 + Rnd(26)
+      end if
 
-            item = item + Chr(chNumber)
-        end for
-    end if
+      item = item + Chr(chNumber)
+    end for
+  end if
 
-    return item
+  return item
 end function
-'*****************************************************************
-'* Copyright Roku 2011-2019
-'* All Rights Reserved
-'*****************************************************************
+' *****************************************************************
+' * Copyright Roku 2011-2019
+' * All Rights Reserved
+' *****************************************************************
 
 ' Functions in this file:
 '        Logger
@@ -923,52 +941,52 @@ end function
 ' @return A Logger object.
 ' ----------------------------------------------------------------
 function Logger() as Object
-    this = {}
+  this = {}
 
-    this.verbosityLevel = {
-        basic: 0
-        normal: 1
-        verboseFailed: 2
-        verbose: 3
-    }
+  this.verbosityLevel = {
+    basic: 0,
+    normal: 1,
+    verboseFailed: 2,
+    verbose: 3,
+  }
 
-    ' Internal properties
-    this.verbosity = this.verbosityLevel.normal
-    this.echoEnabled = false
-    this.serverURL = ""
-    this.jUnitEnabled = false
+  ' Internal properties
+  this.verbosity = this.verbosityLevel.normal
+  this.echoEnabled = false
+  this.serverURL = ""
+  this.jUnitEnabled = false
 
-    ' Interface
-    this.SetVerbosity = Logger__SetVerbosity
-    this.SetEcho = Logger__SetEcho
-    this.SetJUnit = Logger__SetJUnit
-    this.SetServer = Logger__SetServer
-    this.SetServerURL = Logger__SetServerURL ' Deprecated. Use Logger__SetServer instead.
-    this.PrintStatistic = Logger__PrintStatistic
-    this.SendToServer = Logger__SendToServer
+  ' Interface
+  this.SetVerbosity = Logger__SetVerbosity
+  this.SetEcho = Logger__SetEcho
+  this.SetJUnit = Logger__SetJUnit
+  this.SetServer = Logger__SetServer
+  this.SetServerURL = Logger__SetServerURL ' Deprecated. Use Logger__SetServer instead.
+  this.PrintStatistic = Logger__PrintStatistic
+  this.SendToServer = Logger__SendToServer
 
-    this.CreateTotalStatistic = Logger__CreateTotalStatistic
-    this.CreateSuiteStatistic = Logger__CreateSuiteStatistic
-    this.CreateTestStatistic = Logger__CreateTestStatistic
-    this.AppendSuiteStatistic = Logger__AppendSuiteStatistic
-    this.AppendTestStatistic = Logger__AppendTestStatistic
+  this.CreateTotalStatistic = Logger__CreateTotalStatistic
+  this.CreateSuiteStatistic = Logger__CreateSuiteStatistic
+  this.CreateTestStatistic = Logger__CreateTestStatistic
+  this.AppendSuiteStatistic = Logger__AppendSuiteStatistic
+  this.AppendTestStatistic = Logger__AppendTestStatistic
 
-    ' Internal functions
-    this.PrintSuiteStatistic = Logger__PrintSuiteStatistic
-    this.PrintTestStatistic = Logger__PrintTestStatistic
-    this.PrintStart = Logger__PrintStart
-    this.PrintEnd = Logger__PrintEnd
-    this.PrintSuiteSetUp = Logger__PrintSuiteSetUp
-    this.PrintSuiteStart = Logger__PrintSuiteStart
-    this.PrintSuiteEnd = Logger__PrintSuiteEnd
-    this.PrintSuiteTearDown = Logger__PrintSuiteTearDown
-    this.PrintTestSetUp = Logger__PrintTestSetUp
-    this.PrintTestStart = Logger__PrintTestStart
-    this.PrintTestEnd = Logger__PrintTestEnd
-    this.PrintTestTearDown = Logger__PrintTestTearDown
-    this.PrintJUnitFormat = Logger__PrintJUnitFormat
+  ' Internal functions
+  this.PrintSuiteStatistic = Logger__PrintSuiteStatistic
+  this.PrintTestStatistic = Logger__PrintTestStatistic
+  this.PrintStart = Logger__PrintStart
+  this.PrintEnd = Logger__PrintEnd
+  this.PrintSuiteSetUp = Logger__PrintSuiteSetUp
+  this.PrintSuiteStart = Logger__PrintSuiteStart
+  this.PrintSuiteEnd = Logger__PrintSuiteEnd
+  this.PrintSuiteTearDown = Logger__PrintSuiteTearDown
+  this.PrintTestSetUp = Logger__PrintTestSetUp
+  this.PrintTestStart = Logger__PrintTestStart
+  this.PrintTestEnd = Logger__PrintTestEnd
+  this.PrintTestTearDown = Logger__PrintTestTearDown
+  this.PrintJUnitFormat = Logger__PrintJUnitFormat
 
-    return this
+  return this
 end function
 
 ' ----------------------------------------------------------------
@@ -983,9 +1001,9 @@ end function
 ' Default level: 1
 ' ----------------------------------------------------------------
 sub Logger__SetVerbosity(verbosity = m.verbosityLevel.normal as Integer)
-    if verbosity >= m.verbosityLevel.basic and verbosity <= m.verbosityLevel.verbose
-        m.verbosity = verbosity
-    end if
+  if (verbosity >= m.verbosityLevel.basic AND verbosity <= m.verbosityLevel.verbose)
+    m.verbosity = verbosity
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -996,7 +1014,7 @@ end sub
 ' Default value: false
 ' ----------------------------------------------------------------
 sub Logger__SetEcho(enable = false as Boolean)
-    m.echoEnabled = enable
+  m.echoEnabled = enable
 end sub
 
 ' ----------------------------------------------------------------
@@ -1007,7 +1025,7 @@ end sub
 ' Default value: false
 ' ----------------------------------------------------------------
 sub Logger__SetJUnit(enable = false as Boolean)
-    m.jUnitEnabled = enable
+  m.jUnitEnabled = enable
 end sub
 
 ' ----------------------------------------------------------------
@@ -1019,13 +1037,13 @@ end sub
 ' Default value: ""
 ' ----------------------------------------------------------------
 sub Logger__SetServer(host = "" as String, port = "" as String)
-    if TF_Utils__IsNotEmptyString(host)
-        if TF_Utils__IsNotEmptyString(port)
-            m.serverURL = "http://" + host + ":" + port
-        else
-            m.serverURL = "http://" + host
-        end if
+  if (TF_Utils__IsNotEmptyString(host))
+    if (TF_Utils__IsNotEmptyString(port))
+      m.serverURL = "http://" + host + ":" + port
+    else
+      m.serverURL = "http://" + host
     end if
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -1034,29 +1052,29 @@ end sub
 ' @param url (string) A storage server URL.
 ' Default value: ""
 ' ----------------------------------------------------------------
-sub Logger__SetServerURL(url = "" as String)
-    ? "This function is deprecated. Please use Logger__SetServer(host, port)"
+sub Logger__SetServerURL(_url = "" as String)
+  ? "This function is deprecated. Please use Logger__SetServer(host, port)"
 end sub
 
-'----------------------------------------------------------------
+' ----------------------------------------------------------------
 ' Send test results as a POST json payload.
 '
 ' @param statObj (object) stats of the test run.
 ' Default value: invalid
 ' ----------------------------------------------------------------
 sub Logger__SendToServer(statObj as Object)
-    if TF_Utils__IsNotEmptyString(m.serverURL) and TF_Utils__IsValid(statObj)
-        ? "***"
-        ? "***   Sending statsObj to server: "; m.serverURL
+  if (TF_Utils__IsNotEmptyString(m.serverURL) AND TF_Utils__IsValid(statObj))
+    ? "***"
+    ? "***   Sending statsObj to server: "; m.serverURL
 
-        request = CreateObject("roUrlTransfer")
-        request.SetUrl(m.serverURL)
-        statString = FormatJson(statObj)
+    request = CreateObject("roUrlTransfer")
+    request.SetUrl(m.serverURL)
+    statString = FormatJson(statObj)
 
-        ? "***   Response: "; request.postFromString(statString)
-        ? "***"
-        ? "******************************************************************"
-    end if
+    ? "***   Response: "; request.postFromString(statString)
+    ? "***"
+    ? "******************************************************************"
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -1065,38 +1083,38 @@ end sub
 ' @param statObj (object) A statistic object to print.
 ' ----------------------------------------------------------------
 sub Logger__PrintStatistic(statObj as Object)
-    if not m.echoEnabled
-        m.PrintStart()
+  if (NOT m.echoEnabled)
+    m.PrintStart()
 
-        if m.verbosity = m.verbosityLevel.normal or m.verbosity = m.verbosityLevel.verboseFailed
-            for each testSuite in statObj.Suites
-                for each testCase in testSuite.Tests
-                    if m.verbosity = m.verbosityLevel.verboseFailed and testCase.result = "Fail"
-                        m.printTestStatistic(testCase)
-                    else
-                        ? "***   "; testSuite.Name; ": "; testCase.Name; " - "; testCase.Result
-                    end if
-                end for
-            end for
-        else if m.verbosity = m.verbosityLevel.verbose
-            for each testSuite in statObj.Suites
-                m.PrintSuiteStatistic(testSuite)
-            end for
-        end if
+    if m.verbosity = m.verbosityLevel.normal OR m.verbosity = m.verbosityLevel.verboseFailed
+      for each testSuite in statObj.Suites
+        for each testCase in testSuite.Tests
+          if m.verbosity = m.verbosityLevel.verboseFailed AND testCase.result = "Fail"
+            m.printTestStatistic(testCase)
+          else
+            ? "***   "; testSuite.Name; ": "; testCase.Name; " - "; testCase.Result
+          end if
+        end for
+      end for
+    else if m.verbosity = m.verbosityLevel.verbose
+      for each testSuite in statObj.Suites
+        m.PrintSuiteStatistic(testSuite)
+      end for
     end if
+  end if
 
-    ? "***"
-    ? "***   Total  = "; TF_Utils__AsString(statObj.Total); " ; Passed  = "; statObj.Correct; " ; Failed   = "; statObj.Fail; " ; Skipped   = "; statObj.skipped; " ; Crashes  = "; statObj.Crash;
-    ? "***   Time spent: "; statObj.Time; "ms"
-    ? "***"
+  ? "***"
+  ? "***   Total  = "; TF_Utils__AsString(statObj.Total); " ; Passed  = "; statObj.Correct; " ; Failed   = "; statObj.Fail; " ; Skipped   = "; statObj.skipped; " ; Crashes  = "; statObj.Crash;
+  ? "***   Time spent: "; statObj.Time; "ms"
+  ? "***"
 
-    m.PrintEnd()
+  m.PrintEnd()
 
-    m.SendToServer(statObj)
+  m.SendToServer(statObj)
 
-    if m.jUnitEnabled
-        m.printJUnitFormat(statObj)
-    end if
+  if (m.jUnitEnabled)
+    m.printJUnitFormat(statObj)
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -1105,21 +1123,21 @@ end sub
 ' @return An empty statistic object.
 ' ----------------------------------------------------------------
 function Logger__CreateTotalStatistic() as Object
-    statTotalItem = {
-        Suites: []
-        Time: 0
-        Total: 0
-        Correct: 0
-        Fail: 0
-        Skipped: 0
-        Crash: 0
-    }
+  statTotalItem = {
+    Suites: [],
+    Time: 0,
+    Total: 0,
+    Correct: 0,
+    Fail: 0,
+    Skipped: 0,
+    Crash: 0,
+  }
 
-    if m.echoEnabled
-        m.PrintStart()
-    end if
+  if (m.echoEnabled)
+    m.PrintStart()
+  end if
 
-    return statTotalItem
+  return statTotalItem
 end function
 
 ' ----------------------------------------------------------------
@@ -1130,24 +1148,24 @@ end function
 ' @return An empty statistic object for test suite.
 ' ----------------------------------------------------------------
 function Logger__CreateSuiteStatistic(name as String) as Object
-    statSuiteItem = {
-        Name: name
-        Tests: []
-        Time: 0
-        Total: 0
-        Correct: 0
-        Fail: 0
-        Skipped: 0
-        Crash: 0
-    }
+  statSuiteItem = {
+    Name: name,
+    Tests: [],
+    Time: 0,
+    Total: 0,
+    Correct: 0,
+    Fail: 0,
+    Skipped: 0,
+    Crash: 0,
+  }
 
-    if m.echoEnabled
-        if m.verbosity = m.verbosityLevel.verbose
-            m.PrintSuiteStart(name)
-        end if
+  if (m.echoEnabled)
+    if m.verbosity = m.verbosityLevel.verbose
+      m.PrintSuiteStart(name)
     end if
+  end if
 
-    return statSuiteItem
+  return statSuiteItem
 end function
 
 ' ----------------------------------------------------------------
@@ -1176,24 +1194,24 @@ end function
 ' @return A statistic object for test.
 ' ----------------------------------------------------------------
 function Logger__CreateTestStatistic(name as String, result = "Success" as String, time = 0 as Integer, errorCode = 0 as Integer, errorMessage = "" as String, isInit = false as Boolean) as Object
-    statTestItem = {
-        Name: name
-        Result: result
-        Time: time
-	PerfData: {}
-        Error: {
-            Code: errorCode
-            Message: errorMessage
-        }
+  statTestItem = {
+    Name: name,
+    Result: result,
+    Time: time,
+    PerfData: {},
+    Error: {
+      Code: errorCode,
+      Message: errorMessage,
     }
+  }
 
-    if m.echoEnabled and not isInit
-        if m.verbosity = m.verbosityLevel.verbose
-            m.PrintTestStart(name)
-        end if
+  if (m.echoEnabled AND NOT isInit)
+    if m.verbosity = m.verbosityLevel.verbose
+      m.PrintTestStart(name)
     end if
+  end if
 
-    return statTestItem
+  return statTestItem
 end function
 
 ' ----------------------------------------------------------------
@@ -1203,33 +1221,33 @@ end function
 ' @param statTestObj (object) A test statistic to append.
 ' ----------------------------------------------------------------
 sub Logger__AppendTestStatistic(statSuiteObj as Object, statTestObj as Object)
-    if TF_Utils__IsAssociativeArray(statSuiteObj) and TF_Utils__IsAssociativeArray(statTestObj)
-        statSuiteObj.Tests.Push(statTestObj)
+  if (TF_Utils__IsAssociativeArray(statSuiteObj) AND TF_Utils__IsAssociativeArray(statTestObj))
+    statSuiteObj.Tests.Push(statTestObj)
 
-        if TF_Utils__IsInteger(statTestObj.time)
-            statSuiteObj.Time = statSuiteObj.Time + statTestObj.Time
-        end if
-
-        statSuiteObj.Total = statSuiteObj.Total + 1
-
-        if LCase(statTestObj.Result) = "success"
-            statSuiteObj.Correct = statSuiteObj.Correct + 1
-        else if LCase(statTestObj.result) = "fail"
-            statSuiteObj.Fail = statSuiteObj.Fail + 1
-        else if LCase(statTestObj.result) = "skipped"
-            statSuiteObj.skipped++
-        else
-            statSuiteObj.crash = statSuiteObj.crash + 1
-        end if
-
-        if m.echoEnabled
-            if m.verbosity = m.verbosityLevel.normal
-                ? "***   "; statSuiteObj.Name; ": "; statTestObj.Name; " - "; statTestObj.Result
-            else if m.verbosity = m.verbosityLevel.verbose
-                m.PrintTestStatistic(statTestObj)
-            end if
-        end if
+    if (TF_Utils__IsInteger(statTestObj.time))
+      statSuiteObj.Time = statSuiteObj.Time + statTestObj.Time
     end if
+
+    statSuiteObj.Total = statSuiteObj.Total + 1
+
+    if LCase(statTestObj.Result) = "success"
+      statSuiteObj.Correct = statSuiteObj.Correct + 1
+    else if LCase(statTestObj.result) = "fail"
+      statSuiteObj.Fail = statSuiteObj.Fail + 1
+    else if LCase(statTestObj.result) = "skipped"
+      statSuiteObj.skipped++
+    else
+      statSuiteObj.crash = statSuiteObj.crash + 1
+    end if
+
+    if (m.echoEnabled)
+      if m.verbosity = m.verbosityLevel.normal
+        ? "***   "; statSuiteObj.Name; ": "; statTestObj.Name; " - "; statTestObj.Result
+      else if m.verbosity = m.verbosityLevel.verbose
+        m.PrintTestStatistic(statTestObj)
+      end if
+    end if
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -1239,36 +1257,36 @@ end sub
 ' @param statSuiteObj (object) A test suite statistic object to append.
 ' ----------------------------------------------------------------
 sub Logger__AppendSuiteStatistic(statTotalObj as Object, statSuiteObj as Object)
-    if TF_Utils__IsAssociativeArray(statTotalObj) and TF_Utils__IsAssociativeArray(statSuiteObj)
-        statTotalObj.Suites.Push(statSuiteObj)
-        statTotalObj.Time = statTotalObj.Time + statSuiteObj.Time
+  if (TF_Utils__IsAssociativeArray(statTotalObj) AND TF_Utils__IsAssociativeArray(statSuiteObj))
+    statTotalObj.Suites.Push(statSuiteObj)
+    statTotalObj.Time = statTotalObj.Time + statSuiteObj.Time
 
-        if TF_Utils__IsInteger(statSuiteObj.Total)
-            statTotalObj.Total = statTotalObj.Total + statSuiteObj.Total
-        end if
-
-        if TF_Utils__IsInteger(statSuiteObj.Correct)
-            statTotalObj.Correct = statTotalObj.Correct + statSuiteObj.Correct
-        end if
-
-        if TF_Utils__IsInteger(statSuiteObj.Fail)
-            statTotalObj.Fail = statTotalObj.Fail + statSuiteObj.Fail
-        end if
-
-        if TF_Utils__IsInteger(statSuiteObj.skipped)
-            statTotalObj.skipped += statSuiteObj.skipped
-        end if
-
-        if TF_Utils__IsInteger(statSuiteObj.Crash)
-            statTotalObj.Crash = statTotalObj.Crash + statSuiteObj.Crash
-        end if
-
-        if m.echoEnabled
-            if m.verbosity = m.verbosityLevel.verbose
-                m.PrintSuiteStatistic(statSuiteObj)
-            end if
-        end if
+    if (TF_Utils__IsInteger(statSuiteObj.Total))
+      statTotalObj.Total = statTotalObj.Total + statSuiteObj.Total
     end if
+
+    if (TF_Utils__IsInteger(statSuiteObj.Correct))
+      statTotalObj.Correct = statTotalObj.Correct + statSuiteObj.Correct
+    end if
+
+    if (TF_Utils__IsInteger(statSuiteObj.Fail))
+      statTotalObj.Fail = statTotalObj.Fail + statSuiteObj.Fail
+    end if
+
+    if (TF_Utils__IsInteger(statSuiteObj.skipped))
+      statTotalObj.skipped += statSuiteObj.skipped
+    end if
+
+    if (TF_Utils__IsInteger(statSuiteObj.Crash))
+      statTotalObj.Crash = statTotalObj.Crash + statSuiteObj.Crash
+    end if
+
+    if (m.echoEnabled)
+      if m.verbosity = m.verbosityLevel.verbose
+        m.PrintSuiteStatistic(statSuiteObj)
+      end if
+    end if
+  end if
 end sub
 
 ' ----------------------------------------------------------------
@@ -1277,20 +1295,20 @@ end sub
 ' @param statSuiteObj (object) A target test suite object to print.
 ' ----------------------------------------------------------------
 sub Logger__PrintSuiteStatistic(statSuiteObj as Object)
-    if not m.echoEnabled
-        m.PrintSuiteStart(statSuiteObj.Name)
+  if (NOT m.echoEnabled)
+    m.PrintSuiteStart(statSuiteObj.Name)
 
-        for each testCase in statSuiteObj.Tests
-            m.PrintTestStatistic(testCase)
-        end for
-    end if
+    for each testCase in statSuiteObj.Tests
+      m.PrintTestStatistic(testCase)
+    end for
+  end if
 
-    ? "==="
-    ? "===   Total  = "; TF_Utils__AsString(statSuiteObj.Total); " ; Passed  = "; statSuiteObj.Correct; " ; Failed   = "; statSuiteObj.Fail; " ; Skipped   = "; statSuiteObj.skipped; " ; Crashes  = "; statSuiteObj.Crash;
-    ? " Time spent: "; statSuiteObj.Time; "ms"
-    ? "==="
+  ? "==="
+  ? "===   Total  = "; TF_Utils__AsString(statSuiteObj.Total); " ; Passed  = "; statSuiteObj.Correct; " ; Failed   = "; statSuiteObj.Fail; " ; Skipped   = "; statSuiteObj.skipped; " ; Crashes  = "; statSuiteObj.Crash;
+  ? " Time spent: "; statSuiteObj.Time; "ms"
+  ? "==="
 
-    m.PrintSuiteEnd(statSuiteObj.Name)
+  m.PrintSuiteEnd(statSuiteObj.Name)
 end sub
 
 ' ----------------------------------------------------------------
@@ -1299,164 +1317,164 @@ end sub
 ' @param statTestObj (object) A target test object to print.
 ' ----------------------------------------------------------------
 sub Logger__PrintTestStatistic(statTestObj as Object)
-    if not m.echoEnabled
-        m.PrintTestStart(statTestObj.Name)
+  if (NOT m.echoEnabled)
+    m.PrintTestStart(statTestObj.Name)
+  end if
+
+  ? "---   Result:        "; statTestObj.Result
+  ? "---   Time:          "; statTestObj.Time
+
+  if LCase(statTestObj.result) = "skipped"
+    if (Len(statTestObj.message) > 0)
+      ? "---   Message: "; statTestObj.message
     end if
+  else if (LCase(statTestObj.Result) <> "success")
+    ? "---   Error Code:    "; statTestObj.Error.Code
+    ? "---   Error Message: "; statTestObj.Error.Message
+  end if
 
-    ? "---   Result:        "; statTestObj.Result
-    ? "---   Time:          "; statTestObj.Time
-
-    if LCase(statTestObj.result) = "skipped"
-        if Len(statTestObj.message) > 0
-            ? "---   Message: "; statTestObj.message
-        end if
-    else if LCase(statTestObj.Result) <> "success"
-        ? "---   Error Code:    "; statTestObj.Error.Code
-        ? "---   Error Message: "; statTestObj.Error.Message
-    end if
-
-    m.PrintTestEnd(statTestObj.Name)
+  m.PrintTestEnd(statTestObj.Name)
 end sub
 
 ' ----------------------------------------------------------------
 ' Print testting start message.
 ' ----------------------------------------------------------------
 sub Logger__PrintStart()
-    ? ""
-    ? "******************************************************************"
-    ? "******************************************************************"
-    ? "*************            Start testing               *************"
-    ? "******************************************************************"
+  ? ""
+  ? "******************************************************************"
+  ? "******************************************************************"
+  ? "*************            Start testing               *************"
+  ? "******************************************************************"
 end sub
 
 ' ----------------------------------------------------------------
 ' Print testing end message.
 ' ----------------------------------------------------------------
 sub Logger__PrintEnd()
-    ? "******************************************************************"
-    ? "*************             End testing                *************"
-    ? "******************************************************************"
-    ? "******************************************************************"
-    ? ""
+  ? "******************************************************************"
+  ? "*************             End testing                *************"
+  ? "******************************************************************"
+  ? "******************************************************************"
+  ? ""
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test suite SetUp message.
 ' ----------------------------------------------------------------
 sub Logger__PrintSuiteSetUp(sName as String)
-    if m.verbosity = m.verbosityLevel.verbose
-        ? "================================================================="
-        ? "===   SetUp "; sName; " suite."
-        ? "================================================================="
-    end if
+  if m.verbosity = m.verbosityLevel.verbose
+    ? "================================================================="
+    ? "===   SetUp "; sName; " suite."
+    ? "================================================================="
+  end if
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test suite start message.
 ' ----------------------------------------------------------------
 sub Logger__PrintSuiteStart(sName as String)
-    ? "================================================================="
-    ? "===   Start "; sName; " suite:"
-    ? "==="
+  ? "================================================================="
+  ? "===   Start "; sName; " suite:"
+  ? "==="
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test suite end message.
 ' ----------------------------------------------------------------
 sub Logger__PrintSuiteEnd(sName as String)
-    ? "==="
-    ? "===   End "; sName; " suite."
-    ? "================================================================="
+  ? "==="
+  ? "===   End "; sName; " suite."
+  ? "================================================================="
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test suite TearDown message.
 ' ----------------------------------------------------------------
 sub Logger__PrintSuiteTearDown(sName as String)
-    if m.verbosity = m.verbosityLevel.verbose
-        ? "================================================================="
-        ? "===   TearDown "; sName; " suite."
-        ? "================================================================="
-    end if
+  if m.verbosity = m.verbosityLevel.verbose
+    ? "================================================================="
+    ? "===   TearDown "; sName; " suite."
+    ? "================================================================="
+  end if
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test setUp message.
 ' ----------------------------------------------------------------
 sub Logger__PrintTestSetUp(tName as String)
-    if m.verbosity = m.verbosityLevel.verbose
-        ? "----------------------------------------------------------------"
-        ? "---   SetUp "; tName; " test."
-        ? "----------------------------------------------------------------"
-    end if
+  if m.verbosity = m.verbosityLevel.verbose
+    ? "----------------------------------------------------------------"
+    ? "---   SetUp "; tName; " test."
+    ? "----------------------------------------------------------------"
+  end if
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test start message.
 ' ----------------------------------------------------------------
 sub Logger__PrintTestStart(tName as String)
-    ? "----------------------------------------------------------------"
-    ? "---   Start "; tName; " test:"
-    ? "---"
+  ? "----------------------------------------------------------------"
+  ? "---   Start "; tName; " test:"
+  ? "---"
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test end message.
 ' ----------------------------------------------------------------
 sub Logger__PrintTestEnd(tName as String)
-    ? "---"
-    ? "---   End "; tName; " test."
-    ? "----------------------------------------------------------------"
+  ? "---"
+  ? "---   End "; tName; " test."
+  ? "----------------------------------------------------------------"
 end sub
 
 ' ----------------------------------------------------------------
 ' Print test TearDown message.
 ' ----------------------------------------------------------------
 sub Logger__PrintTestTearDown(tName as String)
-    if m.verbosity = m.verbosityLevel.verbose
-        ? "----------------------------------------------------------------"
-        ? "---   TearDown "; tName; " test."
-        ? "----------------------------------------------------------------"
-    end if
+  if m.verbosity = m.verbosityLevel.verbose
+    ? "----------------------------------------------------------------"
+    ? "---   TearDown "; tName; " test."
+    ? "----------------------------------------------------------------"
+  end if
 end sub
 
 sub Logger__PrintJUnitFormat(statObj as Object)
-    ' TODO finish report
-    xml = CreateObject("roXMLElement")
-    xml.SetName("testsuites")
-    for each testSuiteAA in statObj.suites
-        testSuite = xml.AddElement("testsuite")
-        ' name="FeatureManagerTest" time="13.923" tests="2" errors="0" skipped="0" failures="0"
-        testSuite.AddAttribute("name", testSuiteAA.name)
-        testSuite.AddAttribute("time", testSuiteAA.time.toStr())
-        testSuite.AddAttribute("tests", testSuiteAA.Tests.count().toStr())
+  ' TODO finish report
+  xml = CreateObject("roXMLElement")
+  xml.SetName("testsuites")
+  for each testSuiteAA in statObj.suites
+    testSuite = xml.AddElement("testsuite")
+    ' name="FeatureManagerTest" time="13.923" tests="2" errors="0" skipped="0" failures="0"
+    testSuite.AddAttribute("name", testSuiteAA.name)
+    testSuite.AddAttribute("time", testSuiteAA.time.toStr())
+    testSuite.AddAttribute("tests", testSuiteAA.Tests.count().toStr())
 
-        skippedNum = 0
-        failedNum = 0
-        for each testAA in testSuiteAA.Tests
-            test = testSuite.AddElement("testcase")
-            test.AddAttribute("name", testAA.name)
-            test.AddAttribute("time", testAA.time.toStr())
+    skippedNum = 0
+    failedNum = 0
+    for each testAA in testSuiteAA.Tests
+      test = testSuite.AddElement("testcase")
+      test.AddAttribute("name", testAA.name)
+      test.AddAttribute("time", testAA.time.toStr())
 
-            if LCase(testAA.result) = "skipped" then
-                test.AddElement("skipped")
-                skippedNum++
-            else if LCase(testAA.Result) <> "success"
-                failure = test.AddElement("failure")
-                failure.AddAttribute("message", testAA.error.message)
-                failure.AddAttribute("type", testAA.error.code.tostr())
-                failedNum++
-            end if
-        end for
-        testSuite.AddAttribute("errors", failedNum.tostr())
-        testSuite.AddAttribute("skipped", skippedNum.tostr())
+      if LCase(testAA.result) = "skipped"
+        test.AddElement("skipped")
+        skippedNum++
+      else if (LCase(testAA.Result) <> "success")
+        failure = test.AddElement("failure")
+        failure.AddAttribute("message", testAA.error.message)
+        failure.AddAttribute("type", testAA.error.code.tostr())
+        failedNum++
+      end if
     end for
-    ? xml.GenXML(true)
+    testSuite.AddAttribute("errors", failedNum.tostr())
+    testSuite.AddAttribute("skipped", skippedNum.tostr())
+  end for
+  ? xml.GenXML(true)
 end sub
-'*****************************************************************
-'* Copyright Roku 2011-2019
-'* All Rights Reserved
-'*****************************************************************
+' *****************************************************************
+' * Copyright Roku 2011-2019
+' * All Rights Reserved
+' *****************************************************************
 
 ' Functions in this file:
 '        TestRunner
@@ -1479,49 +1497,49 @@ end sub
 ' @return A TestRunner object.
 ' ----------------------------------------------------------------
 function TestRunner() as Object
-    this = {}
-    GetGlobalAA().globalErrorsList = []
-    this.isNodeMode = GetGlobalAA().top <> invalid
-    this.Logger = Logger()
+  this = {}
+  GetGlobalAA().globalErrorsList = []
+  this.isNodeMode = GetGlobalAA().top <> Invalid
+  this.Logger = Logger()
 
-    ' Internal properties
-    this.SKIP_TEST_MESSAGE_PREFIX = "SKIP_TEST_MESSAGE_PREFIX__"
-    this.nodesTestDirectory = "pkg:/components/tests"
-    if this.isNodeMode
-        this.testsDirectory = this.nodesTestDirectory
-        this.testFilePrefix = m.top.subtype()
-    else
-        this.testsDirectory = "pkg:/source/tests"
-        this.testFilePrefix = "Test__"
-    end if
-    this.testSuitePrefix = "TestSuite__"
-    this.testSuiteName = ""
-    this.testCaseName = ""
-    this.failFast = false
-    this.testsFilter = []
+  ' Internal properties
+  this.SKIP_TEST_MESSAGE_PREFIX = "SKIP_TEST_MESSAGE_PREFIX__"
+  this.nodesTestDirectory = "pkg:/components/tests"
+  if (this.isNodeMode)
+    this.testsDirectory = this.nodesTestDirectory
+    this.testFilePrefix = m.top.subtype()
+  else
+    this.testsDirectory = "pkg:/source/tests"
+    this.testFilePrefix = "Test__"
+  end if
+  this.testSuitePrefix = "TestSuite__"
+  this.testSuiteName = ""
+  this.testCaseName = ""
+  this.failFast = false
+  this.testsFilter = []
 
-    ' Interface
-    this.Run = TestRunner__Run
-    this.SetTestsDirectory = TestRunner__SetTestsDirectory
-    this.SetTestFilePrefix = TestRunner__SetTestFilePrefix
-    this.SetTestSuitePrefix = TestRunner__SetTestSuitePrefix
-    this.SetTestSuiteName = TestRunner__SetTestSuiteName ' Obsolete, will be removed in next versions
-    this.SetTestCaseName = TestRunner__SetTestCaseName ' Obsolete, will be removed in next versions
-    this.SetFailFast = TestRunner__SetFailFast
-    this.SetFunctions = TestRunner__SetFunctions
-    this.SetIncludeFilter = TestRunner__SetIncludeFilter
-    this.SetExcludeFilter = TestRunner__SetExcludeFilter
-    this.SetTestsFilter = TestRunner__SetTestsFilter
+  ' Interface
+  this.Run = TestRunner__Run
+  this.SetTestsDirectory = TestRunner__SetTestsDirectory
+  this.SetTestFilePrefix = TestRunner__SetTestFilePrefix
+  this.SetTestSuitePrefix = TestRunner__SetTestSuitePrefix
+  this.SetTestSuiteName = TestRunner__SetTestSuiteName ' Obsolete, will be removed in next versions
+  this.SetTestCaseName = TestRunner__SetTestCaseName ' Obsolete, will be removed in next versions
+  this.SetFailFast = TestRunner__SetFailFast
+  this.SetFunctions = TestRunner__SetFunctions
+  this.SetIncludeFilter = TestRunner__SetIncludeFilter
+  this.SetExcludeFilter = TestRunner__SetExcludeFilter
+  this.SetTestsFilter = TestRunner__SetTestsFilter
 
-    ' Internal functions
-    this.GetTestFilesList = TestRunner__GetTestFilesList
-    this.GetTestSuitesList = TestRunner__GetTestSuitesList
-    this.GetTestNodesList = TestRunner__GetTestNodesList
-    this.GetTestSuiteNamesList = TestRunner__GetTestSuiteNamesList
-    this.GetIncludeFilter = TestRunner__GetIncludeFilter
-    this.GetExcludeFilter = TestRunner__GetExcludeFilter
+  ' Internal functions
+  this.GetTestFilesList = TestRunner__GetTestFilesList
+  this.GetTestSuitesList = TestRunner__GetTestSuitesList
+  this.GetTestNodesList = TestRunner__GetTestNodesList
+  this.GetTestSuiteNamesList = TestRunner__GetTestSuiteNamesList
+  this.GetIncludeFilter = TestRunner__GetIncludeFilter
+  this.GetExcludeFilter = TestRunner__GetExcludeFilter
 
-    return this
+  return this
 end function
 
 ' ----------------------------------------------------------------
@@ -1533,246 +1551,247 @@ end function
 ' @return Statistic object if run in node mode, invalid otherwise
 ' ----------------------------------------------------------------
 function TestRunner__Run(statObj = m.Logger.CreateTotalStatistic() as Object, testSuiteNamesList = [] as Object) as Object
-    alltestCount = 0
-    totalStatObj = statObj
-    testSuitesList = m.GetTestSuitesList(testSuiteNamesList)
+  alltestCount = 0
+  totalStatObj = statObj
+  testSuitesList = m.GetTestSuitesList(testSuiteNamesList)
 
-    globalErrorsList = GetGlobalAA().globalErrorsList
-    for each testSuite in testSuitesList
-        testCases = testSuite.testCases
-        testCount = testCases.Count()
-        alltestCount = alltestCount + testCount
+  globalErrorsList = GetGlobalAA().globalErrorsList
+  for each testSuite in testSuitesList
+    testCases = testSuite.testCases
+    testCount = testCases.Count()
+    alltestCount = alltestCount + testCount
 
-        IS_NEW_APPROACH = testSuite.IS_NEW_APPROACH
-        ' create dedicated env for each test, so that they will have not global m and don't rely on m.that is set in another suite
-        env = {}
+    IS_NEW_APPROACH = testSuite.IS_NEW_APPROACH
+    ' create dedicated env for each test, so that they will have not global m and don't rely on m.that is set in another suite
+    env = {}
 
-        if TF_Utils__IsFunction(testSuite.SetUp)
-            m.Logger.PrintSuiteSetUp(testSuite.Name)
-            if IS_NEW_APPROACH then
-                env.functionToCall = testSuite.SetUp
+    if (TF_Utils__IsFunction(testSuite.SetUp))
+      m.Logger.PrintSuiteSetUp(testSuite.Name)
+      if (IS_NEW_APPROACH)
+        env.functionToCall = testSuite.SetUp
+        env.functionToCall()
+      else
+        testSuite.SetUp()
+      end if
+    end if
+
+    suiteStatObj = m.Logger.CreateSuiteStatistic(testSuite.Name)
+    ' Initiate empty test statistics object to print results if no tests was run
+    testStatObj = m.Logger.CreateTestStatistic("", "Success", 0, 0, "", true)
+    for each testCase in testCases
+      ' clear all existing errors
+      globalErrorsList.clear()
+
+      if m.testCaseName = "" OR (m.testCaseName <> "" AND LCase(testCase.Name) = LCase(m.testCaseName))
+        skipTest = TF_Utils__AsBoolean(testCase.skip)
+
+        if (TF_Utils__IsFunction(testCase.SetUp) AND NOT skipTest)
+          m.Logger.PrintTestSetUp(testCase.Name)
+          if (IS_NEW_APPROACH)
+            env.functionToCall = testCase.SetUp
+            env.functionToCall()
+          else
+            testCase.SetUp()
+          end if
+        end if
+
+        testTimer = CreateObject("roTimespan")
+        testStatObj = m.Logger.CreateTestStatistic(testCase.Name)
+
+        if (skipTest)
+          runResult = m.SKIP_TEST_MESSAGE_PREFIX + "Test was skipped according to specified filters"
+        else
+          testSuite.testInstance = testCase
+          testSuite.testCase = testCase.Func
+
+          runResult = ""
+          if (IS_NEW_APPROACH)
+            env.functionToCall = testCase.Func
+
+            if (GetInterface(env.functionToCall, "ifFunction") <> Invalid)
+              if (testCase.hasArguments)
+                env.functionToCall(testCase.arg)
+              else
                 env.functionToCall()
+              end if
             else
-                testSuite.SetUp()
+              UTF_fail("Failed to execute test """ + testCase.Name + """ function pointer not found")
             end if
+          else
+            runResult = testSuite.testCase()
+          end if
         end if
 
-        suiteStatObj = m.Logger.CreateSuiteStatistic(testSuite.Name)
-        ' Initiate empty test statistics object to print results if no tests was run
-        testStatObj = m.Logger.CreateTestStatistic("", "Success", 0, 0, "", true)
-        for each testCase in testCases
-            ' clear all existing errors
-            globalErrorsList.clear()
-
-            if m.testCaseName = "" or (m.testCaseName <> "" and LCase(testCase.Name) = LCase(m.testCaseName))
-                skipTest = TF_Utils__AsBoolean(testCase.skip)
-
-                if TF_Utils__IsFunction(testCase.SetUp) and not skipTest
-                    m.Logger.PrintTestSetUp(testCase.Name)
-                    if IS_NEW_APPROACH then
-                        env.functionToCall = testCase.SetUp
-                        env.functionToCall()
-                    else
-                        testCase.SetUp()
-                    end if
-                end if
-
-                testTimer = CreateObject("roTimespan")
-                testStatObj = m.Logger.CreateTestStatistic(testCase.Name)
-
-                if skipTest
-                    runResult = m.SKIP_TEST_MESSAGE_PREFIX + "Test was skipped according to specified filters"
-                else
-                    testSuite.testInstance = testCase
-                    testSuite.testCase = testCase.Func
-
-                    runResult = ""
-                    if IS_NEW_APPROACH then
-                        env.functionToCall = testCase.Func
-
-                        if GetInterface(env.functionToCall, "ifFunction") <> invalid
-                            if testCase.hasArguments then
-                                env.functionToCall(testCase.arg)
-                            else
-                                env.functionToCall()
-                            end if
-                        else
-                            UTF_fail("Failed to execute test """ + testCase.Name + """ function pointer not found")
-                        end if
-                    else
-                        runResult = testSuite.testCase()
-                    end if
-                end if
-
-                if TF_Utils__IsFunction(testCase.TearDown) and not skipTest
-                    m.Logger.PrintTestTearDown(testCase.Name)
-                    if IS_NEW_APPROACH then
-                        env.functionToCall = testCase.TearDown
-                        env.functionToCall()
-                    else
-                        testCase.TearDown()
-                    end if
-                end if
-
-                if IS_NEW_APPROACH then
-                    if globalErrorsList.count() > 0
-                        for each error in globalErrorsList
-                            runResult += error + Chr(10) + String(10, "-") + Chr(10)
-                        end for
-                    end if
-                end if
-
-                if runResult <> ""
-                    if InStr(0, runResult, m.SKIP_TEST_MESSAGE_PREFIX) = 1
-                        testStatObj.result = "Skipped"
-                        testStatObj.message = runResult.Mid(Len(m.SKIP_TEST_MESSAGE_PREFIX)) ' remove prefix from the message
-                    else
-                        testStatObj.Result = "Fail"
-                        testStatObj.Error.Code = 1
-                        testStatObj.Error.Message = runResult
-                    end if
-                else
-                    testStatObj.Result = "Success"
-                end if
-
-                testStatObj.Time = testTimer.TotalMilliseconds()
-                m.Logger.AppendTestStatistic(suiteStatObj, testStatObj)
-
-                if testStatObj.Result = "Fail" and m.failFast
-                    suiteStatObj.Result = "Fail"
-                    exit for
-                end if
-            end if
-        end for
-
-        m.Logger.AppendSuiteStatistic(totalStatObj, suiteStatObj)
-
-        if TF_Utils__IsFunction(testSuite.TearDown)
-            m.Logger.PrintSuiteTearDown(testSuite.Name)
-            testSuite.TearDown()
+        if (TF_Utils__IsFunction(testCase.TearDown) AND NOT skipTest)
+          m.Logger.PrintTestTearDown(testCase.Name)
+          if (IS_NEW_APPROACH)
+            env.functionToCall = testCase.TearDown
+            env.functionToCall()
+          else
+            testCase.TearDown()
+          end if
         end if
 
-        if suiteStatObj.Result = "Fail" and m.failFast
-            exit for
+        if (IS_NEW_APPROACH)
+          if (globalErrorsList.count() > 0)
+            for each error in globalErrorsList
+              runResult += error + Chr(10) + String(10, "-") + Chr(10)
+            end for
+          end if
         end if
+
+        if (runResult <> "")
+          if Instr(0, runResult, m.SKIP_TEST_MESSAGE_PREFIX) = 1
+            testStatObj.result = "Skipped"
+            testStatObj.message = runResult.Mid(Len(m.SKIP_TEST_MESSAGE_PREFIX)) ' remove prefix from the message
+          else
+            testStatObj.Result = "Fail"
+            testStatObj.Error.Code = 1
+            testStatObj.Error.Message = runResult
+          end if
+        else
+          testStatObj.Result = "Success"
+        end if
+
+        testStatObj.Time = testTimer.TotalMilliseconds()
+        m.Logger.AppendTestStatistic(suiteStatObj, testStatObj)
+
+        if testStatObj.Result = "Fail" AND m.failFast
+          suiteStatObj.Result = "Fail"
+          exit for
+        end if
+      end if
     end for
 
-    gthis = GetGlobalAA()
-    msg = ""
-    if gthis.notFoundFunctionPointerList <> invalid then
-        msg = Chr(10) + String(40, "---") + Chr(10)
-        if m.isNodeMode
-            fileNamesString = ""
+    m.Logger.AppendSuiteStatistic(totalStatObj, suiteStatObj)
 
-            for each testSuiteObject in testSuiteNamesList
-                if GetInterface(testSuiteObject, "ifString") <> invalid then
-                    fileNamesString += testSuiteObject + ".brs, "
-                else if GetInterface(testSuiteObject, "ifAssociativeArray") <> invalid then
-                    if testSuiteObject.filePath <> invalid then
-                        fileNamesString += testSuiteObject.filePath + ", "
-                    end if
-                end if
-            end for
-
-            msg += Chr(10) + "Create this function below in one of these files"
-            msg += Chr(10) + fileNamesString + Chr(10)
-
-            msg += Chr(10) + "sub init()"
-        end if
-        msg += Chr(10) + "Runner.SetFunctions([" + Chr(10) + "    testCase" + Chr(10) + "])"
-        msg += Chr(10) + "For example we think this might resolve your issue"
-        msg += Chr(10) + "Runner = TestRunner()"
-        msg += Chr(10) + "Runner.SetFunctions(["
-
-        tmpMap = {}
-        for each functionName in gthis.notFoundFunctionPointerList
-            if tmpMap[functionName] = invalid then
-                tmpMap[functionName] = ""
-                msg += Chr(10) + "    " + functionName
-            end if
-        end for
-
-        msg += Chr(10) + "])"
-        if m.isNodeMode then
-            msg += Chr(10) + "end sub"
-        else
-            msg += Chr(10) + "Runner.Run()"
-        end if
+    if (TF_Utils__IsFunction(testSuite.TearDown))
+      m.Logger.PrintSuiteTearDown(testSuite.Name)
+      testSuite.TearDown()
     end if
 
-    if m.isNodeMode
-        if msg.Len() > 0 then
-            if totalStatObj.notFoundFunctionsMessage = invalid then totalStatObj.notFoundFunctionsMessage = ""
-            totalStatObj.notFoundFunctionsMessage += msg
+    if suiteStatObj.Result = "Fail" AND m.failFast
+      exit for
+    end if
+  end for
+
+  gthis = GetGlobalAA()
+  msg = ""
+  if (gthis.notFoundFunctionPointerList <> Invalid)
+    msg = Chr(10) + String(40, "---") + Chr(10)
+    if (m.isNodeMode)
+      fileNamesString = ""
+
+      for each testSuiteObject in testSuiteNamesList
+        if (GetInterface(testSuiteObject, "ifString") <> Invalid)
+          fileNamesString += testSuiteObject + ".brs, "
+        else if (GetInterface(testSuiteObject, "ifAssociativeArray") <> Invalid)
+          if (testSuiteObject.filePath <> Invalid)
+            fileNamesString += testSuiteObject.filePath + ", "
+          end if
         end if
-        return totalStatObj
+      end for
+
+      msg += Chr(10) + "Create this function below in one of these files"
+      msg += Chr(10) + fileNamesString + Chr(10)
+
+      msg += Chr(10) + "sub init()"
+    end if
+    msg += Chr(10) + "Runner.SetFunctions([" + Chr(10) + "    testCase" + Chr(10) + "])"
+    msg += Chr(10) + "For example we think this might resolve your issue"
+    msg += Chr(10) + "Runner = TestRunner()"
+    msg += Chr(10) + "Runner.SetFunctions(["
+
+    tmpMap = {}
+    for each functionName in gthis.notFoundFunctionPointerList
+      if tmpMap[functionName] = Invalid
+        tmpMap[functionName] = ""
+        msg += Chr(10) + "    " + functionName
+      end if
+    end for
+
+    msg += Chr(10) + "])"
+    if (m.isNodeMode)
+      msg += Chr(10) + "end sub"
     else
-        testNodes = m.getTestNodesList()
-        if m.testsFilter.count() > 0
-            filteredNodes = []
-            for each testNodeName in testNodes
-                for each filterPattern in m.testsFilter
-                    regexStr = filterPattern.replace("*", ".*")
-                    regex = CreateObject("roRegex", "^" + regexStr + "$", "i")
-                    if regex.isMatch(testNodeName)
-                        filteredNodes.push(testNodeName)
-                        exit for
-                    end if
-                end for
-            end for
-            testNodes = filteredNodes
-        end if
-        for each testNodeName in testNodes
-            testNode = CreateObject("roSGNode", testNodeName)
-            if testNode <> invalid
-                testSuiteNamesList = m.GetTestSuiteNamesList(testNodeName)
-                if CreateObject("roSGScreen").CreateScene(testNodeName) <> invalid
-                    ? "WARNING: Test cases cannot be run in main scene."
-                    for each testSuiteName in testSuiteNamesList
-                        suiteStatObj = m.Logger.CreateSuiteStatistic(testSuiteName)
-                        suiteStatObj.fail = 1
-                        suiteStatObj.total = 1
-                        m.Logger.AppendSuiteStatistic(totalStatObj, suiteStatObj)
-                    end for
-                else
-                    params = [m, totalStatObj, testSuiteNamesList, m.GetIncludeFilter(), m.GetExcludeFilter()]
-                    tmp = testNode.callFunc("TestFramework__RunNodeTests", params)
-                    if tmp <> invalid then
-                        totalStatObj = tmp
-                    end if
-                end if
-            end if
+      msg += Chr(10) + "Runner.Run()"
+    end if
+  end if
+
+  if (m.isNodeMode)
+    if (msg.Len() > 0)
+      if totalStatObj.notFoundFunctionsMessage = Invalid then totalStatObj.notFoundFunctionsMessage = ""
+      totalStatObj.notFoundFunctionsMessage += msg
+    end if
+
+    return totalStatObj
+  else
+    testNodes = m.getTestNodesList()
+    if (m.testsFilter.count() > 0)
+      filteredNodes = []
+      for each testNodeName in testNodes
+        for each filterPattern in m.testsFilter
+          regexStr = filterPattern.replace("*", ".*")
+          regex = CreateObject("roRegex", "^" + regexStr + "$", "i")
+          if (regex.isMatch(testNodeName))
+            filteredNodes.push(testNodeName)
+            exit for
+          end if
         end for
-
-        m.Logger.PrintStatistic(totalStatObj)
+      end for
+      testNodes = filteredNodes
     end if
-
-    if msg.Len() > 0 or totalStatObj.notFoundFunctionsMessage <> invalid then
-        title = ""
-        title += Chr(10) + "NOTE: If some your tests haven't been executed this might be due to outdated list of functions"
-        title += Chr(10) + "To resolve this issue please execute" + Chr(10) + Chr(10)
-
-        title += msg
-
-        if totalStatObj.notFoundFunctionsMessage <> invalid then
-            title += totalStatObj.notFoundFunctionsMessage
+    for each testNodeName in testNodes
+      testNode = CreateObject("roSGNode", testNodeName)
+      if (testNode <> Invalid)
+        testSuiteNamesList = m.GetTestSuiteNamesList(testNodeName)
+        if (CreateObject("roSGScreen").CreateScene(testNodeName) <> Invalid)
+          ? "WARNING: Test cases cannot be run in main scene."
+          for each testSuiteName in testSuiteNamesList
+            suiteStatObj = m.Logger.CreateSuiteStatistic(testSuiteName)
+            suiteStatObj.fail = 1
+            suiteStatObj.total = 1
+            m.Logger.AppendSuiteStatistic(totalStatObj, suiteStatObj)
+          end for
+        else
+          params = [m, totalStatObj, testSuiteNamesList, m.GetIncludeFilter(), m.GetExcludeFilter()]
+          tmp = testNode.callFunc("TestFramework__RunNodeTests", params)
+          if (tmp <> Invalid)
+            totalStatObj = tmp
+          end if
         end if
-        ? title
+      end if
+    end for
+
+    m.Logger.PrintStatistic(totalStatObj)
+  end if
+
+  if (msg.Len() > 0 OR totalStatObj.notFoundFunctionsMessage <> Invalid)
+    title = ""
+    title += Chr(10) + "NOTE: If some your tests haven't been executed this might be due to outdated list of functions"
+    title += Chr(10) + "To resolve this issue please execute" + Chr(10) + Chr(10)
+
+    title += msg
+
+    if (totalStatObj.notFoundFunctionsMessage <> Invalid)
+      title += totalStatObj.notFoundFunctionsMessage
     end if
+    ? title
+  end if
 end function
 
 ' ----------------------------------------------------------------
 ' Set testsDirectory property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestsDirectory(testsDirectory as String)
-    m.testsDirectory = testsDirectory
+  m.testsDirectory = testsDirectory
 end sub
 
 ' ----------------------------------------------------------------
 ' Set testFilePrefix property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestFilePrefix(testFilePrefix as String)
-    m.testFilePrefix = testFilePrefix
+  m.testFilePrefix = testFilePrefix
 end sub
 
 ' ----------------------------------------------------------------
@@ -1781,35 +1800,35 @@ end sub
 ' Each entry should be a full test node name, e.g. "Test__Tile_".
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestsFilter(testsFilter as Object)
-    m.testsFilter = testsFilter
+  m.testsFilter = testsFilter
 end sub
 
 ' ----------------------------------------------------------------
 ' Set testSuitePrefix property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestSuitePrefix(testSuitePrefix as String)
-    m.testSuitePrefix = testSuitePrefix
+  m.testSuitePrefix = testSuitePrefix
 end sub
 
 ' ----------------------------------------------------------------
 ' Set testSuiteName property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestSuiteName(testSuiteName as String)
-    m.testSuiteName = testSuiteName
+  m.testSuiteName = testSuiteName
 end sub
 
 ' ----------------------------------------------------------------
 ' Set testCaseName property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetTestCaseName(testCaseName as String)
-    m.testCaseName = testCaseName
+  m.testCaseName = testCaseName
 end sub
 
 ' ----------------------------------------------------------------
 ' Set failFast property.
 ' ----------------------------------------------------------------
 sub TestRunner__SetFailFast(failFast = false as Boolean)
-    m.failFast = failFast
+  m.failFast = failFast
 end sub
 
 ' ----------------------------------------------------------------
@@ -1820,400 +1839,400 @@ end sub
 ' @return An array of test suites.
 ' ----------------------------------------------------------------
 function TestRunner__GetTestSuitesList(testSuiteNamesList = [] as Object) as Object
-    result = []
+  result = []
 
-    if testSuiteNamesList.count() > 0
-        for each value in testSuiteNamesList
-            if TF_Utils__IsString(value) then
-                tmpTestSuiteFunction = TestFramework__getFunctionPointer(value)
-                if tmpTestSuiteFunction <> invalid then
-                    testSuite = tmpTestSuiteFunction()
+  if (testSuiteNamesList.count() > 0)
+    for each value in testSuiteNamesList
+      if (TF_Utils__IsString(value))
+        tmpTestSuiteFunction = TestFramework__getFunctionPointer(value)
+        if (tmpTestSuiteFunction <> Invalid)
+          testSuite = tmpTestSuiteFunction()
 
-                    if TF_Utils__IsAssociativeArray(testSuite)
-                        result.Push(testSuite)
-                    end if
-                end if
-                ' also we can get AA that will give source code and filePath
-                ' Please be aware this is executed in render thread
-            else if GetInterface(value, "ifAssociativeArray") <> invalid then
-                ' try to use new approach
-                testSuite = ScanFileForNewTests(value.code, value.filePath)
-                if testSuite <> invalid then
-                    result.push(testSuite)
-                end if
-            else if GetInterface(value, "ifFunction") <> invalid then
-                 result.Push(value)
+          if (TF_Utils__IsAssociativeArray(testSuite))
+            result.Push(testSuite)
+          end if
+        end if
+        ' also we can get AA that will give source code and filePath
+        ' Please be aware this is executed in render thread
+      else if (GetInterface(value, "ifAssociativeArray") <> Invalid)
+        ' try to use new approach
+        testSuite = ScanFileForNewTests(value.code, value.filePath)
+        if (testSuite <> Invalid)
+          result.push(testSuite)
+        end if
+      else if (GetInterface(value, "ifFunction") <> Invalid)
+        result.Push(value)
+      end if
+    end for
+  else
+    testSuiteRegex = CreateObject("roRegex", "^(function|sub)\s(" + m.testSuitePrefix + m.testSuiteName + "[0-9a-z\_]*)\s*\(", "i")
+    testFilesList = m.GetTestFilesList()
+
+    for each filePath in testFilesList
+      code = TF_Utils__AsString(ReadAsciiFile(filePath))
+
+      if (code <> "")
+        foundTestSuite = false
+        for each line in code.Tokenize(Chr(10))
+          line.Trim()
+
+          if (testSuiteRegex.IsMatch(line))
+            testSuite = Invalid
+            functionName = testSuiteRegex.Match(line).Peek()
+            tmpTestSuiteFunction = TestFramework__getFunctionPointer(functionName)
+            if (tmpTestSuiteFunction <> Invalid)
+              testSuite = tmpTestSuiteFunction()
+
+              if (TF_Utils__IsAssociativeArray(testSuite))
+                result.Push(testSuite)
+                foundTestSuite = true
+              else
+                ' TODO check if we need this
+                ' using new mode
+                '                          testSuite = ScanFileForNewTests(code, filePath)
+
+                '                          exit for
+              end if
             end if
+          end if
         end for
-    else
-        testSuiteRegex = CreateObject("roRegex", "^(function|sub)\s(" + m.testSuitePrefix + m.testSuiteName + "[0-9a-z\_]*)\s*\(", "i")
-        testFilesList = m.GetTestFilesList()
+        if (NOT foundTestSuite)
+          testSuite = ScanFileForNewTests(code, filePath)
+          if (testSuite <> Invalid)
+            result.push(testSuite)
+          end if
+        end if
+      end if
+    end for
+  end if
 
-        for each filePath in testFilesList
-            code = TF_Utils__AsString(ReadAsciiFile(filePath))
-
-            if code <> ""
-                foundTestSuite = false
-                for each line in code.Tokenize(Chr(10))
-                    line.Trim()
-
-                    if testSuiteRegex.IsMatch(line)
-                        testSuite = invalid
-                        functionName = testSuiteRegex.Match(line).Peek()
-
-                        tmpTestSuiteFunction = TestFramework__getFunctionPointer(functionName)
-                        if tmpTestSuiteFunction <> invalid then
-                            testSuite = tmpTestSuiteFunction()
-
-                            if TF_Utils__IsAssociativeArray(testSuite)
-                                result.Push(testSuite)
-                                foundTestSuite = true
-                            else
-                                ' TODO check if we need this
-                                ' using new mode
-'                          testSuite = ScanFileForNewTests(code, filePath)
-
-'                          exit for
-                            end if
-                        end if
-                    end if
-                end for
-                if not foundTestSuite then
-                    testSuite = ScanFileForNewTests(code, filePath)
-                    if testSuite <> invalid then
-                        result.push(testSuite)
-                    end if
-                end if
-            end if
-        end for
-    end if
-
-    return result
+  return result
 end function
 
-function ScanFileForNewTests(souceCode, filePath)
-    foundAnyTest = false
-    testSuite = BaseTestSuite()
+function ScanFileForNewTests(souceCode as String, filePath as String) as Object
+  foundAnyTest = false
+  testSuite = BaseTestSuite()
 
-    allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(test|beforeall|beforeeach|afterall|aftereach|repeatedtest|parameterizedtest|methodsource|ignore)\s*|\n", "i")
-    voidFunctionRegex = CreateObject("roRegex", "^(function|sub)\s([a-z0-9A-Z_]*)\(\)", "i")
-    anyArgsFunctionRegex = CreateObject("roRegex", "^(function|sub)\s([a-z0-9A-Z_]*)\(", "i")
+  allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(test|beforeall|beforeeach|afterall|aftereach|repeatedtest|parameterizedtest|methodsource|ignore)\s*|\n", "i")
+  voidFunctionRegex = CreateObject("roRegex", "^(function|sub)\s([a-z0-9A-Z_]*)\(\)", "i")
+  anyArgsFunctionRegex = CreateObject("roRegex", "^(function|sub)\s([a-z0-9A-Z_]*)\(", "i")
 
-    processors = {
-        testSuite: testSuite
-        filePath: filePath
-        currentLine: ""
-        annotations: {}
+  processors = {
+    testSuite: testSuite,
+    filePath: filePath,
+    currentLine: "",
+    annotations: {},
 
-        functionName: ""
+    functionName: "",
+    tests: [],
 
-        tests: []
+    beforeEachFunc: Invalid,
+    beforeAllFunc: Invalid,
 
-        beforeEachFunc: invalid
-        beforeAllFunc: invalid
+    AfterEachFunc: Invalid,
+    AfterAllFunc: Invalid,
 
-        AfterEachFunc: invalid
-        AfterAllFunc: invalid
+    isParameterizedTest: false,
+    MethodForArguments: "",
+    executedParametrizedAdding: false,
 
-        isParameterizedTest: false
-        MethodForArguments: ""
-        executedParametrizedAdding: false
+    test: sub()
+      skipTest = m.doSkipTest(m.functionName)
+      funcPointer = m.getFunctionPointer(m.functionName)
+      m.tests.push({ name: m.functionName, pointer: funcPointer, skip: skipTest })
+    end sub
 
-        test: sub()
+    repeatedtest: sub()
+      allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(repeatedtest)\((\d*)\)", "i")
+      annotationLine = m.annotations["repeatedtest"].line
+      if (allowedAnnotationsRegex.IsMatch(annotationLine))
+        groups = allowedAnnotationsRegex.Match(annotationLine)
+        numberOfLoops = groups[2]
+        if (numberOfLoops <> Invalid AND TF_Utils__AsInteger(numberOfLoops) > 0)
+          numberOfLoops = TF_Utils__AsInteger(numberOfLoops)
+          funcPointer = m.getFunctionPointer(m.functionName)
+          for index = 1 to numberOfLoops
             skipTest = m.doSkipTest(m.functionName)
-            funcPointer = m.getFunctionPointer(m.functionName)
-            m.tests.push({ name: m.functionName, pointer: funcPointer, skip: skipTest })
-        end sub
-
-        repeatedtest: sub()
-            allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(repeatedtest)\((\d*)\)", "i")
-            annotationLine = m.annotations["repeatedtest"].line
-            if allowedAnnotationsRegex.IsMatch(annotationLine)
-                groups = allowedAnnotationsRegex.Match(annotationLine)
-                numberOfLoops = groups[2]
-                if numberOfLoops <> invalid and TF_Utils__AsInteger(numberOfLoops) > 0 then
-                    numberOfLoops = TF_Utils__AsInteger(numberOfLoops)
-                    funcPointer = m.getFunctionPointer(m.functionName)
-                    for index = 1 to numberOfLoops
-                        skipTest = m.doSkipTest(m.functionName)
-                        text = " " + index.tostr() + " of " + numberOfLoops.tostr()
-                        m.tests.push({ name: m.functionName + text, pointer: funcPointer, skip: skipTest })
-                    end for
-                end if
-            else
-                ? "WARNING: Wrong format of repeatedTest(numberOfRuns) "annotationLine
-            end if
-        end sub
-
-        parameterizedTest: sub()
-            m.processParameterizedTests()
-        end sub
-
-        methodSource: sub()
-            m.processParameterizedTests()
-        end sub
-
-        processParameterizedTests: sub()
-            ' add test if it was not added already
-            if not m.executedParametrizedAdding
-                if m.annotations.methodSource <> invalid and m.annotations.parameterizedTest <> invalid then
-                    methodAnottation = m.annotations.methodSource.line
-
-                    allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(methodsource)\(" + Chr(34) + "([A-Za-z0-9_]*)" + Chr(34) + "\)", "i")
-
-                    if allowedAnnotationsRegex.IsMatch(methodAnottation)
-                        groups = allowedAnnotationsRegex.Match(methodAnottation)
-                        providerFunction = groups[2]
-
-                        providerFunctionPointer = m.getFunctionPointer(providerFunction)
-
-                        if providerFunctionPointer <> invalid then
-                            funcPointer = m.getFunctionPointer(m.functionName)
-
-                            args = providerFunctionPointer()
-
-                            index = 1
-                            for each arg in args
-                                skipTest = m.doSkipTest(m.functionName)
-                                text = " " + index.tostr() + " of " + args.count().tostr()
-                                m.tests.push({ name: m.functionName + text, pointer: funcPointer, arg: arg, hasArgs: true, skip: skipTest })
-                                index++
-                            end for
-                        else
-                            ? "WARNING: Cannot find function [" providerFunction "]"
-                        end if
-                    end if
-                else
-                    ? "WARNING: Wrong format of  @ParameterizedTest \n @MethodSource(providerFunctionName)"
-                    ? "m.executedParametrizedAdding = "m.executedParametrizedAdding
-                    ? "m.annotations.methodSource = "m.annotations.methodSource
-                    ? "m.annotations.parameterizedTest = "m.annotations.parameterizedTest
-                    ? ""
-                end if
-            end if
-        end sub
-
-        beforeEach: sub()
-            m.beforeEachFunc = m.getFunctionPointer(m.functionName)
-        end sub
-
-        beforeAll: sub()
-            m.beforeAllFunc = m.getFunctionPointer(m.functionName)
-        end sub
-
-        AfterEach: sub()
-            m.AfterEachFunc = m.getFunctionPointer(m.functionName)
-        end sub
-
-        AfterAll: sub()
-            m.AfterAllFunc = m.getFunctionPointer(m.functionName)
-        end sub
-
-        ignore: sub()
-            funcPointer = m.getFunctionPointer(m.functionName)
-            m.tests.push({ name: m.functionName, pointer: funcPointer, skip: true })
-        end sub
-
-        doSkipTest: function(name as String)
-            includeFilter = []
-            excludeFilter = []
-
-            gthis = GetGlobalAA()
-            if gthis.IncludeFilter <> invalid then includeFilter.append(gthis.IncludeFilter)
-            if gthis.ExcludeFilter <> invalid then excludeFilter.append(gthis.ExcludeFilter)
-
-            ' apply test filters
-            skipTest = false
-            ' skip test if it is found in exclude filter
-            for each testName in excludeFilter
-                if TF_Utils__IsNotEmptyString(testName) and LCase(testName.Trim()) = LCase(name.Trim())
-                    skipTest = true
-                    exit for
-                end if
-            end for
-
-            ' skip test if it is not found in include filter
-            if not skipTest and includeFilter.Count() > 0
-                foundInIncludeFilter = false
-
-                for each testName in includeFilter
-                    if TF_Utils__IsNotEmptyString(testName) and LCase(testName) = LCase(name)
-                        foundInIncludeFilter = true
-                        exit for
-                    end if
-                end for
-
-                skipTest = not foundInIncludeFilter
-            end if
-
-            return skipTest
-        end function
-
-        buildTests: sub()
-            testSuite = m.testSuite
-            testSuite.Name = m.filePath
-            if m.beforeAllFunc <> invalid then testSuite.SetUp = m.beforeAllFunc
-            if m.AfterAllFunc <> invalid then testSuite.TearDown = m.AfterAllFunc
-            testSuite.IS_NEW_APPROACH = true
-
-            for each test in m.tests
-                ' Add tests to suite's tests collection
-                arg = invalid
-                hasArgs = false
-                if test.hasArgs <> invalid then
-                    arg = test.arg
-                    hasArgs = true
-                end if
-
-                testSuite.addTest(test.name, test.pointer, m.beforeEachFunc, m.AfterEachFunc, arg, hasArgs, test.skip)
-            end for
-        end sub
-
-        getFunctionPointer: TestFramework__getFunctionPointer
-    }
-
-    currentAnottations = []
-    index = 0
-
-    for each line in souceCode.Tokenize(Chr(10))
-        line = line.Trim()
-        if line <> "" ' skipping empty lines
-            if allowedAnnotationsRegex.IsMatch(line)
-                groups = allowedAnnotationsRegex.Match(line)
-                anottationType = groups[1]
-                if anottationType <> invalid and processors[anottationType] <> invalid then
-                    currentAnottations.push(anottationType)
-                    processors.annotations[anottationType] = { line: line, lineIndex: index }
-                end if
-            else
-                if currentAnottations.count() > 0 then
-                    isParametrized = anyArgsFunctionRegex.IsMatch(line)
-                    properMap = { parameterizedtest: "", methodsource: "" }
-                    for each availableAnottation in currentAnottations
-                        isParametrized = isParametrized or properMap[availableAnottation] <> invalid
-                    end for
-
-                    if voidFunctionRegex.IsMatch(line) or isParametrized then
-                        groups = voidFunctionRegex.Match(line)
-
-                        if isParametrized then
-                            groups = anyArgsFunctionRegex.Match(line)
-                        end if
-                        if groups[2] <> invalid then
-                            processors.functionName = groups[2]
-                            processors.currentLine = line
-
-                            ' process all handlers
-                            if isParametrized then processors.executedParametrizedAdding = false
-                            for each availableAnottation in currentAnottations
-                                processors[availableAnottation]()
-                                if isParametrized then processors.executedParametrizedAdding = true
-                            end for
-                            currentAnottations = []
-                            processors.annotations = {}
-                            foundAnyTest = true
-                        end if
-                    else
-                        ' invalidating annotation
-                        ' TODO print message here that we skipped annotation
-                        ? "WARNING: annotation " currentAnottations " isparametrized=" isParametrized " skipped at line " index ":[" line "]"
-                        processors.annotations = {}
-                        currentAnottations = []
-                    end if
-                end if
-            end if
+            text = " " + index.tostr() + " of " + numberOfLoops.tostr()
+            m.tests.push({ name: m.functionName + text, pointer: funcPointer, skip: skipTest })
+          end for
         end if
-        index++
-    end for
+      else
+        ? "WARNING: Wrong format of repeatedTest(numberOfRuns) "annotationLine
+      end if
+    end sub
 
-    processors.buildTests()
+    parameterizedTest: sub()
+      m.processParameterizedTests()
+    end sub
 
-    if not foundAnyTest then
-        testSuite = invalid
+    methodSource: sub()
+      m.processParameterizedTests()
+    end sub
+
+    processParameterizedTests: sub()
+      ' add test if it was not added already
+      if (NOT m.executedParametrizedAdding)
+        if (m.annotations.methodSource <> Invalid AND m.annotations.parameterizedTest <> Invalid)
+          methodAnottation = m.annotations.methodSource.line
+
+          allowedAnnotationsRegex = CreateObject("roRegex", "^'\s*@(methodsource)\(" + Chr(34) + "([A-Za-z0-9_]*)" + Chr(34) + "\)", "i")
+
+          if (allowedAnnotationsRegex.IsMatch(methodAnottation))
+            groups = allowedAnnotationsRegex.Match(methodAnottation)
+            providerFunction = groups[2]
+
+            providerFunctionPointer = m.getFunctionPointer(providerFunction)
+
+            if (providerFunctionPointer <> Invalid)
+              funcPointer = m.getFunctionPointer(m.functionName)
+
+              args = providerFunctionPointer()
+
+              index = 1
+              for each arg in args
+                skipTest = m.doSkipTest(m.functionName)
+                text = " " + index.tostr() + " of " + args.count().tostr()
+                m.tests.push({ name: m.functionName + text, pointer: funcPointer, arg: arg, hasArgs: true, skip: skipTest })
+                index++
+              end for
+            else
+              ? "WARNING: Cannot find function [" providerFunction "]"
+            end if
+          end if
+        else
+          ? "WARNING: Wrong format of  @ParameterizedTest \n @MethodSource(providerFunctionName)"
+          ? "m.executedParametrizedAdding = "m.executedParametrizedAdding
+          ? "m.annotations.methodSource = "m.annotations.methodSource
+          ? "m.annotations.parameterizedTest = "m.annotations.parameterizedTest
+          ? ""
+        end if
+      end if
+    end sub
+
+    beforeEach: sub()
+      m.beforeEachFunc = m.getFunctionPointer(m.functionName)
+    end sub
+
+    beforeAll: sub()
+      m.beforeAllFunc = m.getFunctionPointer(m.functionName)
+    end sub
+
+    AfterEach: sub()
+      m.AfterEachFunc = m.getFunctionPointer(m.functionName)
+    end sub
+
+    AfterAll: sub()
+      m.AfterAllFunc = m.getFunctionPointer(m.functionName)
+    end sub
+
+    ignore: sub()
+      funcPointer = m.getFunctionPointer(m.functionName)
+      m.tests.push({ name: m.functionName, pointer: funcPointer, skip: true })
+    end sub
+
+    doSkipTest: function(name as String)
+      includeFilter = []
+      excludeFilter = []
+
+      gthis = GetGlobalAA()
+      if gthis.IncludeFilter <> Invalid then includeFilter.append(gthis.IncludeFilter)
+      if gthis.ExcludeFilter <> Invalid then excludeFilter.append(gthis.ExcludeFilter)
+
+      ' apply test filters
+      skipTest = false
+      ' skip test if it is found in exclude filter
+      for each testName in excludeFilter
+        if TF_Utils__IsNotEmptyString(testName) AND LCase(testName.Trim()) = LCase(name.Trim())
+          skipTest = true
+          exit for
+        end if
+      end for
+
+      ' skip test if it is not found in include filter
+      if (NOT skipTest AND includeFilter.Count() > 0)
+        foundInIncludeFilter = false
+
+        for each testName in includeFilter
+          if TF_Utils__IsNotEmptyString(testName) AND LCase(testName) = LCase(name)
+            foundInIncludeFilter = true
+            exit for
+          end if
+        end for
+
+        skipTest = NOT foundInIncludeFilter
+      end if
+
+      return skipTest
+    end function
+
+    buildTests: sub()
+      testSuite = m.testSuite
+      testSuite.Name = m.filePath
+      if m.beforeAllFunc <> Invalid then testSuite.SetUp = m.beforeAllFunc
+      if m.AfterAllFunc <> Invalid then testSuite.TearDown = m.AfterAllFunc
+      testSuite.IS_NEW_APPROACH = true
+
+      for each test in m.tests
+        ' Add tests to suite's tests collection
+        arg = Invalid
+        hasArgs = false
+        if (test.hasArgs <> Invalid)
+          arg = test.arg
+          hasArgs = true
+        end if
+
+        testSuite.addTest(test.name, test.pointer, m.beforeEachFunc, m.AfterEachFunc, arg, hasArgs, test.skip)
+      end for
+    end sub
+
+    getFunctionPointer: TestFramework__getFunctionPointer,
+  }
+
+  currentAnottations = []
+  index = 0
+
+  for each line in souceCode.Tokenize(Chr(10))
+    line = line.Trim()
+    if (line <> "") ' skipping empty lines
+      if (allowedAnnotationsRegex.IsMatch(line))
+        groups = allowedAnnotationsRegex.Match(line)
+        anottationType = groups[1]
+        if (anottationType <> Invalid AND processors[anottationType] <> Invalid)
+          currentAnottations.push(anottationType)
+          processors.annotations[anottationType] = { line: line, lineIndex: index }
+        end if
+      else
+        if (currentAnottations.count() > 0)
+          isParametrized = anyArgsFunctionRegex.IsMatch(line)
+          properMap = { parameterizedtest: "", methodsource: "" }
+          for each availableAnottation in currentAnottations
+            isParametrized = isParametrized OR properMap[availableAnottation] <> Invalid
+          end for
+
+          if (voidFunctionRegex.IsMatch(line) OR isParametrized)
+            groups = voidFunctionRegex.Match(line)
+
+            if (isParametrized)
+              groups = anyArgsFunctionRegex.Match(line)
+            end if
+            if (groups[2] <> Invalid)
+              processors.functionName = groups[2]
+              processors.currentLine = line
+
+              ' process all handlers
+              if isParametrized then processors.executedParametrizedAdding = false
+              for each availableAnottation in currentAnottations
+                processors[availableAnottation]()
+                if isParametrized then processors.executedParametrizedAdding = true
+              end for
+              currentAnottations = []
+              processors.annotations = {}
+              foundAnyTest = true
+            end if
+          else
+            ' invalidating annotation
+            ' TODO print message here that we skipped annotation
+            ? "WARNING: annotation " currentAnottations " isparametrized=" isParametrized " skipped at line " index ":[" line "]"
+            processors.annotations = {}
+            currentAnottations = []
+          end if
+        end if
+      end if
     end if
-    return testSuite
+    index++
+  end for
+
+  processors.buildTests()
+
+  if (NOT foundAnyTest)
+    testSuite = Invalid
+  end if
+
+  return testSuite
 end function
 
 function TestFramework__getFunctionPointer(functionName as String) as Dynamic
-    result = invalid
+  result = Invalid
 
-    gthis = GetGlobalAA()
-    if gthis.FunctionsList <> invalid then
-        for each value in gthis.FunctionsList
-            if Type(value) <> "" and LCase(Type(value)) <> "<uninitialized>" and GetInterface(value, "ifFunction") <> invalid and LCase(value.tostr()) = "function: " + LCase(functionName) then
-                result = value
-                exit for
-            end if
-        end for
-    end if
+  gthis = GetGlobalAA()
+  if (gthis.FunctionsList <> Invalid)
+    for each value in gthis.FunctionsList
+      if Type(value) <> "" AND LCase(Type(value)) <> "<uninitialized>" AND GetInterface(value, "ifFunction") <> Invalid AND LCase(value.tostr()) = "function: " + LCase(functionName)
+        result = value
+        exit for
+      end if
+    end for
+  end if
 
-    if LCase(Type(result)) = "<uninitialized>" then result = invalid
-    if result = invalid then
-        if gthis.notFoundFunctionPointerList = invalid then gthis.notFoundFunctionPointerList = []
-        gthis.notFoundFunctionPointerList.push(functionName)
-    end if
-    return result
+  if LCase(Type(result)) = "<uninitialized>" then result = Invalid
+  if result = Invalid
+    if gthis.notFoundFunctionPointerList = Invalid then gthis.notFoundFunctionPointerList = []
+    gthis.notFoundFunctionPointerList.push(functionName)
+  end if
+
+  return result
 end function
 
 sub TestRunner__SetFunctions(listOfFunctions as Dynamic)
-    gthis = GetGlobalAA()
+  gthis = GetGlobalAA()
 
-    if gthis.FunctionsList = invalid then
-        gthis.FunctionsList = []
-    end if
-    gthis.FunctionsList.append(listOfFunctions)
+  if gthis.FunctionsList = Invalid
+    gthis.FunctionsList = []
+  end if
+  gthis.FunctionsList.append(listOfFunctions)
 end sub
 
 sub TestRunner__SetIncludeFilter(listOfFunctions as Dynamic)
-    gthis = GetGlobalAA()
+  gthis = GetGlobalAA()
 
-    if gthis.IncludeFilter = invalid
-        gthis.IncludeFilter = []
-    end if
+  if gthis.IncludeFilter = Invalid
+    gthis.IncludeFilter = []
+  end if
 
-    if TF_Utils__IsArray(listOfFunctions)
-        gthis.IncludeFilter.Append(listOfFunctions)
-    else if TF_Utils__IsNotEmptyString(listOfFunctions)
-        gthis.IncludeFilter.Append(listOfFunctions.Split(","))
-    else
-        ? "WARNING: Could not parse input parameters for Include Filter. Filter wont be applied."
-    end if
+  if (TF_Utils__IsArray(listOfFunctions))
+    gthis.IncludeFilter.Append(listOfFunctions)
+  else if (TF_Utils__IsNotEmptyString(listOfFunctions))
+    gthis.IncludeFilter.Append(listOfFunctions.Split(","))
+  else
+    ? "WARNING: Could not parse input parameters for Include Filter. Filter wont be applied."
+  end if
 end sub
 
-function TestRunner__GetIncludeFilter()
-    gthis = GetGlobalAA()
+function TestRunner__GetIncludeFilter() as Object
+  gthis = GetGlobalAA()
 
-    if gthis.IncludeFilter = invalid
-        gthis.IncludeFilter = []
-    end if
+  if gthis.IncludeFilter = Invalid
+    gthis.IncludeFilter = []
+  end if
 
-    return gthis.IncludeFilter
+  return gthis.IncludeFilter
 end function
 
 sub TestRunner__SetExcludeFilter(listOfFunctions as Dynamic)
-    gthis = GetGlobalAA()
+  gthis = GetGlobalAA()
 
-    if gthis.ExcludeFilter = invalid
-        gthis.ExcludeFilter = []
-    end if
+  if gthis.ExcludeFilter = Invalid
+    gthis.ExcludeFilter = []
+  end if
 
-    if TF_Utils__IsArray(listOfFunctions)
-        gthis.ExcludeFilter.Append(listOfFunctions)
-    else if TF_Utils__IsNotEmptyString(listOfFunctions)
-        gthis.ExcludeFilter.Append(listOfFunctions.Split(","))
-    else
-        ? "WARNING: Could not parse input parameters for Exclude Filter. Filter wont be applied."
-    end if
+  if (TF_Utils__IsArray(listOfFunctions))
+    gthis.ExcludeFilter.Append(listOfFunctions)
+  else if (TF_Utils__IsNotEmptyString(listOfFunctions))
+    gthis.ExcludeFilter.Append(listOfFunctions.Split(","))
+  else
+    ? "WARNING: Could not parse input parameters for Exclude Filter. Filter wont be applied."
+  end if
 end sub
 
-function TestRunner__GetExcludeFilter()
-    gthis = GetGlobalAA()
+function TestRunner__GetExcludeFilter() as Object
+  gthis = GetGlobalAA()
 
-    if gthis.ExcludeFilter = invalid
-        gthis.ExcludeFilter = []
-    end if
+  if gthis.ExcludeFilter = Invalid
+    gthis.ExcludeFilter = []
+  end if
 
-    return gthis.ExcludeFilter
+  return gthis.ExcludeFilter
 end function
 
 ' ----------------------------------------------------------------
@@ -2224,34 +2243,34 @@ end function
 ' @return An array of test suite names.
 ' ----------------------------------------------------------------
 function TestRunner__GetTestSuiteNamesList(testNodeName as String) as Object
-    result = []
-    testSuiteRegex = CreateObject("roRegex", "^(function|sub)\s(" + m.testSuitePrefix + m.testSuiteName + "[0-9a-z\_]*)\s*\(", "i")
-    testFilesList = m.GetTestFilesList(m.nodesTestDirectory, testNodeName)
+  result = []
+  testSuiteRegex = CreateObject("roRegex", "^(function|sub)\s(" + m.testSuitePrefix + m.testSuiteName + "[0-9a-z\_]*)\s*\(", "i")
+  testFilesList = m.GetTestFilesList(m.nodesTestDirectory, testNodeName)
 
-    for each filePath in testFilesList
-        code = TF_Utils__AsString(ReadAsciiFile(filePath))
+  for each filePath in testFilesList
+    code = TF_Utils__AsString(ReadAsciiFile(filePath))
 
-        if code <> ""
-            foundTestSuite = false
-            for each line in code.Tokenize(Chr(10))
-                line.Trim()
+    if (code <> "")
+      foundTestSuite = false
+      for each line in code.Tokenize(Chr(10))
+        line.Trim()
 
-                if testSuiteRegex.IsMatch(line)
-                    functionName = testSuiteRegex.Match(line).Peek()
-                    result.Push(functionName)
-                    foundTestSuite = true
-                end if
-            end for
-
-            if not foundTestSuite then
-                ' we cannot scan for new tests as we are not in proper scope
-                ' so we need to pass some data so this can be executed in render thread
-                result.push({ filePath: filePath, code: code })
-            end if
+        if (testSuiteRegex.IsMatch(line))
+          functionName = testSuiteRegex.Match(line).Peek()
+          result.Push(functionName)
+          foundTestSuite = true
         end if
-    end for
+      end for
 
-    return result
+      if (NOT foundTestSuite)
+        ' we cannot scan for new tests as we are not in proper scope
+        ' so we need to pass some data so this can be executed in render thread
+        result.push({ filePath: filePath, code: code })
+      end if
+    end if
+  end for
+
+  return result
 end function
 
 ' ----------------------------------------------------------------
@@ -2263,36 +2282,36 @@ end function
 ' @return An array of test files.
 ' ----------------------------------------------------------------
 function TestRunner__GetTestFilesList(testsDirectory = m.testsDirectory as String, testFilePrefix = m.testFilePrefix as String) as Object
-    result = []
-    testsFileRegex = CreateObject("roRegex", "^(" + testFilePrefix + ")[0-9a-z\_]*\.brs$", "i")
+  result = []
+  testsFileRegex = CreateObject("roRegex", "^(" + testFilePrefix + ")[0-9a-z\_]*\.brs$", "i")
 
-    if testsDirectory <> ""
-        fileSystem = CreateObject("roFileSystem")
+  if (testsDirectory <> "")
+    fileSystem = CreateObject("roFileSystem")
 
-        if m.isNodeMode
-            ? String(2, Chr(10))
-            ? String(10, "!!!")
-            ? "Note if you crash here this means that we are in render thread and searching for tests"
-            ? "Problem is that file naming is wrong"
-            ? "check brs file name they should match pattern ""Test_ExactComponentName_anything.brs"""
-            ? "In this case we were looking for "testFilePrefix
-            ? String(10, "!!!") String(2, Chr(10))
-        end if
-        listing = fileSystem.GetDirectoryListing(testsDirectory)
-
-        for each item in listing
-            itemPath = testsDirectory + "/" + item
-            itemStat = fileSystem.Stat(itemPath)
-
-            if itemStat.type = "directory" then
-                result.Append(m.getTestFilesList(itemPath, testFilePrefix))
-            else if testsFileRegex.IsMatch(item) then
-                result.Push(itemPath)
-            end if
-        end for
+    if (m.isNodeMode)
+      ? String(2, Chr(10))
+      ? String(10, "!!!")
+      ? "Note if you crash here this means that we are in render thread and searching for tests"
+      ? "Problem is that file naming is wrong"
+      ? "check brs file name they should match pattern ""Test_ExactComponentName_anything.brs"""
+      ? "In this case we were looking for "testFilePrefix
+      ? String(10, "!!!") String(2, Chr(10))
     end if
+    listing = fileSystem.GetDirectoryListing(testsDirectory)
 
-    return result
+    for each item in listing
+      itemPath = testsDirectory + "/" + item
+      itemStat = fileSystem.Stat(itemPath)
+
+      if itemStat.type = "directory"
+        result.Append(m.getTestFilesList(itemPath, testFilePrefix))
+      else if (testsFileRegex.IsMatch(item))
+        result.Push(itemPath)
+      end if
+    end for
+  end if
+
+  return result
 end function
 
 ' ----------------------------------------------------------------
@@ -2303,26 +2322,26 @@ end function
 ' @return An array of test node names.
 ' ----------------------------------------------------------------
 function TestRunner__GetTestNodesList(testsDirectory = m.nodesTestDirectory as String) as Object
-    result = []
-    testsFileRegex = CreateObject("roRegex", "^(" + m.testFilePrefix + ")[0-9a-z\_]*\.xml$", "i")
+  result = []
+  testsFileRegex = CreateObject("roRegex", "^(" + m.testFilePrefix + ")[0-9a-z\_]*\.xml$", "i")
 
-    if testsDirectory <> ""
-        fileSystem = CreateObject("roFileSystem")
-        listing = fileSystem.GetDirectoryListing(testsDirectory)
+  if (testsDirectory <> "")
+    fileSystem = CreateObject("roFileSystem")
+    listing = fileSystem.GetDirectoryListing(testsDirectory)
 
-        for each item in listing
-            itemPath = testsDirectory + "/" + item
-            itemStat = fileSystem.Stat(itemPath)
+    for each item in listing
+      itemPath = testsDirectory + "/" + item
+      itemStat = fileSystem.Stat(itemPath)
 
-            if itemStat.type = "directory" then
-                result.Append(m.getTestNodesList(itemPath))
-            else if testsFileRegex.IsMatch(item) then
-                result.Push(item.replace(".xml", ""))
-            end if
-        end for
-    end if
+      if itemStat.type = "directory"
+        result.Append(m.getTestNodesList(itemPath))
+      else if (testsFileRegex.IsMatch(item))
+        result.Push(item.replace(".xml", ""))
+      end if
+    end for
+  end if
 
-    return result
+  return result
 end function
 
 ' ----------------------------------------------------------------
@@ -2333,115 +2352,116 @@ end function
 ' @return statistic object.
 ' ----------------------------------------------------------------
 function TestFramework__RunNodeTests(params as Object) as Object
-    this = params[0]
+  this = params[0]
 
-    statObj = params[1]
-    testSuiteNamesList = params[2]
+  statObj = params[1]
+  testSuiteNamesList = params[2]
 
-    Runner = TestRunner()
+  Runner = TestRunner()
 
-    Runner.SetTestSuitePrefix(this.testSuitePrefix)
-    Runner.SetTestFilePrefix(this.testFilePrefix)
-    Runner.SetTestSuiteName(this.testSuiteName)
-    Runner.SetTestCaseName(this.testCaseName)
-    Runner.SetFailFast(this.failFast)
+  Runner.SetTestSuitePrefix(this.testSuitePrefix)
+  Runner.SetTestFilePrefix(this.testFilePrefix)
+  Runner.SetTestSuiteName(this.testSuiteName)
+  Runner.SetTestCaseName(this.testCaseName)
+  Runner.SetFailFast(this.failFast)
 
-    Runner.SetIncludeFilter(params[3])
-    Runner.SetExcludeFilter(params[4])
+  Runner.SetIncludeFilter(params[3])
+  Runner.SetExcludeFilter(params[4])
 
-    return Runner.Run(statObj, testSuiteNamesList)
-end function
-function UTF_skip(msg = "")
-    return UTF_PushErrorMessage(BTS__Skip(msg))
+  return Runner.Run(statObj, testSuiteNamesList)
 end function
 
-function UTF_fail(msg = "")
-    return UTF_PushErrorMessage(BTS__Fail(msg))
+function UTF_skip(msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__Skip(msg))
 end function
 
-function UTF_assertFalse(expr, msg = "Expression evaluates to true")
-    return UTF_PushErrorMessage(BTS__AssertFalse(expr, msg))
+function UTF_fail(msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__Fail(msg))
 end function
 
-function UTF_assertTrue(expr, msg = "Expression evaluates to false")
-    return UTF_PushErrorMessage(BTS__AssertTrue(expr, msg))
+function UTF_assertFalse(expr as Dynamic, msg = "Expression evaluates to true" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertFalse(expr, msg))
 end function
 
-function UTF_assertEqual(first, second, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertEqual(first, second, msg))
+function UTF_assertTrue(expr as Dynamic, msg = "Expression evaluates to false" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertTrue(expr, msg))
 end function
 
-function UTF_assertNotEqual(first, second, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertNotEqual(first, second, msg))
+function UTF_assertEqual(first as Dynamic, second as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertEqual(first, second, msg))
 end function
 
-function UTF_assertInvalid(value, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertInvalid(value, msg))
+function UTF_assertNotEqual(first as Dynamic, second as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertNotEqual(first, second, msg))
 end function
 
-function UTF_assertNotInvalid(value, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertNotInvalid(value, msg))
+function UTF_assertInvalid(value as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertInvalid(value, msg))
 end function
 
-function UTF_assertAAHasKey(array, key, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertAAHasKey(array, key, msg))
+function UTF_assertNotInvalid(value as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertNotInvalid(value, msg))
 end function
 
-function UTF_assertAANotHasKey(array, key, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertAANotHasKey(array, key, msg))
+function UTF_assertAAHasKey(array as Dynamic, key as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertAAHasKey(array, key, msg))
 end function
 
-function UTF_assertAAHasKeys(array, keys, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertAAHasKeys(array, keys, msg))
+function UTF_assertAANotHasKey(array as Dynamic, key as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertAANotHasKey(array, key, msg))
 end function
 
-function UTF_assertAANotHasKeys(array, keys, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertAANotHasKeys(array, keys, msg))
+function UTF_assertAAHasKeys(array as Dynamic, keys as Object, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertAAHasKeys(array, keys, msg))
 end function
 
-function UTF_assertArrayContains(array, value, key = invalid, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayContains(array, value, key, msg))
+function UTF_assertAANotHasKeys(array as Dynamic, keys as Object, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertAANotHasKeys(array, keys, msg))
 end function
 
-function UTF_assertArrayNotContains(array, value, key = invalid, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayNotContains(array, value, key, msg))
+function UTF_assertArrayContains(array as Dynamic, value as Dynamic, key = Invalid as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayContains(array, value, key, msg))
 end function
 
-function UTF_assertArrayContainsSubset(array, subset, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayContainsSubset(array, subset, msg))
+function UTF_assertArrayNotContains(array as Dynamic, value as Dynamic, key = Invalid as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayNotContains(array, value, key, msg))
 end function
 
-function UTF_assertArrayNotContainsSubset(array, subset, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayNotContainsSubset(array, subset, msg))
+function UTF_assertArrayContainsSubset(array as Dynamic, subset as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayContainsSubset(array, subset, msg))
 end function
 
-function UTF_assertArrayCount(array, count, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayCount(array, count, msg))
+function UTF_assertArrayNotContainsSubset(array as Dynamic, subset as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayNotContainsSubset(array, subset, msg))
 end function
 
-function UTF_assertArrayNotCount(array, count, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertArrayNotCount(array, count, msg))
+function UTF_assertArrayCount(array as Dynamic, count as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayCount(array, count, msg))
 end function
 
-function UTF_assertEmpty(item, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertEmpty(item, msg))
+function UTF_assertArrayNotCount(array as Dynamic, count as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertArrayNotCount(array, count, msg))
 end function
 
-function UTF_assertNotEmpty(item, msg = "")
-    return UTF_PushErrorMessage(BTS__AssertNotEmpty(item, msg))
+function UTF_assertEmpty(item as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertEmpty(item, msg))
+end function
+
+function UTF_assertNotEmpty(item as Dynamic, msg = "" as String) as Boolean
+  return UTF_PushErrorMessage(BTS__AssertNotEmpty(item, msg))
 end function
 
 function UTF_PushErrorMessage(message as String) as Boolean
-    result = Len(message) <= 0
-    if not result then
-        m.globalErrorsList.push(message)
-    end if
+  result = Len(message) <= 0
+  if (NOT result)
+    m.globalErrorsList.push(message)
+  end if
 
-    return result
-end function'*****************************************************************
-'* Copyright Roku 2011-2019
-'* All Rights Reserved
-'*****************************************************************
+  return result
+end function' *****************************************************************
+' * Copyright Roku 2011-2019
+' * All Rights Reserved
+' *****************************************************************
 ' Common framework utility functions
 ' *****************************************************************
 
@@ -2451,7 +2471,7 @@ end function'*****************************************************************
 ' @return As Boolean - true if value contains XMLElement interface, else return false
 ' *************************************************
 function TF_Utils__IsXmlElement(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifXMLElement") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifXMLElement") <> Invalid
 end function
 
 ' *************************************************
@@ -2460,7 +2480,7 @@ end function
 ' @return As Boolean - true if value contains Function interface, else return false
 ' *************************************************
 function TF_Utils__IsFunction(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifFunction") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifFunction") <> Invalid
 end function
 
 ' *************************************************
@@ -2469,7 +2489,7 @@ end function
 ' @return As Boolean - true if value contains Boolean interface, else return false
 ' *************************************************
 function TF_Utils__IsBoolean(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifBoolean") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifBoolean") <> Invalid
 end function
 
 ' *************************************************
@@ -2478,7 +2498,7 @@ end function
 ' @return As Boolean - true if value type equals Integer, else return false
 ' *************************************************
 function TF_Utils__IsInteger(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifInt") <> invalid and (Type(value) = "roInt" or Type(value) = "roInteger" or Type(value) = "Integer")
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifInt") <> Invalid AND (Type(value) = "roInt" OR Type(value) = "roInteger" OR Type(value) = "Integer")
 end function
 
 ' *************************************************
@@ -2487,7 +2507,7 @@ end function
 ' @return As Boolean - true if value contains Float interface, else return false
 ' *************************************************
 function TF_Utils__IsFloat(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifFloat") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifFloat") <> Invalid
 end function
 
 ' *************************************************
@@ -2496,7 +2516,7 @@ end function
 ' @return As Boolean - true if value contains Double interface, else return false
 ' *************************************************
 function TF_Utils__IsDouble(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifDouble") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifDouble") <> Invalid
 end function
 
 ' *************************************************
@@ -2505,7 +2525,7 @@ end function
 ' @return As Boolean - true if value contains LongInteger interface, else return false
 ' *************************************************
 function TF_Utils__IsLongInteger(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifLongInt") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifLongInt") <> Invalid
 end function
 
 ' *************************************************
@@ -2514,7 +2534,7 @@ end function
 ' @return As Boolean - true if value is number, else return false
 ' *************************************************
 function TF_Utils__IsNumber(value as Dynamic) as Boolean
-    return TF_Utils__IsLongInteger(value) or TF_Utils__IsDouble(value) or TF_Utils__IsInteger(value) or TF_Utils__IsFloat(value)
+  return TF_Utils__IsLongInteger(value) OR TF_Utils__IsDouble(value) OR TF_Utils__IsInteger(value) OR TF_Utils__IsFloat(value)
 end function
 
 ' *************************************************
@@ -2523,7 +2543,7 @@ end function
 ' @return As Boolean - true if value contains List interface, else return false
 ' *************************************************
 function TF_Utils__IsList(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifList") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifList") <> Invalid
 end function
 
 ' *************************************************
@@ -2532,7 +2552,7 @@ end function
 ' @return As Boolean - true if value contains Array interface, else return false
 ' *************************************************
 function TF_Utils__IsArray(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifArray") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifArray") <> Invalid
 end function
 
 ' *************************************************
@@ -2541,7 +2561,7 @@ end function
 ' @return As Boolean - true if value contains AssociativeArray interface, else return false
 ' *************************************************
 function TF_Utils__IsAssociativeArray(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifAssociativeArray") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifAssociativeArray") <> Invalid
 end function
 
 ' *************************************************
@@ -2550,7 +2570,7 @@ end function
 ' @return As Boolean - true if value contains SGNodeChildren interface, else return false
 ' *************************************************
 function TF_Utils__IsSGNode(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifSGNodeChildren") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifSGNodeChildren") <> Invalid
 end function
 
 ' *************************************************
@@ -2559,7 +2579,7 @@ end function
 ' @return As Boolean - true if value contains String interface, else return false
 ' *************************************************
 function TF_Utils__IsString(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and GetInterface(value, "ifString") <> invalid
+  return TF_Utils__IsValid(value) AND GetInterface(value, "ifString") <> Invalid
 end function
 
 ' *************************************************
@@ -2568,7 +2588,7 @@ end function
 ' @return As Boolean - true if value contains String interface and length more 0, else return false
 ' *************************************************
 function TF_Utils__IsNotEmptyString(value as Dynamic) as Boolean
-    return TF_Utils__IsString(value) and Len(value) > 0
+  return TF_Utils__IsString(value) AND Len(value) > 0
 end function
 
 ' *************************************************
@@ -2577,7 +2597,7 @@ end function
 ' @return As Boolean - true if value contains DateTime interface, else return false
 ' *************************************************
 function TF_Utils__IsDateTime(value as Dynamic) as Boolean
-    return TF_Utils__IsValid(value) and (GetInterface(value, "ifDateTime") <> invalid or Type(value) = "roDateTime")
+  return TF_Utils__IsValid(value) AND (GetInterface(value, "ifDateTime") <> Invalid OR Type(value) = "roDateTime")
 end function
 
 ' *************************************************
@@ -2586,7 +2606,7 @@ end function
 ' @return As Boolean - true if value initialized and not equal invalid, else return false
 ' *************************************************
 function TF_Utils__IsValid(value as Dynamic) as Boolean
-    return Type(value) <> "<uninitialized>" and value <> invalid
+  return Type(value) <> "<uninitialized>" AND value <> Invalid
 end function
 
 ' *************************************************
@@ -2595,11 +2615,11 @@ end function
 ' @return As String - value if his contains String interface else return empty string
 ' *************************************************
 function TF_Utils__ValidStr(obj as Object) as String
-    if obj <> invalid and GetInterface(obj, "ifString") <> invalid
-        return obj
-    else
-        return ""
-    end if
+  if (obj <> Invalid AND GetInterface(obj, "ifString") <> Invalid)
+    return obj
+  else
+    return ""
+  end if
 end function
 
 ' *************************************************
@@ -2608,17 +2628,17 @@ end function
 ' @return As String - return converted string
 ' *************************************************
 function TF_Utils__AsString(input as Dynamic) as String
-    if TF_Utils__IsValid(input) = false
-        return ""
-    else if TF_Utils__IsString(input)
-        return input
-    else if TF_Utils__IsInteger(input) or TF_Utils__IsLongInteger(input) or TF_Utils__IsBoolean(input)
-        return input.ToStr()
-    else if TF_Utils__IsFloat(input) or TF_Utils__IsDouble(input)
-        return Str(input).Trim()
-    else
-        return ""
-    end if
+  if TF_Utils__IsValid(input) = false
+    return ""
+  else if (TF_Utils__IsString(input))
+    return input
+  else if (TF_Utils__IsInteger(input) OR TF_Utils__IsLongInteger(input) OR TF_Utils__IsBoolean(input))
+    return input.ToStr()
+  else if (TF_Utils__IsFloat(input) OR TF_Utils__IsDouble(input))
+    return Str(input).Trim()
+  else
+    return ""
+  end if
 end function
 
 ' *************************************************
@@ -2627,17 +2647,17 @@ end function
 ' @return As Integer - return converted Integer
 ' *************************************************
 function TF_Utils__AsInteger(input as Dynamic) as Integer
-    if TF_Utils__IsValid(input) = false
-        return 0
-    else if TF_Utils__IsString(input)
-        return input.ToInt()
-    else if TF_Utils__IsInteger(input)
-        return input
-    else if TF_Utils__IsFloat(input) or TF_Utils__IsDouble(input) or TF_Utils__IsLongInteger(input)
-        return Int(input)
-    else
-        return 0
-    end if
+  if TF_Utils__IsValid(input) = false
+    return 0
+  else if (TF_Utils__IsString(input))
+    return input.ToInt()
+  else if (TF_Utils__IsInteger(input))
+    return input
+  else if (TF_Utils__IsFloat(input) OR TF_Utils__IsDouble(input) OR TF_Utils__IsLongInteger(input))
+    return Int(input)
+  else
+    return 0
+  end if
 end function
 
 ' *************************************************
@@ -2646,15 +2666,15 @@ end function
 ' @return As Integer - return converted LongInteger
 ' *************************************************
 function TF_Utils__AsLongInteger(input as Dynamic) as Longinteger
-    if TF_Utils__IsValid(input) = false
-        return 0
-    else if TF_Utils__IsString(input)
-        return TF_Utils__AsInteger(input)
-    else if TF_Utils__IsLongInteger(input) or TF_Utils__IsFloat(input) or TF_Utils__IsDouble(input) or TF_Utils__IsInteger(input)
-        return input
-    else
-        return 0
-    end if
+  if TF_Utils__IsValid(input) = false
+    return 0
+  else if (TF_Utils__IsString(input))
+    return TF_Utils__AsInteger(input)
+  else if (TF_Utils__IsLongInteger(input) OR TF_Utils__IsFloat(input) OR TF_Utils__IsDouble(input) OR TF_Utils__IsInteger(input))
+    return input
+  else
+    return 0
+  end if
 end function
 
 ' *************************************************
@@ -2663,17 +2683,17 @@ end function
 ' @return As Float - return converted Float
 ' *************************************************
 function TF_Utils__AsFloat(input as Dynamic) as Float
-    if TF_Utils__IsValid(input) = false
-        return 0.0
-    else if TF_Utils__IsString(input)
-        return input.ToFloat()
-    else if TF_Utils__IsInteger(input)
-        return (input / 1)
-    else if TF_Utils__IsFloat(input) or TF_Utils__IsDouble(input) or TF_Utils__IsLongInteger(input)
-        return input
-    else
-        return 0.0
-    end if
+  if TF_Utils__IsValid(input) = false
+    return 0.0
+  else if (TF_Utils__IsString(input))
+    return input.ToFloat()
+  else if (TF_Utils__IsInteger(input))
+    return (input / 1)
+  else if (TF_Utils__IsFloat(input) OR TF_Utils__IsDouble(input) OR TF_Utils__IsLongInteger(input))
+    return input
+  else
+    return 0.0
+  end if
 end function
 
 ' *************************************************
@@ -2682,15 +2702,15 @@ end function
 ' @return As Float - return converted Double
 ' *************************************************
 function TF_Utils__AsDouble(input as Dynamic) as Double
-    if TF_Utils__IsValid(input) = false
-        return 0.0
-    else if TF_Utils__IsString(input)
-        return TF_Utils__AsFloat(input)
-    else if TF_Utils__IsInteger(input) or TF_Utils__IsLongInteger(input) or TF_Utils__IsFloat(input) or TF_Utils__IsDouble(input)
-        return input
-    else
-        return 0.0
-    end if
+  if TF_Utils__IsValid(input) = false
+    return 0.0
+  else if (TF_Utils__IsString(input))
+    return TF_Utils__AsFloat(input)
+  else if (TF_Utils__IsInteger(input) OR TF_Utils__IsLongInteger(input) OR TF_Utils__IsFloat(input) OR TF_Utils__IsDouble(input))
+    return input
+  else
+    return 0.0
+  end if
 end function
 
 ' *************************************************
@@ -2699,17 +2719,17 @@ end function
 ' @return As Boolean
 ' *************************************************
 function TF_Utils__AsBoolean(input as Dynamic) as Boolean
-    if TF_Utils__IsValid(input) = false
-        return false
-    else if TF_Utils__IsString(input)
-        return LCase(input) = "true"
-    else if TF_Utils__IsInteger(input) or TF_Utils__IsFloat(input)
-        return input <> 0
-    else if TF_Utils__IsBoolean(input)
-        return input
-    else
-        return false
-    end if
+  if TF_Utils__IsValid(input) = false
+    return false
+  else if (TF_Utils__IsString(input))
+    return LCase(input) = "true"
+  else if (TF_Utils__IsInteger(input) OR TF_Utils__IsFloat(input))
+    return input <> 0
+  else if (TF_Utils__IsBoolean(input))
+    return input
+  else
+    return false
+  end if
 end function
 
 ' *************************************************
@@ -2718,14 +2738,15 @@ end function
 ' @return As Object - roArray
 ' *************************************************
 function TF_Utils__AsArray(value as Object) as Object
-    if TF_Utils__IsValid(value)
-        if not TF_Utils__IsArray(value)
-            return [value]
-        else
-            return value
-        end if
+  if (TF_Utils__IsValid(value))
+    if (NOT TF_Utils__IsArray(value))
+      return [value]
+    else
+      return value
     end if
-    return []
+  end if
+
+  return []
 end function
 
 ' =====================
@@ -2738,11 +2759,11 @@ end function
 ' @return As Boolean - true if value is null or empty string, else return false
 ' *************************************************
 function TF_Utils__IsNullOrEmpty(value as Dynamic) as Boolean
-    if TF_Utils__IsString(value)
-        return Len(value) = 0
-    else
-        return not TF_Utils__IsValid(value)
-    end if
+  if (TF_Utils__IsString(value))
+    return Len(value) = 0
+  else
+    return NOT TF_Utils__IsValid(value)
+  end if
 end function
 
 ' =====================
@@ -2757,28 +2778,28 @@ end function
 ' @param caseSensitive As Boolean
 ' @return As Integer - element index if array contains a value, else return -1
 ' *************************************************
-function TF_Utils__FindElementIndexInArray(array as Object, value as Object, compareAttribute = invalid as Dynamic, caseSensitive = false as Boolean) as Integer
-    if TF_Utils__IsArray(array)
-        for i = 0 to TF_Utils__AsArray(array).Count() - 1
-            compareValue = array[i]
+function TF_Utils__FindElementIndexInArray(array as Object, value as Object, compareAttribute = Invalid as Dynamic, caseSensitive = false as Boolean) as Integer
+  if (TF_Utils__IsArray(array))
+    for i = 0 to TF_Utils__AsArray(array).Count() - 1
+      compareValue = array[i]
 
-            if compareAttribute <> invalid and TF_Utils__IsAssociativeArray(compareValue) and compareValue.DoesExist(compareAttribute)
-                compareValue = compareValue.LookupCI(compareAttribute)
-            end if
+      if (compareAttribute <> Invalid AND TF_Utils__IsAssociativeArray(compareValue) AND compareValue.DoesExist(compareAttribute))
+        compareValue = compareValue.LookupCI(compareAttribute)
+      end if
 
-            if TF_Utils__IsString(compareValue) and TF_Utils__IsString(value) and not caseSensitive
-                if LCase(compareValue) = LCase(value)
-                    return i
-                end if
-            else if TF_Utils__BaseComparator(compareValue, value)
-                return i
-            end if
+      if (TF_Utils__IsString(compareValue) AND TF_Utils__IsString(value) AND NOT caseSensitive)
+        if LCase(compareValue) = LCase(value)
+          return i
+        end if
+      else if (TF_Utils__BaseComparator(compareValue, value))
+        return i
+      end if
 
-            item = array[i]
-        next
-    end if
+      _item = array[i]
+    next
+  end if
 
-    return -1
+  return -1
 end function
 
 ' *************************************************
@@ -2788,8 +2809,8 @@ end function
 ' @param compareAttribute As Dynamic
 ' @return As Boolean - true if array contains a value, else return false
 ' *************************************************
-function TF_Utils__ArrayContains(array as Object, value as Object, compareAttribute = invalid as Dynamic) as Boolean
-    return (TF_Utils__FindElementIndexInArray(array, value, compareAttribute) > - 1)
+function TF_Utils__ArrayContains(array as Object, value as Object, compareAttribute = Invalid as Dynamic) as Boolean
+  return (TF_Utils__FindElementIndexInArray(array, value, compareAttribute) > - 1)
 end function
 
 ' ----------------------------------------------------------------
@@ -2805,12 +2826,12 @@ end function
 
 ' @return True if values are equal or False in other case.
 ' ----------------------------------------------------------------
-function TF_Utils__EqValues(Value1 as Dynamic, Value2 as Dynamic, comparator = invalid as Object) as Boolean
-    if comparator = invalid
-        return TF_Utils__BaseComparator(value1, value2)
-    else
-        return comparator(value1, value2)
-    end if
+function TF_Utils__EqValues(Value1 as Dynamic, Value2 as Dynamic, comparator = Invalid as Object) as Boolean
+  if comparator = Invalid
+    return TF_Utils__BaseComparator(value1, value2)
+  else
+    return comparator(value1, value2)
+  end if
 end function
 
 ' ----------------------------------------------------------------
@@ -2821,25 +2842,25 @@ end function
 
 ' @return True if values are equal or False in other case.
 function TF_Utils__BaseComparator(value1 as Dynamic, value2 as Dynamic) as Boolean
-    ' This method was modified by DAZN, remove this comment once https://github.com/rokudev/unit-testing-framework/pull/37 is merged and we update the framework
-    if (Type(Box(value1), 3) <> Type(Box(value2), 3))
-        return false
-    end if
+  ' This method was modified by DAZN, remove this comment once https://github.com/rokudev/unit-testing-framework/pull/37 is merged and we update the framework
+  if (Type(Box(value1), 3) <> Type(Box(value2), 3))
+    return false
+  end if
 
-    valuesType = Type(Box(value1), 3)
+  valuesType = Type(Box(value1), 3)
 
-    if (valuesType = "roSGNode")
-        return value1.isSameNode(value2)
-    else if (valuesType = "roList" or valuesType = "roArray")
-        return TF_Utils__EqArray(value1, value2)
-    else if (valuesType = "roAssociativeArray")
-        return TF_Utils__EqAssocArray(value1, value2)
+  if (valuesType = "roSGNode")
+    return value1.isSameNode(value2)
+  else if (valuesType = "roList" OR valuesType = "roArray")
+    return TF_Utils__EqArray(value1, value2)
+  else if (valuesType = "roAssociativeArray")
+    return TF_Utils__EqAssocArray(value1, value2)
     ' This check fixes Brightscript's float values comparison issue
-    else if (valuesType = "roFloat")
-        return (Cdbl(value1) = Cdbl(value2))
-    end if
+  else if (valuesType = "roFloat")
+    return (Cdbl(value1) = Cdbl(value2))
+  end if
 
-    return value1 = value2
+  return value1 = value2
 end function
 
 ' ----------------------------------------------------------------
@@ -2851,25 +2872,26 @@ end function
 ' @return True if arrays are equal or False in other case.
 ' ----------------------------------------------------------------
 function TF_Utils__EqAssocArray(Value1 as Object, Value2 as Object) as Boolean
-    l1 = Value1.Count()
-    l2 = Value2.Count()
+  l1 = Value1.Count()
+  l2 = Value2.Count()
 
-    if not l1 = l2
+  if NOT l1 = l2
+    return false
+  else
+    for each k in Value1
+      if (NOT Value2.DoesExist(k))
         return false
-    else
-        for each k in Value1
-            if not Value2.DoesExist(k)
-                return false
-            else
-                v1 = Value1[k]
-                v2 = Value2[k]
-                if not TF_Utils__EqValues(v1, v2)
-                    return false
-                end if
-            end if
-        end for
-        return true
-    end if
+      else
+        v1 = Value1[k]
+        v2 = Value2[k]
+        if (NOT TF_Utils__EqValues(v1, v2))
+          return false
+        end if
+      end if
+    end for
+
+    return true
+  end if
 end function
 
 ' ----------------------------------------------------------------
@@ -2881,19 +2903,20 @@ end function
 ' @return True if arrays are equal or False in other case.
 ' ----------------------------------------------------------------
 function TF_Utils__EqArray(Value1 as Object, Value2 as Object) as Boolean
-    l1 = Value1.Count()
-    l2 = Value2.Count()
+  l1 = Value1.Count()
+  l2 = Value2.Count()
 
-    if not l1 = l2
+  if NOT l1 = l2
+    return false
+  else
+    for i = 0 to l1 - 1
+      v1 = Value1[i]
+      v2 = Value2[i]
+      if (NOT TF_Utils__EqValues(v1, v2))
         return false
-    else
-        for i = 0 to l1 - 1
-            v1 = Value1[i]
-            v2 = Value2[i]
-            if not TF_Utils__EqValues(v1, v2) then
-                return false
-            end if
-        end for
-        return true
-    end if
+      end if
+    end for
+
+    return true
+  end if
 end function

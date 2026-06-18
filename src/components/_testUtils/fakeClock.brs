@@ -1,4 +1,4 @@
-function fakeClock(scope as Object)
+function fakeClock(scope as Object) as Object
   prototype = {}
 
   prototype._scope = scope

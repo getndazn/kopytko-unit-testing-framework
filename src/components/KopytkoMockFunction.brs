@@ -2,7 +2,7 @@ function mockFunction(functionName as String) as Object
   _globalAA = GetGlobalAA()
   context = {}
   context._functionName = functionName
-  context._ts = _globalAA["$$ts"]
+  context._ts = _globalAA["$$testSuite"]
 
   if (_globalAA["__mocks"] = Invalid)
     _globalAA["__mocks"] = {}
@@ -81,8 +81,8 @@ function mockFunction(functionName as String) as Object
   ' @param value (dynamic) - Expected value
   ' ----------------------------------------------------------------
   context.resolvedValue = sub (value as Dynamic)
-    if (PromiseResolve <> Invalid)
-      m._mock.returnValue = PromiseResolve(value)
+    if (PromiseResolve <> Invalid) ' kopytko-disable-line identifier/undefined-variable
+      m._mock.returnValue = PromiseResolve(value) ' kopytko-disable-line identifier/undefined-function
     else
       error = [
         "To mock resolvedValue you need to import PromiseResolve from @dazn/kopytko-utils in your test",
@@ -99,8 +99,8 @@ function mockFunction(functionName as String) as Object
   ' @param error (dynamic) - Expected error
   ' ----------------------------------------------------------------
   context.rejectedValue = sub (error as Dynamic)
-    if (PromiseReject <> Invalid)
-      m._mock.returnValue = PromiseReject(error)
+    if (PromiseReject <> Invalid) ' kopytko-disable-line identifier/undefined-variable
+      m._mock.returnValue = PromiseReject(error) ' kopytko-disable-line identifier/undefined-function
     else
       error = [
         "To mock rejectedValue you need to import PromiseReject from @dazn/kopytko-utils in your test",
