@@ -1,3 +1,10 @@
+## [2.6.4](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.3...v2.6.4) (2026-06-18)
+
+
+### Bug Fixes
+
+* add formatter and linter ([#57](https://github.com/getndazn/kopytko-unit-testing-framework/issues/57)) ([4a52f2a](https://github.com/getndazn/kopytko-unit-testing-framework/commit/4a52f2a5effa1c187e233e04d66e87fb3e3aeda4))
+
 ## [2.6.3](https://github.com/getndazn/kopytko-unit-testing-framework/compare/v2.6.2...v2.6.3) (2026-04-01)
 
 
